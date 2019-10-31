@@ -107,19 +107,7 @@ namespace Calculator
             else
                 return false;
         }
-
-        /// <summary>
-        /// Проверяем, задано ли значение Number1.
-        /// </summary>
-        /// <returns></returns>
-        public bool Number1SetOrNot()
-        {
-            if (Number1 != 0)
-                return true;
-            else
-                return false;
-        }
-
+       
         /// <summary>
         /// Возврвщвет символ арифметической операции.
         /// </summary>
