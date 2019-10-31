@@ -65,7 +65,7 @@ namespace Calculator
         /// <param name="num">Number</param>
         private void FilingOutTextBoxAndLable(string num)
         {
-
+            //При соблюдении условия перед запятой будет дописан 0.
             if (num == "," && mainWindow.textBox.Text.Length == 0)
             {
                 mainWindow.textBox.Text += "0" + num;
@@ -74,6 +74,7 @@ namespace Calculator
             else
                 mainWindow.textBox.Text += num;
 
+            //После добавления в Lable арифметического знака туда не добавляются символы.
             if (!mainWindow.lable.Content.ToString().Contains(model.ReturnSign()) && num != ",")
                 mainWindow.lable.Content += num;
 
@@ -181,6 +182,7 @@ namespace Calculator
         //Button "="
         private void MainWindow_But_Equals_Click(object sender, EventArgs e)
         {
+            //Выполнятся только при условии, что установлен какой либо из знаков операции.
             if (model.SignSetOrNot())
             {
                 if (mainWindow.textBox.Text.Length != 0)
@@ -213,12 +215,6 @@ namespace Calculator
                 if (mainWindow.lable.Content.ToString().Length != 0)
                     mainWindow.lable.Content = mainWindow.lable.Content.ToString().Remove(mainWindow.lable.Content.ToString().Length - 1, 1);
             }
-
-            //if (mainWindow.textBox.Text.Length == 0 && mainWindow.lable.Content.ToString().Length == 0)
-            //{
-            //    mainWindow.textBox.Text = "0";
-            //    mainWindow.lable.Content = "0";
-            //}
         }
         #endregion 
     }
