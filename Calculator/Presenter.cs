@@ -201,7 +201,10 @@ namespace Calculator
         //Button "+/-"
         private void MainWindow_But_ChangeSign_Click(object sender, EventArgs e)
         {
-
+            if (!mainWindow.textBox.Text.StartsWith("-"))
+                mainWindow.textBox.Text = mainWindow.textBox.Text.Insert(0, "-");
+            else
+                mainWindow.textBox.Text = mainWindow.textBox.Text.Remove(0,1);
         }
 
         //
