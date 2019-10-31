@@ -130,7 +130,7 @@ namespace Calculator
         }
 
         /// <summary>
-        /// Сброс всех переменных.
+        /// Сброс значений всех переменных.
         /// </summary>
         public void Reset()
         {

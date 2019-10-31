@@ -77,27 +77,6 @@ namespace Calculator
             if (!mainWindow.lable.Content.ToString().Contains(model.ReturnSign()) && num != ",")
                 mainWindow.lable.Content += num;
 
-
-
-            //if (mainWindow.textBox.Text.Length != 0)
-            //{
-            //    mainWindow.lable.Content += mainWindow.textBox.Text;
-
-            //    mainWindow.textBox.Text += model.AddCharToString(num);
-            //}
-            //else
-            //if (num == ",")
-            //    mainWindow.textBox.Text += "0" + model.AddCharToString(num);
-            //else
-            //{
-            //    mainWindow.textBox.Text += model.AddCharToString(num);
-            //    mainWindow.lable.Content += mainWindow.textBox.Text;
-            //}
-
-            //if (mainWindow.lable.Content.ToString().Length != 0)
-            //    mainWindow.lable.Content += model.AddCharToString(num);
-            //else
-            //    mainWindow.lable.Content += "0" + model.AddCharToString(num);
         }
 
         #region Arithmetic operations buttons.
