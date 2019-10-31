@@ -6,15 +6,15 @@ namespace Calculator
     {
         readonly Model model;
         readonly MainWindow mainWindow;
-        string TextBoxText { get; set; }
-        object LableContent { get; set; }
+        //string TextBoxText { get; set; }
+        //object LableContent { get; set; }
 
         public Presenter(MainWindow mainWindow)
         {
             model = new Model();
             this.mainWindow = mainWindow;
-            TextBoxText = this.mainWindow.textBox.Text = "";
-            LableContent = this.mainWindow.lable.Content = "";
+            this.mainWindow.textBox.Text = "";
+            this.mainWindow.lable.Content = "";
 
             #region Subscribe to events.
 
@@ -49,9 +49,9 @@ namespace Calculator
             model.SetSignOperation(ch);
             model.SetNumber1(mainWindow.textBox.Text);
             model.SetNumber2(mainWindow.textBox.Text);
-            LableContent = TextBoxText;
-            TextBoxText = "";
-            LableContent += model.ArithmeticSignToLable();
+            mainWindow.lable.Content = mainWindow.textBox.Text;
+            mainWindow.textBox.Text = "";
+            mainWindow.lable.Content += model.ArithmeticSignToLable();
         }
 
         /// <summary>
@@ -60,8 +60,8 @@ namespace Calculator
         /// <param name="num">Number</param>
         private void FilingOutFormAndLable(string num)
         {
-            this.mainWindow.textBox.Text += model.AddCharToString(num);
-            LableContent += model.AddCharToString(num);
+            mainWindow.textBox.Text += model.AddCharToString(num);
+            mainWindow.lable.Content += model.AddCharToString(num);
         }
 
         #region Arithmetic operations buttons.
@@ -150,7 +150,7 @@ namespace Calculator
         //Button "C"
         private void MainWindow_But_Res_Click(object sender, EventArgs e)
         {
-            TextBoxText = "";
+            mainWindow.textBox.Text = "";
             mainWindow.lable.Content = "";
             model.Reset();
         }
@@ -166,14 +166,14 @@ namespace Calculator
         //Button "="
         private void MainWindow_But_Equals_Click(object sender, EventArgs e)
         {
-            if (TextBoxText.Length != 0)
-                model.SetNumber2(TextBoxText);
+            if (mainWindow.textBox.Text.Length != 0)
+                model.SetNumber2(mainWindow.textBox.Text);
             else
-                model.SetNumber2(LableContent.ToString().Remove(LableContent.ToString().Length - 1, 1));
+                model.SetNumber2(mainWindow.lable.Content.ToString().Remove(mainWindow.lable.Content.ToString().Length - 1, 1));
 
             model.GetResult();
-            TextBoxText = model.ResultToTextBox();
-            LableContent = "";
+            mainWindow.textBox.Text = model.ResultToTextBox();
+            mainWindow.lable.Content = "";
         }
 
         //
@@ -187,18 +187,18 @@ namespace Calculator
         //Button "<<"
         private void MainWindow_But_Corect_Click(object sender, EventArgs e)
         {
-            if (TextBoxText.Length != 0)
+            if (mainWindow.textBox.Text.Length != 0)
             {
-                TextBoxText = TextBoxText.Remove(TextBoxText.Length - 1, 1);
+                mainWindow.textBox.Text = mainWindow.textBox.Text.Remove(mainWindow.textBox.Text.Length - 1, 1);
 
-                if (LableContent.ToString().Length != 0)
-                    LableContent = LableContent.ToString().Remove(LableContent.ToString().Length - 1, 1);
+                if (mainWindow.lable.Content.ToString().Length != 0)
+                    mainWindow.lable.Content = mainWindow.lable.Content.ToString().Remove(mainWindow.lable.Content.ToString().Length - 1, 1);
             }
 
-            if (TextBoxText.Length == 0 && LableContent.ToString().Length == 0)
+            if (mainWindow.textBox.Text.Length == 0 && mainWindow.lable.Content.ToString().Length == 0)
             {
-                TextBoxText = "0";
-                LableContent = "0";
+                mainWindow.textBox.Text = "0";
+                mainWindow.lable.Content = "0";
             }
         }
         #endregion 
