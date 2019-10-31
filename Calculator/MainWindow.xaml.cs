@@ -93,14 +93,61 @@ namespace Calculator
             remove { but_Add_Click -= value; }
         }
 
-        public event EventHandler But_Equals_Click = null;
-        public event EventHandler But_Point_Click = null;
-        public event EventHandler But_Sub_Click = null;
-        public event EventHandler But_Mul_Click = null;
-        public event EventHandler But_Dev_Click = null;
-        public event EventHandler But_Res_Click = null;
-        public event EventHandler But_ChangeSign_Click = null;
-        public event EventHandler But_Corect_Click = null;
+        public EventHandler but_Equals_Click = null;
+        public event EventHandler But_Equals_Click
+        {
+            add { but_Equals_Click += value; }
+            remove { but_Equals_Click -= value; }
+        }
+
+        public EventHandler but_Point_Click = null;
+        public event EventHandler But_Point_Click
+        {
+            add { but_Point_Click += value; }
+            remove { but_Point_Click -= value; }
+        }
+
+        public EventHandler but_Sub_Click = null;
+        public event EventHandler But_Sub_Click
+        {
+            add { but_Sub_Click += value; }
+            remove { but_Sub_Click -= value; }
+        }
+
+        public EventHandler but_Mul_Click = null;
+        public event EventHandler But_Mul_Click
+        {
+            add { but_Mul_Click += value; }
+            remove { but_Mul_Click -= value; }
+        }
+
+        public EventHandler but_Dev_Click = null;
+        public event EventHandler But_Dev_Click
+        {
+            add { but_Dev_Click += value; }
+            remove { but_Dev_Click -= value; }
+        }
+        public EventHandler but_Res_Click = null;
+        public event EventHandler But_Res_Click
+        {
+            add { but_Res_Click += value; }
+            remove { but_Res_Click -= value; }
+        }
+
+        public EventHandler but_ChangeSign_Click = null;
+        public event EventHandler But_ChangeSign_Click
+        {
+            add { but_ChangeSign_Click += value; }
+            remove { but_ChangeSign_Click -= value; }
+        }
+
+        public EventHandler but_Corect_Click = null;
+        public event EventHandler But_Corect_Click
+        {
+            add { but_Corect_Click += value; }
+            remove { but_Corect_Click -= value; }
+        }
+
         #endregion
 
         private void Button_0_Click(object sender, RoutedEventArgs e)
