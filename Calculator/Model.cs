@@ -121,6 +121,15 @@ namespace Calculator
         }
 
         /// <summary>
+        /// Возврвщвет символ арифметической операции.
+        /// </summary>
+        /// <returns></returns>
+        public string ReturnSign()
+        {
+            return Convert.ToString(Sign);
+        }
+
+        /// <summary>
         /// Сброс всех переменных.
         /// </summary>
         public void Reset()
