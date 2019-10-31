@@ -65,15 +65,18 @@ namespace Calculator
         /// <param name="num">Number</param>
         private void FilingOutTextBoxAndLable(string num)
         {
-            mainWindow.textBox.Text += num;
-            if (!mainWindow.lable.Content.ToString().Contains(model.ReturnSign()))
-                mainWindow.lable.Content += num;
 
-            if (num == "," && mainWindow.textBox.Text.Length == 0 && mainWindow.lable.Content.ToString().Length == 0)
+            if (num == "," && mainWindow.textBox.Text.Length == 0)
             {
                 mainWindow.textBox.Text += "0" + num;
                 mainWindow.lable.Content += "0" + num;
             }
+            else
+                mainWindow.textBox.Text += num;
+
+            if (!mainWindow.lable.Content.ToString().Contains(model.ReturnSign()) && num != ",")
+                mainWindow.lable.Content += num;
+
 
 
             //if (mainWindow.textBox.Text.Length != 0)
