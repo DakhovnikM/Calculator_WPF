@@ -46,30 +46,36 @@ namespace Calculator
         /// <param name="ch">Sign of arithmetic operation</param>
         private void SetNumbersAndSign(char ch)
         {
-            model.SetSignOperation(ch);
-            model.SetNumber1(mainWindow.textBox.Text);
-            model.SetNumber2(mainWindow.textBox.Text);
-            mainWindow.lable.Content = mainWindow.textBox.Text;
-            mainWindow.textBox.Text = "";
-            mainWindow.lable.Content += model.ArithmeticSignToLable();
+            if (mainWindow.textBox.Text.Length != 0)
+            {
+                model.SetSignOperation(ch);
+                model.SetNumber1(mainWindow.textBox.Text);
+                model.SetNumber2(mainWindow.textBox.Text);
+                mainWindow.lable.Content = mainWindow.textBox.Text;
+                mainWindow.textBox.Text = "";
+                mainWindow.lable.Content += model.ArithmeticSignToLable();
+            }
+            else
+                mainWindow.textBox.Text = "";
         }
 
         /// <summary>
         /// Filing out the textbox and the lable.
         /// </summary>
         /// <param name="num">Number</param>
-        private void FilingOutFormAndLable(string num)
+        private void FilingOutTextBoxAndLable(string num)
         {
-
             if (mainWindow.textBox.Text.Length != 0)
                 mainWindow.textBox.Text += model.AddCharToString(num);
-            else  mainWindow.textBox.Text += "0" + model.AddCharToString(num);
-            
+            else if (num == ",") mainWindow.textBox.Text += "0" + model.AddCharToString(num);
+            else mainWindow.textBox.Text += model.AddCharToString(num);
 
-            if (mainWindow.lable.Content.ToString().Length != 0)
-                mainWindow.lable.Content += model.AddCharToString(num);
-            else
-                mainWindow.lable.Content += "0" + model.AddCharToString(num);
+            mainWindow.lable.Content += mainWindow.textBox.Text;
+
+            //if (mainWindow.lable.Content.ToString().Length != 0)
+            //    mainWindow.lable.Content += model.AddCharToString(num);
+            //else
+            //    mainWindow.lable.Content += "0" + model.AddCharToString(num);
         }
 
         #region Arithmetic operations buttons.
@@ -105,51 +111,51 @@ namespace Calculator
         #region Number buttons.
         private void MainWindow_But_9_Click(object sender, EventArgs e)
         {
-            FilingOutFormAndLable("9");
+            FilingOutTextBoxAndLable("9");
         }
 
         private void MainWindow_But_8_Click(object sender, EventArgs e)
         {
-            FilingOutFormAndLable("8");
+            FilingOutTextBoxAndLable("8");
         }
 
         private void MainWindow_But_7_Click(object sender, EventArgs e)
         {
-            FilingOutFormAndLable("7");
+            FilingOutTextBoxAndLable("7");
         }
 
         private void MainWindow_But_6_Click(object sender, EventArgs e)
         {
-            FilingOutFormAndLable("6");
+            FilingOutTextBoxAndLable("6");
         }
 
         private void MainWindow_But_5_Click(object sender, EventArgs e)
         {
-            FilingOutFormAndLable("5");
+            FilingOutTextBoxAndLable("5");
         }
 
         private void MainWindow_But_4_Click(object sender, EventArgs e)
         {
-            FilingOutFormAndLable("4");
+            FilingOutTextBoxAndLable("4");
         }
 
         private void MainWindow_But_3_Click(object sender, EventArgs e)
         {
-            FilingOutFormAndLable("3");
+            FilingOutTextBoxAndLable("3");
         }
         private void MainWindow_But_2_Click(object sender, EventArgs e)
         {
-            FilingOutFormAndLable("2");
+            FilingOutTextBoxAndLable("2");
         }
 
         private void MainWindow_But_1_Click(object sender, EventArgs e)
         {
-            FilingOutFormAndLable("1");
+            FilingOutTextBoxAndLable("1");
         }
 
         private void MainWindow_But_0_Click(object sender, EventArgs e)
         {
-            FilingOutFormAndLable("0");
+            FilingOutTextBoxAndLable("0");
         }
         #endregion
 
@@ -167,7 +173,7 @@ namespace Calculator
         //Button "."
         private void MainWindow_But_Point_Click(object sender, EventArgs e)
         {
-            FilingOutFormAndLable(",");
+            FilingOutTextBoxAndLable(",");
         }
 
         //
@@ -183,6 +189,7 @@ namespace Calculator
 
                 model.GetResult();
                 mainWindow.textBox.Text = model.ResultToTextBox();
+                model.SetNumber1(mainWindow.textBox.Text);
                 mainWindow.lable.Content = "";
             }
         }

@@ -8,15 +8,6 @@ namespace Calculator
         double Number2 { get; set; }
         char Sign { get; set; }
         double Result { get; set; }
-        int SetNumberCount { get; set; }
-        int SetEqualCount { get; set; }
-
-        //public Model()
-        //{
-        //    Number1 = 0;
-        //    Number2 = 0;
-        //    Sign = '\0';
-        //}
 
         /// <summary>
         /// Добавление числа в поле textBox.
@@ -105,21 +96,29 @@ namespace Calculator
             return Result.ToString();
         }
 
+        /// <summary>
+        /// Проверяем, задан ли знак арифметической операции.
+        /// </summary>
+        /// <returns></returns>
         public bool SignSetOrNot()
         {
-            if (Sign!='\0')
+            if (Sign != '\0')
                 return true;
             else
                 return false;
         }
 
-        //public bool Nomber1SetOrNot()
-        //{
-        //    if (Number1)
-        //        return true;
-        //    else
-        //        return false;
-        //}
+        /// <summary>
+        /// Проверяем, задано ли значение Number1.
+        /// </summary>
+        /// <returns></returns>
+        public bool Number1SetOrNot()
+        {
+            if (Number1 != 0)
+                return true;
+            else
+                return false;
+        }
 
         /// <summary>
         /// Сброс всех переменных.
