@@ -212,7 +212,8 @@ namespace Calculator
             {
                 mainWindow.textBox.Text = mainWindow.textBox.Text.Remove(mainWindow.textBox.Text.Length - 1, 1);
 
-                if (mainWindow.lable.Content.ToString().Length != 0)
+                //Корректировка строки в Lable происходит, если в ней не содержится зак операции.
+                if (mainWindow.lable.Content.ToString().Length != 0 && !mainWindow.lable.Content.ToString().Contains(model.ReturnSign()))
                     mainWindow.lable.Content = mainWindow.lable.Content.ToString().Remove(mainWindow.lable.Content.ToString().Length - 1, 1);
             }
         }
