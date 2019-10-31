@@ -202,12 +202,12 @@ namespace Calculator
 
         private void Button_Point_Click(object sender, RoutedEventArgs e)
         {
-            But_Point_Click.Invoke(sender, e);
+            but_Point_Click.Invoke(sender, e);
         }
 
         private void Button_Equals_Click(object sender, RoutedEventArgs e)
         {
-            But_Equals_Click.Invoke(sender, e);
+            but_Equals_Click.Invoke(sender, e);
         }
 
         private void Button_Addition_Click(object sender, RoutedEventArgs e)
@@ -217,32 +217,32 @@ namespace Calculator
 
         private void Button_Subtraction_Click(object sender, RoutedEventArgs e)
         {
-            But_Sub_Click.Invoke(sender, e);
+            but_Sub_Click.Invoke(sender, e);
         }
 
         private void Button_Multiplication_Click(object sender, RoutedEventArgs e)
         {
-            But_Mul_Click.Invoke(sender, e);
+            but_Mul_Click.Invoke(sender, e);
         }
 
         private void Button_Division_Click(object sender, RoutedEventArgs e)
         {
-            But_Dev_Click.Invoke(sender, e);
+            but_Dev_Click.Invoke(sender, e);
         }
 
         private void Button_Reset_Click(object sender, RoutedEventArgs e)
         {
-            But_Res_Click.Invoke(sender, e);
+            but_Res_Click.Invoke(sender, e);
         }
 
         private void Button_ChangeSign_Click(object sender, RoutedEventArgs e)
         {
-            But_ChangeSign_Click.Invoke(sender, e);
+            but_ChangeSign_Click.Invoke(sender, e);
         }
 
         private void ButtonCorect_Click(object sender, RoutedEventArgs e)
         {
-            But_Corect_Click.Invoke(sender, e);
+            but_Corect_Click.Invoke(sender, e);
         }
     }
 }
