@@ -163,7 +163,7 @@ namespace Calculator
 
         #region Auxiliary buttons.
         //
-        //Button "C"
+        //Button "C", all clear.
         private void MainWindow_But_Res_Click(object sender, EventArgs e)
         {
             mainWindow.textBox.Text = "";
@@ -182,7 +182,8 @@ namespace Calculator
         //Button "="
         private void MainWindow_But_Equals_Click(object sender, EventArgs e)
         {
-            //Выполнятся только при условии, что установлен какой либо из знаков операции.
+            //Выполнятся только при условии, 
+            //что установлен какой либо из знаков операции.
             if (model.SignSetOrNot())
             {
                 if (mainWindow.textBox.Text.Length != 0)
@@ -198,7 +199,7 @@ namespace Calculator
         }
 
         //
-        //Button "+/-"
+        //Button "+/-", change the sign of a number.
         private void MainWindow_But_ChangeSign_Click(object sender, EventArgs e)
         {
             if (!mainWindow.textBox.Text.StartsWith("-"))
@@ -208,14 +209,15 @@ namespace Calculator
         }
 
         //
-        //Button "<<"
+        //Button "<<", line adjustment.
         private void MainWindow_But_Corect_Click(object sender, EventArgs e)
         {
             if (mainWindow.textBox.Text.Length != 0)
             {
                 mainWindow.textBox.Text = mainWindow.textBox.Text.Remove(mainWindow.textBox.Text.Length - 1, 1);
 
-                //Корректировка строки в Lable происходит, если в ней не содержится зак операции.
+                //Корректировка строки в Lable происходит, 
+                //если в ней не содержится зак операции.
                 if (mainWindow.lable.Content.ToString().Length != 0 && !mainWindow.lable.Content.ToString().Contains(model.ReturnSign()))
                     mainWindow.lable.Content = mainWindow.lable.Content.ToString().Remove(mainWindow.lable.Content.ToString().Length - 1, 1);
             }
