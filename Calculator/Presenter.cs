@@ -60,8 +60,16 @@ namespace Calculator
         /// <param name="num">Number</param>
         private void FilingOutFormAndLable(string num)
         {
-            mainWindow.textBox.Text += model.AddCharToString(num);
-            mainWindow.lable.Content += model.AddCharToString(num);
+
+            if (mainWindow.textBox.Text.Length != 0)
+                mainWindow.textBox.Text += model.AddCharToString(num);
+            else  mainWindow.textBox.Text += "0" + model.AddCharToString(num);
+            
+
+            if (mainWindow.lable.Content.ToString().Length != 0)
+                mainWindow.lable.Content += model.AddCharToString(num);
+            else
+                mainWindow.lable.Content += "0" + model.AddCharToString(num);
         }
 
         #region Arithmetic operations buttons.
@@ -166,14 +174,17 @@ namespace Calculator
         //Button "="
         private void MainWindow_But_Equals_Click(object sender, EventArgs e)
         {
-            if (mainWindow.textBox.Text.Length != 0)
-                model.SetNumber2(mainWindow.textBox.Text);
-            else
-                model.SetNumber2(mainWindow.lable.Content.ToString().Remove(mainWindow.lable.Content.ToString().Length - 1, 1));
+            if (model.SignSetOrNot())
+            {
+                if (mainWindow.textBox.Text.Length != 0)
+                    model.SetNumber2(mainWindow.textBox.Text);
+                else
+                    model.SetNumber2(mainWindow.lable.Content.ToString().Remove(mainWindow.lable.Content.ToString().Length - 1, 1));
 
-            model.GetResult();
-            mainWindow.textBox.Text = model.ResultToTextBox();
-            mainWindow.lable.Content = "";
+                model.GetResult();
+                mainWindow.textBox.Text = model.ResultToTextBox();
+                mainWindow.lable.Content = "";
+            }
         }
 
         //
@@ -195,11 +206,11 @@ namespace Calculator
                     mainWindow.lable.Content = mainWindow.lable.Content.ToString().Remove(mainWindow.lable.Content.ToString().Length - 1, 1);
             }
 
-            if (mainWindow.textBox.Text.Length == 0 && mainWindow.lable.Content.ToString().Length == 0)
-            {
-                mainWindow.textBox.Text = "0";
-                mainWindow.lable.Content = "0";
-            }
+            //if (mainWindow.textBox.Text.Length == 0 && mainWindow.lable.Content.ToString().Length == 0)
+            //{
+            //    mainWindow.textBox.Text = "0";
+            //    mainWindow.lable.Content = "0";
+            //}
         }
         #endregion 
     }

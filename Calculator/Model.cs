@@ -2,7 +2,7 @@
 
 namespace Calculator
 {
-    internal class Model
+    class Model
     {
         double Number1 { get; set; }
         double Number2 { get; set; }
@@ -10,6 +10,13 @@ namespace Calculator
         double Result { get; set; }
         int SetNumberCount { get; set; }
         int SetEqualCount { get; set; }
+
+        //public Model()
+        //{
+        //    Number1 = 0;
+        //    Number2 = 0;
+        //    Sign = '\0';
+        //}
 
         /// <summary>
         /// Добавление числа в поле textBox.
@@ -62,13 +69,13 @@ namespace Calculator
             switch (Sign)
             {
                 case '+':
-                    Result = Number2 == 0 ? Number1 + Number2 : Number1 + Number1;
+                    Result = Number2 == 0 ? Number1 + Number1 : Number1 + Number2;
                     break;
                 case '-':
-                    Result = Number2 == 0 ? Number1 - Number2 : Number1 - Number1;
+                    Result = Number2 == 0 ? Number1 - Number1 : Number1 - Number2;
                     break;
                 case '*':
-                    Result = Number2 == 0 ? Number1 * Number2 : Number1 * Number1;
+                    Result = Number2 == 0 ? Number1 * Number1 : Number1 * Number2;
                     break;
                 case '/':
                     if (Number2 != 0)
@@ -97,6 +104,22 @@ namespace Calculator
         {
             return Result.ToString();
         }
+
+        public bool SignSetOrNot()
+        {
+            if (Sign!='\0')
+                return true;
+            else
+                return false;
+        }
+
+        //public bool Nomber1SetOrNot()
+        //{
+        //    if (Number1)
+        //        return true;
+        //    else
+        //        return false;
+        //}
 
         /// <summary>
         /// Сброс всех переменных.
