@@ -107,7 +107,7 @@ namespace Calculator
             else
                 return false;
         }
-       
+
         /// <summary>
         /// Возврвщвет символ арифметической операции.
         /// </summary>
