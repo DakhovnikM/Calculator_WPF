@@ -6,6 +6,7 @@ namespace Calculator
     {
         readonly Model model;
         readonly MainWindow mainWindow;
+        int EqualCount { get; set; }
         //string TextBoxText { get; set; }
         //object LableContent { get; set; }
 
@@ -79,8 +80,6 @@ namespace Calculator
                 if (!mainWindow.lable.Content.ToString().Contains(model.ReturnSign()))
                     mainWindow.lable.Content += num;
             }
-
-            
         }
 
         #region Auxiliary buttons.
@@ -108,15 +107,19 @@ namespace Calculator
             //что установлен какой либо из знаков операции.
             if (model.SignSetOrNot())
             {
-                if (mainWindow.textBox.Text.Length != 0)
-                    model.SetNumber2(mainWindow.textBox.Text);
-                else
+                if(mainWindow.lable.Content.ToString().Length!=0)
                     model.SetNumber2(mainWindow.lable.Content.ToString().Remove(mainWindow.lable.Content.ToString().Length - 1, 1));
+
+                if (mainWindow.textBox.Text.Length != 0 && EqualCount == 0)
+                    model.SetNumber2(mainWindow.textBox.Text);
+                //else
+
 
                 model.GetResult();
                 mainWindow.textBox.Text = model.ResultToTextBox();
                 model.SetNumber1(mainWindow.textBox.Text);
                 mainWindow.lable.Content = "";
+                EqualCount = 1;
             }
         }
 
@@ -127,7 +130,7 @@ namespace Calculator
             if (!mainWindow.textBox.Text.StartsWith("-"))
                 mainWindow.textBox.Text = mainWindow.textBox.Text.Insert(0, "-");
             else
-                mainWindow.textBox.Text = mainWindow.textBox.Text.Remove(0,1);
+                mainWindow.textBox.Text = mainWindow.textBox.Text.Remove(0, 1);
         }
 
         //
