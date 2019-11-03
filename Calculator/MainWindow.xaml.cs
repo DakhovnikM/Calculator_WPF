@@ -127,6 +127,7 @@ namespace Calculator
             add { but_Dev_Click += value; }
             remove { but_Dev_Click -= value; }
         }
+
         public EventHandler but_Res_Click = null;
         public event EventHandler But_Res_Click
         {
@@ -150,99 +151,42 @@ namespace Calculator
 
         #endregion
 
-        private void Button_0_Click(object sender, RoutedEventArgs e)
-        {
-            but_0_Click.Invoke(sender, e);
-        }
+        private void Button_0_Click(object sender, RoutedEventArgs e) => but_0_Click.Invoke(sender, e);
 
-        private void Button_1_Click(object sender, RoutedEventArgs e)
-        {
-            but_1_Click.Invoke(sender, e);
-        }
+        private void Button_1_Click(object sender, RoutedEventArgs e) => but_1_Click.Invoke(sender, e);
 
-        private void Button_2_Click(object sender, RoutedEventArgs e)
-        {
-            but_2_Click.Invoke(sender, e);
-        }
+        private void Button_2_Click(object sender, RoutedEventArgs e) => but_2_Click.Invoke(sender, e);
 
-        private void Button_3_Click(object sender, RoutedEventArgs e)
-        {
-            but_3_Click.Invoke(sender, e);
-        }
+        private void Button_3_Click(object sender, RoutedEventArgs e) => but_3_Click.Invoke(sender, e);
 
-        private void Button_4_Click(object sender, RoutedEventArgs e)
-        {
-            but_4_Click.Invoke(sender, e);
-        }
+        private void Button_4_Click(object sender, RoutedEventArgs e) => but_4_Click.Invoke(sender, e);
 
-        private void Button_5_Click(object sender, RoutedEventArgs e)
-        {
-            but_5_Click.Invoke(sender, e);
-        }
+        private void Button_5_Click(object sender, RoutedEventArgs e) => but_5_Click.Invoke(sender, e);
 
-        private void Button_6_Click(object sender, RoutedEventArgs e)
-        {
-            but_6_Click.Invoke(sender, e);
-        }
+        private void Button_6_Click(object sender, RoutedEventArgs e) => but_6_Click.Invoke(sender, e);
 
-        private void Button_7_Click(object sender, RoutedEventArgs e)
-        {
-            but_7_Click.Invoke(sender, e);
-        }
+        private void Button_7_Click(object sender, RoutedEventArgs e) => but_7_Click.Invoke(sender, e);
 
-        private void Button_8_Click(object sender, RoutedEventArgs e)
-        {
-            but_8_Click.Invoke(sender, e);
-        }
+        private void Button_8_Click(object sender, RoutedEventArgs e) => but_8_Click.Invoke(sender, e);
 
-        private void Button_9_Click(object sender, RoutedEventArgs e)
-        {
-            but_9_Click.Invoke(sender, e);
-        }
+        private void Button_9_Click(object sender, RoutedEventArgs e) => but_9_Click.Invoke(sender, e);
 
-        private void Button_Point_Click(object sender, RoutedEventArgs e)
-        {
-            but_Point_Click.Invoke(sender, e);
-        }
+        private void Button_Point_Click(object sender, RoutedEventArgs e) => but_Point_Click.Invoke(sender, e);
 
-        private void Button_Equals_Click(object sender, RoutedEventArgs e)
-        {
-            but_Equals_Click.Invoke(sender, e);
-        }
+        private void Button_Equals_Click(object sender, RoutedEventArgs e) => but_Equals_Click.Invoke(sender, e);
 
-        private void Button_Addition_Click(object sender, RoutedEventArgs e)
-        {
-            but_Add_Click.Invoke(sender, e);
-        }
+        private void Button_Addition_Click(object sender, RoutedEventArgs e) => but_Add_Click.Invoke(sender, e);
 
-        private void Button_Subtraction_Click(object sender, RoutedEventArgs e)
-        {
-            but_Sub_Click.Invoke(sender, e);
-        }
+        private void Button_Subtraction_Click(object sender, RoutedEventArgs e) => but_Sub_Click.Invoke(sender, e);
 
-        private void Button_Multiplication_Click(object sender, RoutedEventArgs e)
-        {
-            but_Mul_Click.Invoke(sender, e);
-        }
+        private void Button_Multiplication_Click(object sender, RoutedEventArgs e) => but_Mul_Click.Invoke(sender, e);
 
-        private void Button_Division_Click(object sender, RoutedEventArgs e)
-        {
-            but_Dev_Click.Invoke(sender, e);
-        }
+        private void Button_Division_Click(object sender, RoutedEventArgs e) => but_Dev_Click.Invoke(sender, e);
 
-        private void Button_Reset_Click(object sender, RoutedEventArgs e)
-        {
-            but_Res_Click.Invoke(sender, e);
-        }
+        private void Button_Reset_Click(object sender, RoutedEventArgs e) => but_Res_Click.Invoke(sender, e);
 
-        private void Button_ChangeSign_Click(object sender, RoutedEventArgs e)
-        {
-            but_ChangeSign_Click.Invoke(sender, e);
-        }
+        private void Button_ChangeSign_Click(object sender, RoutedEventArgs e) => but_ChangeSign_Click.Invoke(sender, e);
 
-        private void ButtonCorect_Click(object sender, RoutedEventArgs e)
-        {
-            but_Corect_Click.Invoke(sender, e);
-        }
+        private void ButtonCorect_Click(object sender, RoutedEventArgs e) => but_Corect_Click.Invoke(sender, e);
     }
 }

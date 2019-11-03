@@ -107,13 +107,11 @@ namespace Calculator
             //что установлен какой либо из знаков операции.
             if (model.SignSetOrNot())
             {
-                if(mainWindow.lable.Content.ToString().Length!=0)
+                if (mainWindow.lable.Content.ToString().Length != 0)
                     model.SetNumber2(mainWindow.lable.Content.ToString().Remove(mainWindow.lable.Content.ToString().Length - 1, 1));
 
                 if (mainWindow.textBox.Text.Length != 0 && EqualCount == 0)
                     model.SetNumber2(mainWindow.textBox.Text);
-                //else
-
 
                 model.GetResult();
                 mainWindow.textBox.Text = model.ResultToTextBox();
@@ -152,82 +150,29 @@ namespace Calculator
         #region Arithmetic operations buttons.
         //
         //Button "/"
-        private void MainWindow_But_Dev_Click(object sender, EventArgs e)
-        {
-            SetNumbersAndSign('/');
-        }
-
+        private void MainWindow_But_Dev_Click(object sender, EventArgs e) => SetNumbersAndSign('/');
         //
         //Button "-"
-        private void MainWindow_But_Sub_Click(object sender, EventArgs e)
-        {
-            SetNumbersAndSign('-');
-        }
-
+        private void MainWindow_But_Sub_Click(object sender, EventArgs e) => SetNumbersAndSign('-');
         //
         //Button "*"
-        private void MainWindow_But_Mul_Click(object sender, EventArgs e)
-        {
-            SetNumbersAndSign('*');
-        }
-
+        private void MainWindow_But_Mul_Click(object sender, EventArgs e) => SetNumbersAndSign('*');
         //
         //Button "+"
-        private void MainWindow_But_Add_Click(object sender, EventArgs e)
-        {
-            SetNumbersAndSign('+');
-        }
+        private void MainWindow_But_Add_Click(object sender, EventArgs e) => SetNumbersAndSign('+');
         #endregion
 
         #region Number buttons.
-        private void MainWindow_But_9_Click(object sender, EventArgs e)
-        {
-            FilingOutTextBoxAndLable("9");
-        }
-
-        private void MainWindow_But_8_Click(object sender, EventArgs e)
-        {
-            FilingOutTextBoxAndLable("8");
-        }
-
-        private void MainWindow_But_7_Click(object sender, EventArgs e)
-        {
-            FilingOutTextBoxAndLable("7");
-        }
-
-        private void MainWindow_But_6_Click(object sender, EventArgs e)
-        {
-            FilingOutTextBoxAndLable("6");
-        }
-
-        private void MainWindow_But_5_Click(object sender, EventArgs e)
-        {
-            FilingOutTextBoxAndLable("5");
-        }
-
-        private void MainWindow_But_4_Click(object sender, EventArgs e)
-        {
-            FilingOutTextBoxAndLable("4");
-        }
-
-        private void MainWindow_But_3_Click(object sender, EventArgs e)
-        {
-            FilingOutTextBoxAndLable("3");
-        }
-        private void MainWindow_But_2_Click(object sender, EventArgs e)
-        {
-            FilingOutTextBoxAndLable("2");
-        }
-
-        private void MainWindow_But_1_Click(object sender, EventArgs e)
-        {
-            FilingOutTextBoxAndLable("1");
-        }
-
-        private void MainWindow_But_0_Click(object sender, EventArgs e)
-        {
-            FilingOutTextBoxAndLable("0");
-        }
+        private void MainWindow_But_9_Click(object sender, EventArgs e) => FilingOutTextBoxAndLable("9");
+        private void MainWindow_But_8_Click(object sender, EventArgs e) => FilingOutTextBoxAndLable("8");
+        private void MainWindow_But_7_Click(object sender, EventArgs e) => FilingOutTextBoxAndLable("7");
+        private void MainWindow_But_6_Click(object sender, EventArgs e) => FilingOutTextBoxAndLable("6");
+        private void MainWindow_But_5_Click(object sender, EventArgs e) => FilingOutTextBoxAndLable("5");
+        private void MainWindow_But_4_Click(object sender, EventArgs e) => FilingOutTextBoxAndLable("4");
+        private void MainWindow_But_3_Click(object sender, EventArgs e) => FilingOutTextBoxAndLable("3");
+        private void MainWindow_But_2_Click(object sender, EventArgs e) => FilingOutTextBoxAndLable("2");
+        private void MainWindow_But_1_Click(object sender, EventArgs e) => FilingOutTextBoxAndLable("1");
+        private void MainWindow_But_0_Click(object sender, EventArgs e) => FilingOutTextBoxAndLable("0");
         #endregion
     }
 }
