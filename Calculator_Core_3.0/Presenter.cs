@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Text;
 
-namespace Calculator
+namespace Calculator_Core_3._0
 {
     class Presenter
     {
@@ -175,4 +177,5 @@ namespace Calculator
         private void MainWindow_But_0_Click(object sender, EventArgs e) => FilingOutTextBoxAndLable("0");
         #endregion
     }
+
 }

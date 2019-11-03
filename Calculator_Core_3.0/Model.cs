@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Text;
 
-namespace Calculator
+namespace Calculator_Core_3._0
 {
     class Model
     {
@@ -127,5 +129,6 @@ namespace Calculator
             Result = 0;
             Sign = '\0';
         }
+
     }
 }
