@@ -57,28 +57,15 @@ namespace Calculator_Core_3._0
         /// <param name="str1">Первое число</param>
         /// <param name="str2">Второе число</param>
         /// <returns></returns>
-        public double GetResult()
+        public double GetResult() =>
+        Sign switch
         {
-            switch (Sign)
-            {
-                case '+':
-                    Result = Number2 == 0 ? Number1 + Number1 : Number1 + Number2;
-                    break;
-                case '-':
-                    Result = Number2 == 0 ? Number1 - Number1 : Number1 - Number2;
-                    break;
-                case '*':
-                    Result = Number2 == 0 ? Number1 * Number1 : Number1 * Number2;
-                    break;
-                case '/':
-                    if (Number2 != 0)
-                        Result = Number1 / Number2;
-                    else
-                        Result = 0;
-                    break;
-            }
-            return Result;
-        }
+            '+' => Result = Number2 == 0 ? Number1 + Number1 : Number1 + Number2,
+            '-' => Result = Number2 == 0 ? Number1 - Number1 : Number1 - Number2,
+            '*' => Result = Number2 == 0 ? Number1 * Number1 : Number1 * Number2,
+            '/' => Result = Number2 != 0 ? Number1 / Number2 : 0,
+            _ => Result
+        };
 
         /// <summary>
         /// Вывод арифметического знака на экран.
