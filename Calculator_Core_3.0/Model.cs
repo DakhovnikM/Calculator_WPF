@@ -10,16 +10,6 @@ namespace Calculator_Core_3._0
         double Result { get; set; }
 
         /// <summary>
-        /// Добавление числа в поле textBox.
-        /// </summary>
-        /// <param name="str"></param>
-        /// <returns></returns>
-        public string AddCharToString(string str)
-        {
-            return str;
-        }
-
-        /// <summary>
         /// Выбор арифметической операции.
         /// </summary>
         /// <param name="ch"></param>
@@ -114,6 +104,5 @@ namespace Calculator_Core_3._0
             Result = 0;
             Sign = '\0';
         }
-
     }
 }
