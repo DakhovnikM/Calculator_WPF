@@ -37,7 +37,7 @@ namespace Calculator_Core_3._0
             this.mainWindow.But_Point_Click += MainWindow_But_Point_Click;
             this.mainWindow.But_Res_Click += MainWindow_But_Res_Click;
             this.mainWindow.But_Sub_Click += MainWindow_But_Sub_Click;
-            this.mainWindow.But_Corect_Click += MainWindow_But_Corect_Click;
+            this.mainWindow.But_Correct_Click += MainWindow_But_Corect_Click;
             #endregion
         }
 
@@ -77,8 +77,8 @@ namespace Calculator_Core_3._0
                 mainWindow.textBox.Text += num;
 
                 //После добавления в Lable арифметического знака туда не добавляются символы.
-                if (!mainWindow.lable.Content.ToString().Contains(model.ReturnSign())) 
-                mainWindow.lable.Content += num;
+                if (!mainWindow.lable.Content.ToString().Contains(model.ReturnSign()))
+                    mainWindow.lable.Content += num;
             }
         }
 

@@ -141,11 +141,11 @@ namespace Calculator_Core_3._0
             remove { but_ChangeSign_Click -= value; }
         }
 
-        EventHandler but_Corect_Click = null;
-        public event EventHandler But_Corect_Click
+        EventHandler but_Correct_Click = null;
+        public event EventHandler But_Correct_Click
         {
-            add { but_Corect_Click += value; }
-            remove { but_Corect_Click -= value; }
+            add { but_Correct_Click += value; }
+            remove { but_Correct_Click -= value; }
         }
 
         #endregion
@@ -168,6 +168,6 @@ namespace Calculator_Core_3._0
         private void Button_Division_Click(object sender, RoutedEventArgs e) => but_Dev_Click.Invoke(sender, e);
         private void Button_Reset_Click(object sender, RoutedEventArgs e) => but_Res_Click.Invoke(sender, e);
         private void Button_ChangeSign_Click(object sender, RoutedEventArgs e) => but_ChangeSign_Click.Invoke(sender, e);
-        private void ButtonCorrect_Click(object sender, RoutedEventArgs e) => but_Corect_Click.Invoke(sender, e);
+        private void ButtonCorrect_Click(object sender, RoutedEventArgs e) => but_Correct_Click.Invoke(sender, e);
     }
 }
