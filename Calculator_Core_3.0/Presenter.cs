@@ -42,7 +42,7 @@ namespace Calculator_Core_3._0
         }
 
         /// <summary>
-        /// Set first number and sign of arithmetic operation.
+        /// Set first number and the sign of arithmetic operation.
         /// </summary>
         /// <param name="ch">Sign of arithmetic operation</param>
         private void SetNumbersAndSign(char ch)
@@ -77,8 +77,8 @@ namespace Calculator_Core_3._0
                 mainWindow.textBox.Text += num;
 
                 //После добавления в Lable арифметического знака туда не добавляются символы.
-                if (!mainWindow.lable.Content.ToString().Contains(model.ReturnSign()))
-                    mainWindow.lable.Content += num;
+                if (!mainWindow.lable.Content.ToString().Contains(model.ReturnSign())) 
+                mainWindow.lable.Content += num;
             }
         }
 
@@ -110,8 +110,7 @@ namespace Calculator_Core_3._0
                 if (mainWindow.lable.Content.ToString().Length != 0)
                     model.SetNumber2(mainWindow.lable.Content.ToString().Remove(mainWindow.lable.Content.ToString().Length - 1, 1));
 
-                if (mainWindow.textBox.Text.Length != 0 && EqualCount == 0)
-                    model.SetNumber2(mainWindow.textBox.Text);
+                if (mainWindow.textBox.Text.Length != 0 && EqualCount == 0) model.SetNumber2(mainWindow.textBox.Text);
 
                 model.GetResult();
                 mainWindow.textBox.Text = model.ResultToTextBox();
@@ -125,10 +124,9 @@ namespace Calculator_Core_3._0
         //Button "+/-", change the sign of a number.
         private void MainWindow_But_ChangeSign_Click(object sender, EventArgs e)
         {
-            if (!mainWindow.textBox.Text.StartsWith("-"))
-                mainWindow.textBox.Text = mainWindow.textBox.Text.Insert(0, "-");
+            if (mainWindow.textBox.Text.StartsWith("-")) mainWindow.textBox.Text = mainWindow.textBox.Text.Remove(0, 1);
             else
-                mainWindow.textBox.Text = mainWindow.textBox.Text.Remove(0, 1);
+                mainWindow.textBox.Text = mainWindow.textBox.Text.Insert(0, "-");
         }
 
         //
@@ -174,5 +172,4 @@ namespace Calculator_Core_3._0
         private void MainWindow_But_0_Click(object sender, EventArgs e) => FilingOutTextBoxAndLable("0");
         #endregion
     }
-
 }
