@@ -79,10 +79,7 @@ namespace Calculator_Core_3._0
         /// <returns></returns>
         public bool SignSetOrNot()
         {
-            if (Sign != '\0')
-                return true;
-            else
-                return false;
+            return Sign != '\0';
         }
 
         /// <summary>
