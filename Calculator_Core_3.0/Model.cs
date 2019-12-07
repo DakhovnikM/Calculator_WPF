@@ -4,40 +4,31 @@ namespace Calculator_Core_3._0
 {
     class Model
     {
-        double Number1 { get; set; }
-        double Number2 { get; set; }
-        char Sign { get; set; }
-        double Result { get; set; }
+        double Number1 { get; set; } = 0;
+        double Number2 { get; set; } = 0;
+        char Sign { get; set; } = 'ё';
+        double Result { get; set; } = 0;
 
         /// <summary>
         /// Выбор арифметической операции.
         /// </summary>
         /// <param name="ch"></param>
         /// <returns></returns>
-        public char SetSignOperation(char ch)
-        {
-            return Sign = ch;
-        }
+        public char SetSignOperation(char ch) => Sign = ch;
 
         /// <summary>
         /// Инициализация 1-ой переменной.
         /// </summary>
         /// <param name="str"></param>
         /// <returns></returns>
-        public double SetNumber1(string str)
-        {
-            return Number1 = Convert.ToDouble(str);
-        }
+        public double SetNumber1(string str) => Number1 = Convert.ToDouble(str);
 
         /// <summary>
         /// Инициализация 2-ой переменной.
         /// </summary>
         /// <param name="str">Число отоброжаемое в </param>
         /// <returns></returns>
-        public double SetNumber2(string str)
-        {
-            return Number2 = Convert.ToDouble(str);
-        }
+        public double SetNumber2(string str) => Number2 = Convert.ToDouble(str);
 
         /// <summary>
         /// Вычисление результата.
@@ -54,42 +45,29 @@ namespace Calculator_Core_3._0
             '/' => Result = Number2 != 0 ? Number1 / Number2 : 0,
             _ => Result
         };
-
         /// <summary>
         /// Вывод арифметического знака на экран.
         /// </summary>
         /// <returns></returns>
-        public string ArithmeticSignToLable()
-        {
-            return Sign.ToString();
-        }
+        public string ArithmeticSignToLable() => Sign.ToString();
 
         /// <summary>
         /// Вывод результата на экран.
         /// </summary>
         /// <returns></returns>
-        public string ResultToTextBox()
-        {
-            return Result.ToString();
-        }
+        public string ResultToTextBox() => Result.ToString();
 
         /// <summary>
         /// Проверяем, задан ли знак арифметической операции.
         /// </summary>
         /// <returns></returns>
-        public bool SignSetOrNot()
-        {
-            return Sign != '\0';
-        }
+        public bool SignSetOrNot() => Sign != 'ё';
 
         /// <summary>
         /// Возврвщвет символ арифметической операции.
         /// </summary>
         /// <returns></returns>
-        public string ReturnSign()
-        {
-            return Convert.ToString(Sign);
-        }
+        public string ReturnSign() => Convert.ToString(Sign);
 
         /// <summary>
         /// Сброс значений всех переменных.
@@ -99,7 +77,7 @@ namespace Calculator_Core_3._0
             Number1 = 0;
             Number2 = 0;
             Result = 0;
-            Sign = '\0';
+            Sign = 'ё';
         }
     }
 }

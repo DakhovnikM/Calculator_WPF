@@ -7,9 +7,6 @@ namespace Calculator_Core_3._0
         readonly Model model;
         readonly MainWindow mainWindow;
         int EqualCount { get; set; }
-        //string TextBoxText { get; set; }
-        //object LableContent { get; set; }
-
         public Presenter(MainWindow mainWindow)
         {
             model = new Model();
@@ -18,7 +15,6 @@ namespace Calculator_Core_3._0
             this.mainWindow.lable.Content = "";
 
             #region Subscribe to events.
-
             this.mainWindow.But_0_Click += MainWindow_But_0_Click;
             this.mainWindow.But_1_Click += MainWindow_But_1_Click;
             this.mainWindow.But_2_Click += MainWindow_But_2_Click;
@@ -40,7 +36,6 @@ namespace Calculator_Core_3._0
             this.mainWindow.But_Correct_Click += MainWindow_But_Corect_Click;
             #endregion
         }
-
         /// <summary>
         /// Set first number and the sign of arithmetic operation.
         /// </summary>
@@ -56,10 +51,8 @@ namespace Calculator_Core_3._0
                 mainWindow.textBox.Text = "";
                 mainWindow.lable.Content += model.ArithmeticSignToLable();
             }
-            else
-                mainWindow.textBox.Text = "";
+            else mainWindow.textBox.Text = "";
         }
-
         /// <summary>
         /// Filing out the textbox and the lable.
         /// </summary>
@@ -75,7 +68,6 @@ namespace Calculator_Core_3._0
             else
             {
                 mainWindow.textBox.Text += num;
-
                 //После добавления в Lable арифметического знака туда не добавляются символы.
                 if (!mainWindow.lable.Content.ToString().Contains(model.ReturnSign()))
                     mainWindow.lable.Content += num;
@@ -89,29 +81,23 @@ namespace Calculator_Core_3._0
         {
             mainWindow.textBox.Text = "";
             mainWindow.lable.Content = "";
+            EqualCount = 0;
             model.Reset();
         }
-
         //
         //Button "."
-        private void MainWindow_But_Point_Click(object sender, EventArgs e)
-        {
-            FilingOutTextBoxAndLable(",");
-        }
-
+        private void MainWindow_But_Point_Click(object sender, EventArgs e) => FilingOutTextBoxAndLable(",");
         //
         //Button "="
         private void MainWindow_But_Equals_Click(object sender, EventArgs e)
         {
-            //Выполнятся только при условии, 
-            //что установлен какой либо из знаков операции.
+            //Выполнятся только при условии, что инициирован какой либо из знаков операции.
             if (model.SignSetOrNot())
             {
                 if (mainWindow.lable.Content.ToString().Length != 0)
                     model.SetNumber2(mainWindow.lable.Content.ToString().Remove(mainWindow.lable.Content.ToString().Length - 1, 1));
-
-                if (mainWindow.textBox.Text.Length != 0 && EqualCount == 0) model.SetNumber2(mainWindow.textBox.Text);
-
+                if (mainWindow.textBox.Text.Length != 0 && EqualCount == 0)
+                    model.SetNumber2(mainWindow.textBox.Text);
                 model.GetResult();
                 mainWindow.textBox.Text = model.ResultToTextBox();
                 model.SetNumber1(mainWindow.textBox.Text);
@@ -119,16 +105,15 @@ namespace Calculator_Core_3._0
                 EqualCount = 1;
             }
         }
-
         //
         //Button "+/-", change the sign of a number.
         private void MainWindow_But_ChangeSign_Click(object sender, EventArgs e)
         {
-            if (mainWindow.textBox.Text.StartsWith("-")) mainWindow.textBox.Text = mainWindow.textBox.Text.Remove(0, 1);
+            if (mainWindow.textBox.Text.StartsWith("-"))
+                mainWindow.textBox.Text = mainWindow.textBox.Text.Remove(0, 1);
             else
                 mainWindow.textBox.Text = mainWindow.textBox.Text.Insert(0, "-");
         }
-
         //
         //Button "<<", line adjustment.
         private void MainWindow_But_Corect_Click(object sender, EventArgs e)
@@ -136,7 +121,6 @@ namespace Calculator_Core_3._0
             if (mainWindow.textBox.Text.Length != 0)
             {
                 mainWindow.textBox.Text = mainWindow.textBox.Text.Remove(mainWindow.textBox.Text.Length - 1, 1);
-
                 //Корректировка строки в Lable происходит, если в ней не содержится зак операции.
                 if (mainWindow.lable.Content.ToString().Length != 0 && !mainWindow.lable.Content.ToString().Contains(model.ReturnSign()))
                     mainWindow.lable.Content = mainWindow.lable.Content.ToString().Remove(mainWindow.lable.Content.ToString().Length - 1, 1);

@@ -20,7 +20,7 @@
         <Button Name="Button_3" Content="3" HorizontalAlignment="Left" Margin="192,278,0,0" VerticalAlignment="Top" Width="75" Height="40" Click="Button_3_Click" FontSize="25"/>
         <Button Name="Button_6" Content="6" HorizontalAlignment="Left" Margin="192,233,0,0" VerticalAlignment="Top" Width="75" Height="40" Click="Button_6_Click" FontSize="25"/>
         <Button Name="Button_9" Content="9" HorizontalAlignment="Left" Margin="192,188,0,0" VerticalAlignment="Top" Width="75" Height="40" Click="Button_9_Click" FontSize="25"/>
-        <Button Name="ButtonCorect" Content="&lt;&lt;" HorizontalAlignment="Left" Margin="192,143,0,0" VerticalAlignment="Top" Width="75" Height="40" Click="ButtonCorect_Click" FontSize="25"/>
+        <Button Name="ButtonCorrect" Content="&lt;&lt;" HorizontalAlignment="Left" Margin="192,143,0,0" VerticalAlignment="Top" Width="75" Height="40" Click="ButtonCorrect_Click" FontSize="25"/>
         <Button Name="Button_Division" Content="/" HorizontalAlignment="Left" Margin="282,143,0,0" VerticalAlignment="Top" Width="75" Height="40" Click="Button_Division_Click" FontSize="25"/>
         <Button Name="Button_Equals" Content="=" HorizontalAlignment="Left" Margin="282,323,0,0" VerticalAlignment="Top" Width="75" Height="40" Click="Button_Equals_Click" FontSize="25"/>
         <Button Name="Button_Addition" Content="+" HorizontalAlignment="Left" Margin="282,278,0,0" VerticalAlignment="Top" Width="75" Height="40" Click="Button_Addition_Click" FontSize="25"/>
