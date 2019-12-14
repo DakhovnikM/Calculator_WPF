@@ -1,61 +1,60 @@
 ﻿using System;
+using System.Globalization;
 
 namespace Calculator_Core_3._0
 {
-    class Model
+    internal class Model
     {
-        double Number1 { get; set; } = 0;
-        double Number2 { get; set; } = 0;
-        char Sign { get; set; } = 'ё';
-        double Result { get; set; } = 0;
+        private double Number1 { get; set; }
+        private double Number2 { get; set; }
+        private char Sign { get; set; }
+        private double Result { get; set; }
 
         /// <summary>
-        /// Выбор арифметической операции.
+        /// Arithmetic operation selection.
         /// </summary>
-        /// <param name="ch"></param>
+        /// <param name="ch">Sign</param>
         /// <returns></returns>
         public char SetSignOperation(char ch) => Sign = ch;
 
         /// <summary>
         /// Инициализация 1-ой переменной.
         /// </summary>
-        /// <param name="str"></param>
+        /// <param name="str">Number1</param>
         /// <returns></returns>
         public double SetNumber1(string str) => Number1 = Convert.ToDouble(str);
 
         /// <summary>
         /// Инициализация 2-ой переменной.
         /// </summary>
-        /// <param name="str">Число отоброжаемое в </param>
+        /// <param name="str">Number2</param>
         /// <returns></returns>
         public double SetNumber2(string str) => Number2 = Convert.ToDouble(str);
 
         /// <summary>
-        /// Вычисление результата.
+        /// Получение результата.
         /// </summary>
-        /// <param name="str1">Первое число</param>
-        /// <param name="str2">Второе число</param>
         /// <returns></returns>
-        public double GetResult() =>
-        Sign switch
+        public double GetResult() => Sign switch
         {
             '+' => Result = Number2 == 0 ? Number1 + Number1 : Number1 + Number2,
             '-' => Result = Number2 == 0 ? Number1 - Number1 : Number1 - Number2,
             '*' => Result = Number2 == 0 ? Number1 * Number1 : Number1 * Number2,
-            '/' => Result = Number2 != 0 ? Number1 / Number2 : 0,
+            '/' => Result = Number2 == 0 ? 0 : Number1 / Number2,
             _ => Result
         };
+        
         /// <summary>
         /// Вывод арифметического знака на экран.
         /// </summary>
         /// <returns></returns>
-        public string ArithmeticSignToLable() => Sign.ToString();
+        public string ArithmeticSignToLabel() => Sign.ToString();
 
         /// <summary>
         /// Вывод результата на экран.
         /// </summary>
         /// <returns></returns>
-        public string ResultToTextBox() => Result.ToString();
+        public string ResultToTextBox() => Result.ToString(CultureInfo.CurrentCulture);
 
         /// <summary>
         /// Проверяем, задан ли знак арифметической операции.
