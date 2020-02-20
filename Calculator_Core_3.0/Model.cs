@@ -10,12 +10,14 @@ namespace Calculator_Core_3._0
         private char sign;
         private double result;
 
+
         /// <summary>
         /// Arithmetic operation selection.
         /// </summary>
         /// <param name="ch">Sign</param>
         /// <returns></returns>
         public char SetSignOperation(char ch) => sign = ch;
+        public char GetSignOperation() => sign;
 
         /// <summary>
         /// Инициализация 1-ой переменной.
@@ -23,6 +25,7 @@ namespace Calculator_Core_3._0
         /// <param name="str">Number1</param>
         /// <returns></returns>
         public double SetNumber1(string str) => number1 = Convert.ToDouble(str);
+        public double GetNumber1() => number1;
 
         /// <summary>
         /// Инициализация 2-ой переменной.
@@ -30,6 +33,7 @@ namespace Calculator_Core_3._0
         /// <param name="str">Number2</param>
         /// <returns></returns>
         public double SetNumber2(string str) => number2 = Convert.ToDouble(str);
+        public double GetNumber2() => number2;
 
         /// <summary>
         /// Получение результата.
@@ -43,7 +47,7 @@ namespace Calculator_Core_3._0
             '/' => result = number2 == 0 ? 0 : number1 / number2,
             _ => result
         };
-        
+
         /// <summary>
         /// Вывод арифметического знака на экран.
         /// </summary>
@@ -60,7 +64,7 @@ namespace Calculator_Core_3._0
         /// Проверяем, задан ли знак арифметической операции.
         /// </summary>
         /// <returns></returns>
-        public bool SignSetOrNot() => sign != 'ё';
+        public bool SignCheck() => sign != '\0';
 
         /// <summary>
         /// Возврвщвет символ арифметической операции.
@@ -76,7 +80,7 @@ namespace Calculator_Core_3._0
             number1 = 0;
             number2 = 0;
             result = 0;
-            sign = 'ё';
+            sign = '\0';
         }
     }
 }

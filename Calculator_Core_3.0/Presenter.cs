@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Windows.Controls;
 
 namespace Calculator_Core_3._0
 {
@@ -17,16 +18,16 @@ namespace Calculator_Core_3._0
 
             #region Subscribe to events.
 
-            this.mainWindow.But_0_Click += MainWindow_But_0_Click;
-            this.mainWindow.But_1_Click += MainWindow_But_1_Click;
-            this.mainWindow.But_2_Click += MainWindow_But_2_Click;
-            this.mainWindow.But_3_Click += MainWindow_But_3_Click;
-            this.mainWindow.But_4_Click += MainWindow_But_4_Click;
-            this.mainWindow.But_5_Click += MainWindow_But_5_Click;
-            this.mainWindow.But_6_Click += MainWindow_But_6_Click;
-            this.mainWindow.But_7_Click += MainWindow_But_7_Click;
-            this.mainWindow.But_8_Click += MainWindow_But_8_Click;
-            this.mainWindow.But_9_Click += MainWindow_But_9_Click;
+            this.mainWindow.But_0_Click += MainWindow_Num_Buttons_Click;
+            this.mainWindow.But_1_Click += MainWindow_Num_Buttons_Click;
+            this.mainWindow.But_2_Click += MainWindow_Num_Buttons_Click;
+            this.mainWindow.But_3_Click += MainWindow_Num_Buttons_Click;
+            this.mainWindow.But_4_Click += MainWindow_Num_Buttons_Click;
+            this.mainWindow.But_5_Click += MainWindow_Num_Buttons_Click;
+            this.mainWindow.But_6_Click += MainWindow_Num_Buttons_Click;
+            this.mainWindow.But_7_Click += MainWindow_Num_Buttons_Click;
+            this.mainWindow.But_8_Click += MainWindow_Num_Buttons_Click;
+            this.mainWindow.But_9_Click += MainWindow_Num_Buttons_Click;
             this.mainWindow.But_Add_Click += MainWindow_But_Add_Click;
             this.mainWindow.But_ChangeSign_Click += MainWindow_But_ChangeSign_Click;
             this.mainWindow.But_Dev_Click += MainWindow_But_Dev_Click;
@@ -40,13 +41,26 @@ namespace Calculator_Core_3._0
             #endregion
         }
 
-        private bool TextBoxIsEmpty() => string.IsNullOrEmpty(mainWindow.TextBox.Text);
-        private int TextBoxLength() => mainWindow.TextBox.Text.Length;
-        private string TextBoxTextRemove(int startindex, int count) => mainWindow.TextBox.Text.Remove(startindex, count);
-        private bool LabelIsEmpty() => string.IsNullOrEmpty(mainWindow.Label.Content.ToString());
-        private bool LabelContains(string str) => mainWindow.Label.Content.ToString().Contains(str);
-        private int LabelLength() => mainWindow.Label.Content.ToString().Length;
-        private string LabelContentRemove(int startindex, int count) => mainWindow.Label.Content.ToString().Remove(startindex, count);
+        private bool TextBoxIsEmpty() => 
+            string.IsNullOrEmpty(mainWindow.TextBox.Text);
+
+        private int TextBoxLength() => 
+            mainWindow.TextBox.Text.Length;
+
+        private string TextBoxTextRemove(int startindex, int count) => 
+            mainWindow.TextBox.Text.Remove(startindex, count);
+
+        private bool LabelIsEmpty() => 
+            string.IsNullOrEmpty(mainWindow.Label.Content.ToString());
+
+        private bool LabelContains(string str) => 
+            mainWindow.Label.Content.ToString().Contains(str);
+
+        private int LabelLength() => 
+            mainWindow.Label.Content.ToString().Length;
+
+        private string LabelContentRemove(int startindex, int count) => 
+            mainWindow.Label.Content.ToString().Remove(startindex, count);
 
         /// <summary>
         /// Set first number and the sign of arithmetic operation.
@@ -63,7 +77,24 @@ namespace Calculator_Core_3._0
                 mainWindow.TextBox.Text = "";
                 mainWindow.Label.Content += model.ArithmeticSignToLabel();
             }
-            else mainWindow.TextBox.Text = "";
+            else
+                mainWindow.TextBox.Text = "";
+        }
+
+        private void ErrorMesage(string str)
+        {
+            mainWindow.Label.Content = "";
+            mainWindow.TextBox.Text = str;
+        }
+
+        private void ShowHiddenButtons()
+        {
+
+        }
+        private void Button(int num)
+        {
+
+
         }
 
         /// <summary>
@@ -80,7 +111,9 @@ namespace Calculator_Core_3._0
             else
             {
                 mainWindow.TextBox.Text += num;
-                if (!LabelContains(model.ReturnSign())) mainWindow.Label.Content += num;
+
+                if (!LabelContains(model.ReturnSign()))
+                    mainWindow.Label.Content += num;
             }
         }
 
@@ -100,25 +133,34 @@ namespace Calculator_Core_3._0
         }
 
         /// <summary>
-        /// Button "."
+        /// Button "." .
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void MainWindow_But_Point_Click(object sender, EventArgs e) => FilingOutTextBoxAndLabel(",");
+        private void MainWindow_But_Point_Click(object sender, EventArgs e) => 
+            FilingOutTextBoxAndLabel(",");
 
         /// <summary>
-        /// Button "="
+        /// Button "=".
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void MainWindow_But_Equals_Click(object sender, EventArgs e)
         {
-            if (!model.SignSetOrNot()) return;
+            if (!model.SignCheck())
+                return;
 
             if (!LabelIsEmpty())
                 model.SetNumber2(LabelContentRemove(LabelLength() - 1, 1));
 
-            if (!TextBoxIsEmpty() && equalCount == 0) model.SetNumber2(mainWindow.TextBox.Text);
+            if (!TextBoxIsEmpty() && equalCount == 0)
+                model.SetNumber2(mainWindow.TextBox.Text);
+
+            if (Math.Abs(model.GetNumber2()) == 0 && model.GetSignOperation() == '/')
+            {
+                ErrorMesage("Деление на 0");
+                return;
+            }
 
             model.GetResult();
             mainWindow.TextBox.Text = model.ResultToTextBox();
@@ -140,13 +182,14 @@ namespace Calculator_Core_3._0
         }
 
         /// <summary>
-        /// Button "<<", line adjustment.
+        /// Button "<<" , line adjustment.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void MainWindow_But_Correct_Click(object sender, EventArgs e)
         {
-            if (TextBoxIsEmpty()) return;
+            if (TextBoxIsEmpty())
+                return;
 
             if (!LabelIsEmpty() && !LabelContains(model.ReturnSign()))
                 mainWindow.Label.Content = LabelContentRemove(LabelLength() - 1, 1);
@@ -157,29 +200,25 @@ namespace Calculator_Core_3._0
         #endregion
 
         #region Arithmetic operations buttons.
-
         //
         //Buttons "/", "-", "*", "+".
-        private void MainWindow_But_Dev_Click(object sender, EventArgs e) => SetNumbersAndSign('/');
-        private void MainWindow_But_Sub_Click(object sender, EventArgs e) => SetNumbersAndSign('-');
-        private void MainWindow_But_Mul_Click(object sender, EventArgs e) => SetNumbersAndSign('*');
-        private void MainWindow_But_Add_Click(object sender, EventArgs e) => SetNumbersAndSign('+');
-
+        private void MainWindow_But_Dev_Click(object sender, EventArgs e) => 
+            SetNumbersAndSign('/');
+        private void MainWindow_But_Sub_Click(object sender, EventArgs e) => 
+            SetNumbersAndSign('-');
+        private void MainWindow_But_Mul_Click(object sender, EventArgs e) => 
+            SetNumbersAndSign('*');
+        private void MainWindow_But_Add_Click(object sender, EventArgs e) => 
+            SetNumbersAndSign('+');
         #endregion
 
         #region Number buttons.
-
-        private void MainWindow_But_9_Click(object sender, EventArgs e) => FilingOutTextBoxAndLabel("9");
-        private void MainWindow_But_8_Click(object sender, EventArgs e) => FilingOutTextBoxAndLabel("8");
-        private void MainWindow_But_7_Click(object sender, EventArgs e) => FilingOutTextBoxAndLabel("7");
-        private void MainWindow_But_6_Click(object sender, EventArgs e) => FilingOutTextBoxAndLabel("6");
-        private void MainWindow_But_5_Click(object sender, EventArgs e) => FilingOutTextBoxAndLabel("5");
-        private void MainWindow_But_4_Click(object sender, EventArgs e) => FilingOutTextBoxAndLabel("4");
-        private void MainWindow_But_3_Click(object sender, EventArgs e) => FilingOutTextBoxAndLabel("3");
-        private void MainWindow_But_2_Click(object sender, EventArgs e) => FilingOutTextBoxAndLabel("2");
-        private void MainWindow_But_1_Click(object sender, EventArgs e) => FilingOutTextBoxAndLabel("1");
-        private void MainWindow_But_0_Click(object sender, EventArgs e) => FilingOutTextBoxAndLabel("0");
-
+        private void MainWindow_Num_Buttons_Click(object sender, EventArgs e)
+        {
+            var button = (Button)sender;
+            string str = button.Name.Substring(6, 1);
+            FilingOutTextBoxAndLabel(str);
+        }
         #endregion
     }
 }
