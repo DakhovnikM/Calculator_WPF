@@ -28,38 +28,40 @@ namespace Calculator_Core_3._0
             this.mainWindow.But_7_Click += MainWindow_Num_Buttons_Click;
             this.mainWindow.But_8_Click += MainWindow_Num_Buttons_Click;
             this.mainWindow.But_9_Click += MainWindow_Num_Buttons_Click;
-            this.mainWindow.But_Add_Click += MainWindow_But_Add_Click;
+
+            this.mainWindow.But_Add_Click += MainWindow_Oper_Battons_Click;
+            this.mainWindow.But_Sub_Click += MainWindow_Oper_Battons_Click;
+            this.mainWindow.But_Mul_Click += MainWindow_Oper_Battons_Click;
+            this.mainWindow.But_Dev_Click += MainWindow_Oper_Battons_Click;
+
             this.mainWindow.But_ChangeSign_Click += MainWindow_But_ChangeSign_Click;
-            this.mainWindow.But_Dev_Click += MainWindow_But_Dev_Click;
             this.mainWindow.But_Equals_Click += MainWindow_But_Equals_Click;
-            this.mainWindow.But_Mul_Click += MainWindow_But_Mul_Click;
             this.mainWindow.But_Point_Click += MainWindow_But_Point_Click;
             this.mainWindow.But_Res_Click += MainWindow_But_Res_Click;
-            this.mainWindow.But_Sub_Click += MainWindow_But_Sub_Click;
             this.mainWindow.But_Correct_Click += MainWindow_But_Correct_Click;
 
             #endregion
         }
 
-        private bool TextBoxIsEmpty() => 
+        private bool TextBoxIsEmpty() =>
             string.IsNullOrEmpty(mainWindow.TextBox.Text);
 
-        private int TextBoxLength() => 
+        private int TextBoxLength() =>
             mainWindow.TextBox.Text.Length;
 
-        private string TextBoxTextRemove(int startindex, int count) => 
+        private string TextBoxTextRemove(int startindex, int count) =>
             mainWindow.TextBox.Text.Remove(startindex, count);
 
-        private bool LabelIsEmpty() => 
+        private bool LabelIsEmpty() =>
             string.IsNullOrEmpty(mainWindow.Label.Content.ToString());
 
-        private bool LabelContains(string str) => 
+        private bool LabelContains(string str) =>
             mainWindow.Label.Content.ToString().Contains(str);
 
-        private int LabelLength() => 
+        private int LabelLength() =>
             mainWindow.Label.Content.ToString().Length;
 
-        private string LabelContentRemove(int startindex, int count) => 
+        private string LabelContentRemove(int startindex, int count) =>
             mainWindow.Label.Content.ToString().Remove(startindex, count);
 
         /// <summary>
@@ -137,7 +139,7 @@ namespace Calculator_Core_3._0
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void MainWindow_But_Point_Click(object sender, EventArgs e) => 
+        private void MainWindow_But_Point_Click(object sender, EventArgs e) =>
             FilingOutTextBoxAndLabel(",");
 
         /// <summary>
@@ -196,20 +198,31 @@ namespace Calculator_Core_3._0
 
             mainWindow.TextBox.Text = TextBoxTextRemove(TextBoxLength() - 1, 1);
         }
-
         #endregion
 
         #region Arithmetic operations buttons.
         //
         //Buttons "/", "-", "*", "+".
-        private void MainWindow_But_Dev_Click(object sender, EventArgs e) => 
-            SetNumbersAndSign('/');
-        private void MainWindow_But_Sub_Click(object sender, EventArgs e) => 
-            SetNumbersAndSign('-');
-        private void MainWindow_But_Mul_Click(object sender, EventArgs e) => 
-            SetNumbersAndSign('*');
-        private void MainWindow_But_Add_Click(object sender, EventArgs e) => 
-            SetNumbersAndSign('+');
+        private void MainWindow_Oper_Battons_Click(object sender, EventArgs e)
+        {
+            var button = (Button)sender;
+            string str = button.Name.Substring(6, 1);
+            switch (str)
+            {
+                case "D":
+                    SetNumbersAndSign('/');
+                    break;
+                case "S":
+                    SetNumbersAndSign('-');
+                    break;
+                case "M":
+                    SetNumbersAndSign('*');
+                    break;
+                case "A":
+                    SetNumbersAndSign('+');
+                    break;
+            }
+        }
         #endregion
 
         #region Number buttons.

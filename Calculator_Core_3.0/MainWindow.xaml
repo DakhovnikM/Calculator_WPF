@@ -35,15 +35,15 @@
                 VerticalAlignment="Top" Width="75" Height="40" Click="Button_9_Click" FontSize="25"/>
         <Button Name="ButtonCorrect" Content="&lt;&lt;" HorizontalAlignment="Left" Margin="192,143,0,0" 
                 VerticalAlignment="Top" Width="75" Height="40" Click="ButtonCorrect_Click" FontSize="25"/>
-        <Button Name="ButtonDivision" Content="/" HorizontalAlignment="Left" Margin="282,143,0,0" 
+        <Button Name="ButtonD" Content="/" HorizontalAlignment="Left" Margin="282,143,0,0" 
                 VerticalAlignment="Top" Width="75" Height="40" Click="Button_Division_Click" FontSize="25"/>
         <Button Name="ButtonEquals" Content="=" HorizontalAlignment="Left" Margin="282,323,0,0" 
                 VerticalAlignment="Top" Width="75" Height="40" Click="Button_Equals_Click" FontSize="25"/>
-        <Button Name="ButtonAddition" Content="+" HorizontalAlignment="Left" Margin="282,278,0,0" 
+        <Button Name="ButtonA" Content="+" HorizontalAlignment="Left" Margin="282,278,0,0" 
                 VerticalAlignment="Top" Width="75" Height="40" Click="Button_Addition_Click" FontSize="25"/>
-        <Button Name="ButtonSubtraction" Content="-" HorizontalAlignment="Left" Margin="282,233,0,0" 
+        <Button Name="ButtonS" Content="-" HorizontalAlignment="Left" Margin="282,233,0,0" 
                 VerticalAlignment="Top" Width="75" Height="40" Click="Button_Subtraction_Click" FontSize="25"/>
-        <Button Name="ButtonMultiplication" Content="*" HorizontalAlignment="Left" Margin="282,188,0,0" 
+        <Button Name="ButtonM" Content="*" HorizontalAlignment="Left" Margin="282,188,0,0" 
                 VerticalAlignment="Top" Width="75" Height="40" Click="Button_Multiplication_Click" FontSize="25"/>
         <TextBox Name="TextBox" HorizontalContentAlignment="Right" VerticalContentAlignment="Center" 
                 HorizontalAlignment="Left" Height="116" Margin="10,10,0,0" TextWrapping="Wrap" Text="TextBox" 
