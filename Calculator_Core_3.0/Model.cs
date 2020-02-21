@@ -16,61 +16,75 @@ namespace Calculator_Core_3._0
         /// </summary>
         /// <param name="ch">Sign</param>
         /// <returns></returns>
-        public char SetSignOperation(char ch) => sign = ch;
-        public char GetSignOperation() => sign;
+        public char SetArithmeticSign(char ch) =>
+            sign = ch;
+
+        public char GetArithmeticSign() =>
+            sign;
 
         /// <summary>
         /// Инициализация 1-ой переменной.
         /// </summary>
         /// <param name="str">Number1</param>
         /// <returns></returns>
-        public double SetNumber1(string str) => number1 = Convert.ToDouble(str);
-        public double GetNumber1() => number1;
+        public double SetNumber1(string str) =>
+            number1 = Convert.ToDouble(str);
+
+        public double GetNumber1() =>
+            number1;
 
         /// <summary>
         /// Инициализация 2-ой переменной.
         /// </summary>
         /// <param name="str">Number2</param>
         /// <returns></returns>
-        public double SetNumber2(string str) => number2 = Convert.ToDouble(str);
-        public double GetNumber2() => number2;
+        public double SetNumber2(string str) =>
+            number2 = Convert.ToDouble(str);
+
+        public double GetNumber2() =>
+            number2;
 
         /// <summary>
         /// Получение результата.
         /// </summary>
         /// <returns></returns>
-        public double GetResult() => sign switch
-        {
-            '+' => result = number2 == 0 ? number1 + number1 : number1 + number2,
-            '-' => result = number2 == 0 ? number1 - number1 : number1 - number2,
-            '*' => result = number2 == 0 ? number1 * number1 : number1 * number2,
-            '/' => result = number2 == 0 ? 0 : number1 / number2,
-            _ => result
-        };
+        public double GetResult() =>
+            sign switch
+            {
+                '+' => result = number2 == 0 ? number1 + number1
+                                             : number1 + number2,
 
-        /// <summary>
-        /// Вывод арифметического знака на экран.
-        /// </summary>
-        /// <returns></returns>
-        public string ArithmeticSignToLabel() => sign.ToString();
+                '-' => result = number2 == 0 ? number1 - number1
+                                             : number1 - number2,
+
+                '*' => result = number2 == 0 ? number1 * number1
+                                             : number1 * number2,
+
+                '/' => result = number2 == 0 ? 0
+                                             : number1 / number2,
+                _ => result
+            };
 
         /// <summary>
         /// Вывод результата на экран.
         /// </summary>
         /// <returns></returns>
-        public string ResultToTextBox() => result.ToString(CultureInfo.CurrentCulture);
+        public string ResultToString() =>
+            Convert.ToString(result);
 
         /// <summary>
         /// Проверяем, задан ли знак арифметической операции.
         /// </summary>
         /// <returns></returns>
-        public bool SignCheck() => sign != '\0';
+        public bool SignInitCheck() =>
+            sign != '\0';
 
         /// <summary>
         /// Возврвщвет символ арифметической операции.
         /// </summary>
         /// <returns></returns>
-        public string ReturnSign() => Convert.ToString(sign);
+        public string SignToString() =>
+            Convert.ToString(sign);
 
         /// <summary>
         /// Сброс значений всех переменных.

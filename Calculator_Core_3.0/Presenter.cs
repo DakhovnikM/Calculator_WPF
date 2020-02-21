@@ -14,25 +14,25 @@ namespace Calculator_Core_3._0
             model = new Model();
             this.mainWindow = mainWindow;
             this.mainWindow.TextBox.Text = "";
-            this.mainWindow.Label.Content = "";
+            this.mainWindow.TextBlock.Text = "";
 
             #region Subscribe to events.
 
-            this.mainWindow.But_0_Click += MainWindow_Num_Buttons_Click;
-            this.mainWindow.But_1_Click += MainWindow_Num_Buttons_Click;
-            this.mainWindow.But_2_Click += MainWindow_Num_Buttons_Click;
-            this.mainWindow.But_3_Click += MainWindow_Num_Buttons_Click;
-            this.mainWindow.But_4_Click += MainWindow_Num_Buttons_Click;
-            this.mainWindow.But_5_Click += MainWindow_Num_Buttons_Click;
-            this.mainWindow.But_6_Click += MainWindow_Num_Buttons_Click;
-            this.mainWindow.But_7_Click += MainWindow_Num_Buttons_Click;
-            this.mainWindow.But_8_Click += MainWindow_Num_Buttons_Click;
-            this.mainWindow.But_9_Click += MainWindow_Num_Buttons_Click;
+            this.mainWindow.But_0_Click += MainWindow_Num_Button_Click;
+            this.mainWindow.But_1_Click += MainWindow_Num_Button_Click;
+            this.mainWindow.But_2_Click += MainWindow_Num_Button_Click;
+            this.mainWindow.But_3_Click += MainWindow_Num_Button_Click;
+            this.mainWindow.But_4_Click += MainWindow_Num_Button_Click;
+            this.mainWindow.But_5_Click += MainWindow_Num_Button_Click;
+            this.mainWindow.But_6_Click += MainWindow_Num_Button_Click;
+            this.mainWindow.But_7_Click += MainWindow_Num_Button_Click;
+            this.mainWindow.But_8_Click += MainWindow_Num_Button_Click;
+            this.mainWindow.But_9_Click += MainWindow_Num_Button_Click;
 
-            this.mainWindow.But_Add_Click += MainWindow_Oper_Battons_Click;
-            this.mainWindow.But_Sub_Click += MainWindow_Oper_Battons_Click;
-            this.mainWindow.But_Mul_Click += MainWindow_Oper_Battons_Click;
-            this.mainWindow.But_Dev_Click += MainWindow_Oper_Battons_Click;
+            this.mainWindow.But_Add_Click += MainWindow_Oper_Batton_Click;
+            this.mainWindow.But_Sub_Click += MainWindow_Oper_Batton_Click;
+            this.mainWindow.But_Mul_Click += MainWindow_Oper_Batton_Click;
+            this.mainWindow.But_Dev_Click += MainWindow_Oper_Batton_Click;
 
             this.mainWindow.But_ChangeSign_Click += MainWindow_But_ChangeSign_Click;
             this.mainWindow.But_Equals_Click += MainWindow_But_Equals_Click;
@@ -46,76 +46,69 @@ namespace Calculator_Core_3._0
         private bool TextBoxIsEmpty() =>
             string.IsNullOrEmpty(mainWindow.TextBox.Text);
 
-        private int TextBoxLength() =>
+        private int TextBoxTextLength() =>
             mainWindow.TextBox.Text.Length;
 
         private string TextBoxTextRemove(int startindex, int count) =>
             mainWindow.TextBox.Text.Remove(startindex, count);
 
-        private bool LabelIsEmpty() =>
-            string.IsNullOrEmpty(mainWindow.Label.Content.ToString());
+        private bool BlockIsEmpty() =>
+            string.IsNullOrEmpty(mainWindow.TextBlock.Text);
 
-        private bool LabelContains(string str) =>
-            mainWindow.Label.Content.ToString().Contains(str);
+        private bool BlockContains(string str) =>
+            mainWindow.TextBlock.Text.Contains(str);
 
-        private int LabelLength() =>
-            mainWindow.Label.Content.ToString().Length;
+        private int BlockTextLength() =>
+            mainWindow.TextBlock.Text.Length;
 
-        private string LabelContentRemove(int startindex, int count) =>
-            mainWindow.Label.Content.ToString().Remove(startindex, count);
+        private string BlockTextRemove(int startindex, int count) =>
+            mainWindow.TextBlock.Text.Remove(startindex,count);
 
         /// <summary>
         /// Set first number and the sign of arithmetic operation.
         /// </summary>
         /// <param name="ch">Sign of arithmetic operation</param>
-        private void SetNumbersAndSign(char ch)
+        private void InitArgumentsAndSign(char ch)
         {
             if (!TextBoxIsEmpty())
             {
-                model.SetSignOperation(ch);
+                model.SetArithmeticSign(ch);
                 model.SetNumber1(mainWindow.TextBox.Text);
                 model.SetNumber2(mainWindow.TextBox.Text);
-                mainWindow.Label.Content = mainWindow.TextBox.Text;
+                mainWindow.TextBlock.Text = mainWindow.TextBox.Text;
                 mainWindow.TextBox.Text = "";
-                mainWindow.Label.Content += model.ArithmeticSignToLabel();
+                mainWindow.TextBlock.Text += model.SignToString();
             }
             else
                 mainWindow.TextBox.Text = "";
         }
-
+        /// <summary>
+        /// Вывод сообщения об ошибке.
+        /// </summary>
+        /// <param name="str"></param>
         private void ErrorMesage(string str)
         {
-            mainWindow.Label.Content = "";
+            mainWindow.TextBlock.Text = "";
             mainWindow.TextBox.Text = str;
-        }
-
-        private void ShowHiddenButtons()
-        {
-
-        }
-        private void Button(int num)
-        {
-
-
         }
 
         /// <summary>
         /// Filing out the Text_box and the Label.
         /// </summary>
         /// <param name="num">Number</param>
-        private void FilingOutTextBoxAndLabel(string num)
+        private void AddTextToBoxAndLabel(string num)
         {
             if (num == "," && TextBoxIsEmpty())
             {
                 mainWindow.TextBox.Text += "0" + num;
-                mainWindow.Label.Content += "0" + num;
+                mainWindow.TextBlock.Text += "0" + num;
             }
             else
             {
                 mainWindow.TextBox.Text += num;
 
-                if (!LabelContains(model.ReturnSign()))
-                    mainWindow.Label.Content += num;
+                if (!BlockContains(model.SignToString()))
+                    mainWindow.TextBlock.Text += num;
             }
         }
 
@@ -129,7 +122,7 @@ namespace Calculator_Core_3._0
         private void MainWindow_But_Res_Click(object sender, EventArgs e)
         {
             mainWindow.TextBox.Text = "";
-            mainWindow.Label.Content = "";
+            mainWindow.TextBlock.Text = "";
             equalCount = 0;
             model.Reset();
         }
@@ -140,7 +133,7 @@ namespace Calculator_Core_3._0
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void MainWindow_But_Point_Click(object sender, EventArgs e) =>
-            FilingOutTextBoxAndLabel(",");
+            AddTextToBoxAndLabel(",");
 
         /// <summary>
         /// Button "=".
@@ -149,25 +142,26 @@ namespace Calculator_Core_3._0
         /// <param name="e"></param>
         private void MainWindow_But_Equals_Click(object sender, EventArgs e)
         {
-            if (!model.SignCheck())
+            if (!model.SignInitCheck())
                 return;
 
-            if (!LabelIsEmpty())
-                model.SetNumber2(LabelContentRemove(LabelLength() - 1, 1));
+            if (!BlockIsEmpty())
+                model.SetNumber2(BlockTextRemove(BlockTextLength() - 1, 1));
 
             if (!TextBoxIsEmpty() && equalCount == 0)
                 model.SetNumber2(mainWindow.TextBox.Text);
 
-            if (Math.Abs(model.GetNumber2()) == 0 && model.GetSignOperation() == '/')
+            if (Math.Abs(model.GetNumber2()) == 0 && model.GetArithmeticSign() == '/')
             {
                 ErrorMesage("Деление на 0");
+                model.Reset();
                 return;
             }
 
             model.GetResult();
-            mainWindow.TextBox.Text = model.ResultToTextBox();
+            mainWindow.TextBox.Text = model.ResultToString();
             model.SetNumber1(mainWindow.TextBox.Text);
-            mainWindow.Label.Content = "";
+            mainWindow.TextBlock.Text = "";
             equalCount = 1;
         }
 
@@ -184,7 +178,7 @@ namespace Calculator_Core_3._0
         }
 
         /// <summary>
-        /// Button "<<" , line adjustment.
+        /// Button "<<", line adjustment.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -193,45 +187,58 @@ namespace Calculator_Core_3._0
             if (TextBoxIsEmpty())
                 return;
 
-            if (!LabelIsEmpty() && !LabelContains(model.ReturnSign()))
-                mainWindow.Label.Content = LabelContentRemove(LabelLength() - 1, 1);
+            if (!BlockIsEmpty() && !BlockContains(model.SignToString()))
+                mainWindow.TextBlock.Text = BlockTextRemove(BlockTextLength() - 1, 1);
 
-            mainWindow.TextBox.Text = TextBoxTextRemove(TextBoxLength() - 1, 1);
+            mainWindow.TextBox.Text = TextBoxTextRemove(TextBoxTextLength() - 1, 1);
         }
         #endregion
 
-        #region Arithmetic operations buttons.
-        //
-        //Buttons "/", "-", "*", "+".
-        private void MainWindow_Oper_Battons_Click(object sender, EventArgs e)
+        /// <summary>
+        /// Возвращает часть имени нажатой клавиши.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="startindex"></param>
+        /// <param name="count"></param>
+        /// <returns></returns>
+        private string PressedButton(object sender, int startindex, int count)
         {
-            var button = (Button)sender;
-            string str = button.Name.Substring(6, 1);
-            switch (str)
+            Button button = (Button)sender;
+            return button.Name.Substring(startindex, count);
+        }
+
+        /// <summary>
+        /// Обработчик нажатия операционных клавиш.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void MainWindow_Oper_Batton_Click(object sender, EventArgs e)
+        {
+            switch (PressedButton(sender, 6, 3))
             {
-                case "D":
-                    SetNumbersAndSign('/');
+                case "Div":
+                    InitArgumentsAndSign('/');
                     break;
-                case "S":
-                    SetNumbersAndSign('-');
+                case "Sub":
+                    InitArgumentsAndSign('-');
                     break;
-                case "M":
-                    SetNumbersAndSign('*');
+                case "Mul":
+                    InitArgumentsAndSign('*');
                     break;
-                case "A":
-                    SetNumbersAndSign('+');
+                case "Add":
+                    InitArgumentsAndSign('+');
+                    break;
+                default:
                     break;
             }
         }
-        #endregion
 
-        #region Number buttons.
-        private void MainWindow_Num_Buttons_Click(object sender, EventArgs e)
-        {
-            var button = (Button)sender;
-            string str = button.Name.Substring(6, 1);
-            FilingOutTextBoxAndLabel(str);
-        }
-        #endregion
+        /// <summary>
+        /// Обработчик нажатия числовых клавиш.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void MainWindow_Num_Button_Click(object sender, EventArgs e) =>
+            AddTextToBoxAndLabel(PressedButton(sender, 6, 1));
     }
 }

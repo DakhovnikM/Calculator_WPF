@@ -17,7 +17,6 @@ namespace Calculator_Core_3._0
         #region Enents.
 
         private EventHandler but0Click = null;
-
         public event EventHandler But_0_Click
         {
             add => but0Click += value;
@@ -25,7 +24,6 @@ namespace Calculator_Core_3._0
         }
 
         private EventHandler but1Click = null;
-
         public event EventHandler But_1_Click
         {
             add => but1Click += value;
@@ -33,7 +31,6 @@ namespace Calculator_Core_3._0
         }
 
         private EventHandler but2Click = null;
-
         public event EventHandler But_2_Click
         {
             add => but2Click += value;
@@ -41,7 +38,6 @@ namespace Calculator_Core_3._0
         }
 
         private EventHandler but3Click = null;
-
         public event EventHandler But_3_Click
         {
             add => but3Click += value;
@@ -49,7 +45,6 @@ namespace Calculator_Core_3._0
         }
 
         private EventHandler but4Click = null;
-
         public event EventHandler But_4_Click
         {
             add => but4Click += value;
@@ -57,7 +52,6 @@ namespace Calculator_Core_3._0
         }
 
         private EventHandler but5Click = null;
-
         public event EventHandler But_5_Click
         {
             add => but5Click += value;
@@ -65,7 +59,6 @@ namespace Calculator_Core_3._0
         }
 
         private EventHandler but6Click = null;
-
         public event EventHandler But_6_Click
         {
             add => but6Click += value;
@@ -73,7 +66,6 @@ namespace Calculator_Core_3._0
         }
 
         private EventHandler but7Click = null;
-
         public event EventHandler But_7_Click
         {
             add => but7Click += value;
@@ -81,7 +73,6 @@ namespace Calculator_Core_3._0
         }
 
         private EventHandler but8Click = null;
-
         public event EventHandler But_8_Click
         {
             add => but8Click += value;
@@ -89,7 +80,6 @@ namespace Calculator_Core_3._0
         }
 
         private EventHandler but9Click = null;
-
         public event EventHandler But_9_Click
         {
             add => but9Click += value;
@@ -97,7 +87,6 @@ namespace Calculator_Core_3._0
         }
 
         private EventHandler butAddClick = null;
-
         public event EventHandler But_Add_Click
         {
             add => butAddClick += value;
@@ -105,7 +94,6 @@ namespace Calculator_Core_3._0
         }
 
         private EventHandler butEqualsClick = null;
-
         public event EventHandler But_Equals_Click
         {
             add => butEqualsClick += value;
@@ -113,7 +101,6 @@ namespace Calculator_Core_3._0
         }
 
         private EventHandler butPointClick = null;
-
         public event EventHandler But_Point_Click
         {
             add => butPointClick += value;
@@ -121,7 +108,6 @@ namespace Calculator_Core_3._0
         }
 
         private EventHandler butSubClick = null;
-
         public event EventHandler But_Sub_Click
         {
             add => butSubClick += value;
@@ -129,7 +115,6 @@ namespace Calculator_Core_3._0
         }
 
         private EventHandler butMulClick = null;
-
         public event EventHandler But_Mul_Click
         {
             add => butMulClick += value;
@@ -137,7 +122,6 @@ namespace Calculator_Core_3._0
         }
 
         private EventHandler butDevClick = null;
-
         public event EventHandler But_Dev_Click
         {
             add => butDevClick += value;
@@ -145,7 +129,6 @@ namespace Calculator_Core_3._0
         }
 
         private EventHandler butResClick = null;
-
         public event EventHandler But_Res_Click
         {
             add => butResClick += value;
@@ -153,7 +136,6 @@ namespace Calculator_Core_3._0
         }
 
         private EventHandler butChangeSignClick = null;
-
         public event EventHandler But_ChangeSign_Click
         {
             add => butChangeSignClick += value;
@@ -161,7 +143,6 @@ namespace Calculator_Core_3._0
         }
 
         private EventHandler butCorrectClick = null;
-
         public event EventHandler But_Correct_Click
         {
             add => butCorrectClick += value;
@@ -189,5 +170,10 @@ namespace Calculator_Core_3._0
         private void Button_Reset_Click(object sender, RoutedEventArgs e) => butResClick.Invoke(sender, e);
         private void Button_ChangeSign_Click(object sender, RoutedEventArgs e) => butChangeSignClick.Invoke(sender, e);
         private void ButtonCorrect_Click(object sender, RoutedEventArgs e) => butCorrectClick.Invoke(sender, e);
+
+        private void TextBox_TextChanged(object sender, System.Windows.Controls.TextChangedEventArgs e)
+        {
+
+        }
     }
 }
