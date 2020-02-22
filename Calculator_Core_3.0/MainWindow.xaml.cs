@@ -149,6 +149,12 @@ namespace Calculator_Core_3._0
             remove => butCorrectClick -= value;
         }
 
+        private EventHandler butSqrClick = null;
+        public event EventHandler But_Sqr_Click
+        {
+            add => butSqrClick += value;
+            remove => butSqrClick -= value;
+        }
         #endregion
 
         private void Button_0_Click(object sender, RoutedEventArgs e) => but0Click.Invoke(sender, e);
@@ -168,12 +174,13 @@ namespace Calculator_Core_3._0
         private void Button_Multiplication_Click(object sender, RoutedEventArgs e) => butMulClick.Invoke(sender, e);
         private void Button_Division_Click(object sender, RoutedEventArgs e) => butDevClick.Invoke(sender, e);
         private void Button_Reset_Click(object sender, RoutedEventArgs e) => butResClick.Invoke(sender, e);
+        private void ButtonSqr_Click(object sender, RoutedEventArgs e) => butSqrClick.Invoke(sender,e);
         private void Button_ChangeSign_Click(object sender, RoutedEventArgs e) => butChangeSignClick.Invoke(sender, e);
         private void ButtonCorrect_Click(object sender, RoutedEventArgs e) => butCorrectClick.Invoke(sender, e);
-
         private void TextBox_TextChanged(object sender, System.Windows.Controls.TextChangedEventArgs e)
         {
 
         }
+
     }
 }

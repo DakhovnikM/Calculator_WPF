@@ -9,149 +9,163 @@ namespace Calculator_Core_3._0
         private readonly MainWindow mainWindow;
         private int equalCount;
 
+        private string BoxText
+        {
+            get { return mainWindow.TextBox.Text; }
+            set { mainWindow.TextBox.Text = value; }
+        }
+
+        private string BlockText
+        {
+            get { return mainWindow.TextBlock.Text; }
+            set { mainWindow.TextBlock.Text = value; }
+        }
+
         public Presenter(MainWindow mainWindow)
         {
             model = new Model();
             this.mainWindow = mainWindow;
-            this.mainWindow.TextBox.Text = "";
-            this.mainWindow.TextBlock.Text = "";
+            BoxText = "";
+            BlockText = "";
 
             #region Subscribe to events.
 
-            this.mainWindow.But_0_Click += MainWindow_Num_Button_Click;
-            this.mainWindow.But_1_Click += MainWindow_Num_Button_Click;
-            this.mainWindow.But_2_Click += MainWindow_Num_Button_Click;
-            this.mainWindow.But_3_Click += MainWindow_Num_Button_Click;
-            this.mainWindow.But_4_Click += MainWindow_Num_Button_Click;
-            this.mainWindow.But_5_Click += MainWindow_Num_Button_Click;
-            this.mainWindow.But_6_Click += MainWindow_Num_Button_Click;
-            this.mainWindow.But_7_Click += MainWindow_Num_Button_Click;
-            this.mainWindow.But_8_Click += MainWindow_Num_Button_Click;
-            this.mainWindow.But_9_Click += MainWindow_Num_Button_Click;
+            this.mainWindow.But_0_Click += MainWindow_Numeric_Button_Click;
+            this.mainWindow.But_1_Click += MainWindow_Numeric_Button_Click;
+            this.mainWindow.But_2_Click += MainWindow_Numeric_Button_Click;
+            this.mainWindow.But_3_Click += MainWindow_Numeric_Button_Click;
+            this.mainWindow.But_4_Click += MainWindow_Numeric_Button_Click;
+            this.mainWindow.But_5_Click += MainWindow_Numeric_Button_Click;
+            this.mainWindow.But_6_Click += MainWindow_Numeric_Button_Click;
+            this.mainWindow.But_7_Click += MainWindow_Numeric_Button_Click;
+            this.mainWindow.But_8_Click += MainWindow_Numeric_Button_Click;
+            this.mainWindow.But_9_Click += MainWindow_Numeric_Button_Click;
 
-            this.mainWindow.But_Add_Click += MainWindow_Oper_Batton_Click;
-            this.mainWindow.But_Sub_Click += MainWindow_Oper_Batton_Click;
-            this.mainWindow.But_Mul_Click += MainWindow_Oper_Batton_Click;
-            this.mainWindow.But_Dev_Click += MainWindow_Oper_Batton_Click;
+            this.mainWindow.But_Add_Click += MainWindow_Operation_Button_Click;
+            this.mainWindow.But_Sub_Click += MainWindow_Operation_Button_Click;
+            this.mainWindow.But_Mul_Click += MainWindow_Operation_Button_Click;
+            this.mainWindow.But_Dev_Click += MainWindow_Operation_Button_Click;
+            this.mainWindow.But_Sqr_Click += MainWindow_But_Sqr_Click;
 
-            this.mainWindow.But_ChangeSign_Click += MainWindow_But_ChangeSign_Click;
+            this.mainWindow.But_ChangeSign_Click += MainWindow_But_InvertSign_Click;
             this.mainWindow.But_Equals_Click += MainWindow_But_Equals_Click;
             this.mainWindow.But_Point_Click += MainWindow_But_Point_Click;
-            this.mainWindow.But_Res_Click += MainWindow_But_Res_Click;
+            this.mainWindow.But_Res_Click += MainWindow_But_Reset_Click;
             this.mainWindow.But_Correct_Click += MainWindow_But_Correct_Click;
 
             #endregion
         }
 
-        private bool TextBoxIsEmpty() =>
-            string.IsNullOrEmpty(mainWindow.TextBox.Text);
+        #region Вспомогательные методы.
 
-        private int TextBoxTextLength() =>
-            mainWindow.TextBox.Text.Length;
+        /// <summary>
+        /// Проверка TextBox на наличие в нем строки.
+        /// </summary>
+        /// <returns></returns>
+        private bool BoxTextIsEmpty() =>
+            string.IsNullOrEmpty(BoxText);
 
-        private string TextBoxTextRemove(int startindex, int count) =>
-            mainWindow.TextBox.Text.Remove(startindex, count);
+        /// <summary>
+        /// Возвращает количество символов в TextBox.
+        /// </summary>
+        /// <returns></returns>
+        private int BoxTextLength() =>
+            BoxText.Length;
 
-        private bool BlockIsEmpty() =>
-            string.IsNullOrEmpty(mainWindow.TextBlock.Text);
+        /// <summary>
+        /// Удаляет символы в TextBox.
+        /// </summary>
+        /// <param name="startindex">Начальная позиция.</param>
+        /// <param name="count">Количество удаляемых символов.</param>
+        /// <returns></returns>
+        private string BoxTextRemove(int startindex, int count) =>
+            BoxText.Remove(startindex, count);
 
-        private bool BlockContains(string str) =>
-            mainWindow.TextBlock.Text.Contains(str);
+        private bool BlockTextIsEmpty() =>
+            string.IsNullOrEmpty(BlockText);
+
+        private bool BlockTextContains(string str) =>
+           BlockText.Contains(str);
 
         private int BlockTextLength() =>
-            mainWindow.TextBlock.Text.Length;
+           BlockText.Length;
 
         private string BlockTextRemove(int startindex, int count) =>
-            mainWindow.TextBlock.Text.Remove(startindex,count);
+            BlockText.Remove(startindex, count);
+        #endregion
 
-        /// <summary>
-        /// Set first number and the sign of arithmetic operation.
-        /// </summary>
-        /// <param name="ch">Sign of arithmetic operation</param>
-        private void InitArgumentsAndSign(char ch)
+
+        private void InitArgument_1_AndSign(char ch)
         {
-            if (!TextBoxIsEmpty())
+            if (!BoxTextIsEmpty())
             {
                 model.SetArithmeticSign(ch);
-                model.SetNumber1(mainWindow.TextBox.Text);
-                model.SetNumber2(mainWindow.TextBox.Text);
-                mainWindow.TextBlock.Text = mainWindow.TextBox.Text;
-                mainWindow.TextBox.Text = "";
-                mainWindow.TextBlock.Text += model.SignToString();
+                model.SetArgument_1(BoxText);
+                model.SetArgument_2(BoxText);
+                BlockText = BoxText;
+                BoxText = "";
+                BlockText += " " + model.SignToString();
             }
             else
-                mainWindow.TextBox.Text = "";
+                BoxText = "";
         }
-        /// <summary>
-        /// Вывод сообщения об ошибке.
-        /// </summary>
-        /// <param name="str"></param>
+
         private void ErrorMesage(string str)
         {
-            mainWindow.TextBlock.Text = "";
-            mainWindow.TextBox.Text = str;
+            BlockText = "";
+            BoxText = str;
         }
 
-        /// <summary>
-        /// Filing out the Text_box and the Label.
-        /// </summary>
-        /// <param name="num">Number</param>
-        private void AddTextToBoxAndLabel(string num)
+        private void AddTextToBoxAndBlock(string num)
         {
-            if (num == "," && TextBoxIsEmpty())
+            if (num == "," && BoxTextIsEmpty())
             {
-                mainWindow.TextBox.Text += "0" + num;
-                mainWindow.TextBlock.Text += "0" + num;
+                BoxText += "0" + num;
+                BlockText += "0";
             }
             else
-            {
-                mainWindow.TextBox.Text += num;
+                BoxText += num;
 
-                if (!BlockContains(model.SignToString()))
-                    mainWindow.TextBlock.Text += num;
-            }
+            if (!BlockTextContains(model.SignToString()))
+                BlockText += num;
         }
 
         #region Auxiliary buttons.
 
-        /// <summary>
-        /// Button "C", all clear.
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void MainWindow_But_Res_Click(object sender, EventArgs e)
+        private void MainWindow_But_Reset_Click(object sender, EventArgs e)
         {
-            mainWindow.TextBox.Text = "";
-            mainWindow.TextBlock.Text = "";
+            BoxText = "";
+            BlockText = "";
             equalCount = 0;
             model.Reset();
         }
 
-        /// <summary>
-        /// Button "." .
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void MainWindow_But_Point_Click(object sender, EventArgs e) =>
-            AddTextToBoxAndLabel(",");
+            AddTextToBoxAndBlock(",");
 
-        /// <summary>
-        /// Button "=".
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+        private void MainWindow_But_Sqr_Click(object sender, EventArgs e)
+        {
+            InitArgument_1_AndSign('\0');
+            model.GetSqr();
+            BoxText = model.ResultToString();
+            BlockText = "";
+        }
+
         private void MainWindow_But_Equals_Click(object sender, EventArgs e)
         {
+
+            if (equalCount == 1) return; //TODO повторное нажатие "=".
+
             if (!model.SignInitCheck())
                 return;
 
-            if (!BlockIsEmpty())
-                model.SetNumber2(BlockTextRemove(BlockTextLength() - 1, 1));
+            if (!BlockTextIsEmpty())
+                model.SetArgument_2(BlockTextRemove(BlockTextLength() - 1, 1));
 
-            if (!TextBoxIsEmpty() && equalCount == 0)
-                model.SetNumber2(mainWindow.TextBox.Text);
+            if (!BoxTextIsEmpty() && equalCount == 0)
+                model.SetArgument_2(BoxText);
 
-            if (Math.Abs(model.GetNumber2()) == 0 && model.GetArithmeticSign() == '/')
+            if (Math.Abs(model.GetArgument_2()) == 0 && model.GetArithmeticSign() == '/')
             {
                 ErrorMesage("Деление на 0");
                 model.Reset();
@@ -159,48 +173,32 @@ namespace Calculator_Core_3._0
             }
 
             model.GetResult();
-            mainWindow.TextBox.Text = model.ResultToString();
-            model.SetNumber1(mainWindow.TextBox.Text);
-            mainWindow.TextBlock.Text = "";
+            BoxText = model.ResultToString();
+            model.SetArgument_1(BoxText);
+            BlockText += " " + model.GetArgument_2() + " =";
             equalCount = 1;
         }
 
-        /// <summary>
-        /// Button "+/-", change the sign of a number.
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void MainWindow_But_ChangeSign_Click(object sender, EventArgs e)
+
+        private void MainWindow_But_InvertSign_Click(object sender, EventArgs e)
         {
-            mainWindow.TextBox.Text = mainWindow.TextBox.Text.StartsWith("-")
-                ? TextBoxTextRemove(0, 1)
-                : mainWindow.TextBox.Text.Insert(0, "-");
+            BoxText = BoxText.StartsWith("-")
+                ? BoxTextRemove(0, 1)
+                : BoxText.Insert(0, "-");
         }
 
-        /// <summary>
-        /// Button "<<", line adjustment.
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void MainWindow_But_Correct_Click(object sender, EventArgs e)
         {
-            if (TextBoxIsEmpty())
+            if (BoxTextIsEmpty())
                 return;
 
-            if (!BlockIsEmpty() && !BlockContains(model.SignToString()))
-                mainWindow.TextBlock.Text = BlockTextRemove(BlockTextLength() - 1, 1);
+            if (!BlockTextIsEmpty() && !BlockTextContains(model.SignToString()))
+                BlockText = BlockTextRemove(BlockTextLength() - 1, 1);
 
-            mainWindow.TextBox.Text = TextBoxTextRemove(TextBoxTextLength() - 1, 1);
+            BoxText = BoxTextRemove(BoxTextLength() - 1, 1);
         }
         #endregion
 
-        /// <summary>
-        /// Возвращает часть имени нажатой клавиши.
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="startindex"></param>
-        /// <param name="count"></param>
-        /// <returns></returns>
         private string PressedButton(object sender, int startindex, int count)
         {
             Button button = (Button)sender;
@@ -212,21 +210,21 @@ namespace Calculator_Core_3._0
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void MainWindow_Oper_Batton_Click(object sender, EventArgs e)
+        private void MainWindow_Operation_Button_Click(object sender, EventArgs e)
         {
             switch (PressedButton(sender, 6, 3))
             {
                 case "Div":
-                    InitArgumentsAndSign('/');
+                    InitArgument_1_AndSign('/');
                     break;
                 case "Sub":
-                    InitArgumentsAndSign('-');
+                    InitArgument_1_AndSign('-');
                     break;
                 case "Mul":
-                    InitArgumentsAndSign('*');
+                    InitArgument_1_AndSign('*');
                     break;
                 case "Add":
-                    InitArgumentsAndSign('+');
+                    InitArgument_1_AndSign('+');
                     break;
                 default:
                     break;
@@ -238,7 +236,7 @@ namespace Calculator_Core_3._0
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void MainWindow_Num_Button_Click(object sender, EventArgs e) =>
-            AddTextToBoxAndLabel(PressedButton(sender, 6, 1));
+        private void MainWindow_Numeric_Button_Click(object sender, EventArgs e) =>
+            AddTextToBoxAndBlock(PressedButton(sender, 6, 1));
     }
 }
