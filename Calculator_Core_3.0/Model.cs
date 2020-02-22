@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Globalization;
 
 namespace Calculator_Core_3._0
 {
@@ -58,19 +57,19 @@ namespace Calculator_Core_3._0
         public double GetResult() =>
             sign switch
             {
-                '+' => result = argument_2 == 0 
+                '+' => result = argument_2 == 0
                                 ? argument_1 + argument_1
                                 : argument_1 + argument_2,
 
-                '-' => result = argument_2 == 0 
+                '-' => result = argument_2 == 0
                                 ? argument_1 - argument_1
                                 : argument_1 - argument_2,
 
-                '*' => result = argument_2 == 0 
+                '*' => result = argument_2 == 0
                                 ? argument_1 * argument_1
                                 : argument_1 * argument_2,
 
-                '/' => result = argument_2 == 0 
+                '/' => result = argument_2 == 0
                                 ? 0
                                 : argument_1 / argument_2,
                 _ => result

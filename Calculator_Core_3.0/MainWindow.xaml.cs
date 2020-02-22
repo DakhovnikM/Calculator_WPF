@@ -155,6 +155,28 @@ namespace Calculator_Core_3._0
             add => butSqrClick += value;
             remove => butSqrClick -= value;
         }
+
+        private EventHandler butMemoryAdd = null;
+        public event EventHandler But_Memory_Add
+        {
+            add => butMemoryAdd += value;
+            remove => butMemoryAdd -= value;
+        }
+
+        private EventHandler butMemorySub = null;
+        public event EventHandler But_Memory_Sub
+        {
+            add => butMemorySub += value;
+            remove => butMemorySub -= value;
+        }
+
+        private EventHandler butMemoryRead = null;
+        public event EventHandler But_Memory_Read
+        {
+            add => butMemoryRead += value;
+            remove => butMemoryRead -= value;
+        }
+
         #endregion
 
         private void Button_0_Click(object sender, RoutedEventArgs e) => but0Click.Invoke(sender, e);
@@ -182,5 +204,10 @@ namespace Calculator_Core_3._0
 
         }
 
+        #region Memory Buttons.
+        private void MemoryAdd_Click(object sender, RoutedEventArgs e) => butMemoryAdd.Invoke(sender, e);
+        private void MemorySub_Click(object sender, RoutedEventArgs e) => butMemorySub.Invoke(sender,e);
+        private void MemoryRead_Click(object sender, RoutedEventArgs e) => butMemoryRead.Invoke(sender,e);
+        #endregion
     }
 }

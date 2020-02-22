@@ -5,9 +5,13 @@ namespace Calculator_Core_3._0
 {
     internal class Presenter
     {
+        #region Поля и свойства.
+
         private readonly Model model;
         private readonly MainWindow mainWindow;
         private int equalCount;
+
+        private int memory;
 
         private string BoxText
         {
@@ -21,12 +25,16 @@ namespace Calculator_Core_3._0
             set { mainWindow.TextBlock.Text = value; }
         }
 
+        #endregion
+
+        #region Конструктор.
         public Presenter(MainWindow mainWindow)
         {
             model = new Model();
             this.mainWindow = mainWindow;
             BoxText = "";
             BlockText = "";
+            memory = 0;
 
             #region Subscribe to events.
 
@@ -53,31 +61,22 @@ namespace Calculator_Core_3._0
             this.mainWindow.But_Res_Click += MainWindow_But_Reset_Click;
             this.mainWindow.But_Correct_Click += MainWindow_But_Correct_Click;
 
+            this.mainWindow.But_Memory_Add += MainWindow_But_Memory_Add_Click;
+            this.mainWindow.But_Memory_Sub += MainWindow_But_Memory_Sub_Click;
+            this.mainWindow.But_Memory_Read += MainWindow_But_Memory_Read_Click;
+
             #endregion
         }
+        #endregion
 
         #region Вспомогательные методы.
 
-        /// <summary>
-        /// Проверка TextBox на наличие в нем строки.
-        /// </summary>
-        /// <returns></returns>
         private bool BoxTextIsEmpty() =>
             string.IsNullOrEmpty(BoxText);
 
-        /// <summary>
-        /// Возвращает количество символов в TextBox.
-        /// </summary>
-        /// <returns></returns>
         private int BoxTextLength() =>
             BoxText.Length;
 
-        /// <summary>
-        /// Удаляет символы в TextBox.
-        /// </summary>
-        /// <param name="startindex">Начальная позиция.</param>
-        /// <param name="count">Количество удаляемых символов.</param>
-        /// <returns></returns>
         private string BoxTextRemove(int startindex, int count) =>
             BoxText.Remove(startindex, count);
 
@@ -92,14 +91,20 @@ namespace Calculator_Core_3._0
 
         private string BlockTextRemove(int startindex, int count) =>
             BlockText.Remove(startindex, count);
+
+        private void ErrorMesage(string str)
+        {
+            BlockText = "";
+            BoxText = str;
+        }
+
         #endregion
 
-
-        private void InitArgument_1_AndSign(char ch)
+        private void InitArgument_1_AndSign(char sign)
         {
             if (!BoxTextIsEmpty())
             {
-                model.SetArithmeticSign(ch);
+                model.SetArithmeticSign(sign);
                 model.SetArgument_1(BoxText);
                 model.SetArgument_2(BoxText);
                 BlockText = BoxText;
@@ -110,28 +115,21 @@ namespace Calculator_Core_3._0
                 BoxText = "";
         }
 
-        private void ErrorMesage(string str)
+        private void AddTextToBoxAndBlock(string str)
         {
-            BlockText = "";
-            BoxText = str;
-        }
-
-        private void AddTextToBoxAndBlock(string num)
-        {
-            if (num == "," && BoxTextIsEmpty())
+            if (str == "," && BoxTextIsEmpty())
             {
-                BoxText += "0" + num;
+                BoxText += "0" + str;
                 BlockText += "0";
             }
             else
-                BoxText += num;
+                BoxText += str;
 
             if (!BlockTextContains(model.SignToString()))
-                BlockText += num;
+                BlockText += str;
         }
 
-        #region Auxiliary buttons.
-
+        #region Функциональные клавиши.
         private void MainWindow_But_Reset_Click(object sender, EventArgs e)
         {
             BoxText = "";
@@ -154,7 +152,8 @@ namespace Calculator_Core_3._0
         private void MainWindow_But_Equals_Click(object sender, EventArgs e)
         {
 
-            if (equalCount == 1) return; //TODO повторное нажатие "=".
+            if (equalCount == 1)
+                return; //TODO повторное нажатие "=".
 
             if (!model.SignInitCheck())
                 return;
@@ -179,7 +178,6 @@ namespace Calculator_Core_3._0
             equalCount = 1;
         }
 
-
         private void MainWindow_But_InvertSign_Click(object sender, EventArgs e)
         {
             BoxText = BoxText.StartsWith("-")
@@ -199,7 +197,33 @@ namespace Calculator_Core_3._0
         }
         #endregion
 
-        private string PressedButton(object sender, int startindex, int count)
+        #region Клавиши памяти.
+        private void MainWindow_But_Memory_Read_Click(object sender, EventArgs e)
+        {
+            BoxText = Convert.ToString(memory);
+        }
+
+        private void MainWindow_But_Memory_Sub_Click(object sender, EventArgs e)
+        {
+            memory -= Convert.ToInt32(BoxText);
+        }
+
+        private void MainWindow_But_Memory_Add_Click(object sender, EventArgs e)
+        {
+            memory += Convert.ToInt32(BoxText);
+        }
+        #endregion
+
+        #region Обработка нажатия клавиш.
+
+        /// <summary>
+        /// Определяем нажатую клавишу по ее имени.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="startindex"></param>
+        /// <param name="count"></param>
+        /// <returns></returns>
+        private string GetPressedButton(object sender, int startindex, int count)
         {
             Button button = (Button)sender;
             return button.Name.Substring(startindex, count);
@@ -212,7 +236,7 @@ namespace Calculator_Core_3._0
         /// <param name="e"></param>
         private void MainWindow_Operation_Button_Click(object sender, EventArgs e)
         {
-            switch (PressedButton(sender, 6, 3))
+            switch (GetPressedButton(sender, 6, 3))
             {
                 case "Div":
                     InitArgument_1_AndSign('/');
@@ -237,6 +261,8 @@ namespace Calculator_Core_3._0
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void MainWindow_Numeric_Button_Click(object sender, EventArgs e) =>
-            AddTextToBoxAndBlock(PressedButton(sender, 6, 1));
+            AddTextToBoxAndBlock(GetPressedButton(sender, 6, 1));
+
+        #endregion
     }
 }

@@ -17,7 +17,7 @@
     <Grid Background="#FFDDDDDD" Height="430">
         <Button Name="ButtonChangeSign" Content="+/-" HorizontalAlignment="Left" 
                 Margin="2,375,0,10" Width="90" Click="Button_ChangeSign_Click" FontSize="25" />
-        <Button x:Name="Button0" Content="0" Margin="97,375,194,10" 
+        <Button Name="Button0" Content="0" Margin="97,375,194,10" 
                 Width="Auto" Click="Button_0_Click" FontSize="25" Background="#FFC5C5C5"/>
         <Button Name="Button8" Content="8" 
                 Margin="97,225,194,160" Click="Button_8_Click" FontSize="25" Background="#FFC5C5C5"/>
@@ -58,6 +58,9 @@
         <TextBlock Name="TextBlock" Margin="20,18,37,389" Text="TextBlock" FontSize="16"
                    TextWrapping="Wrap" TextAlignment="Right"/>
         <Button Name="ButtonSqr" Content="Sqr" Margin="97,175,194,210"
-                Click="ButtonSqr_Click" FontSize="25"/>
+                Click="ButtonSqr_Click" FontSize="23"/>
+        <Button Name="MemoryAdd" Content="M+" HorizontalAlignment="Left" Margin="3,148,0,0" VerticalAlignment="Top" Height="22" Click="MemoryAdd_Click"/>
+        <Button Name="MemorySub" Content="M-" HorizontalAlignment="Left" Margin="98,148,0,0" VerticalAlignment="Top" Height="22" Click="MemorySub_Click"/>
+        <Button Name="MemoryRead" Content="MR" HorizontalAlignment="Left" Margin="193,148,0,0" VerticalAlignment="Top" Height="22" Click="MemoryRead_Click"/>
     </Grid>
 </Window>
