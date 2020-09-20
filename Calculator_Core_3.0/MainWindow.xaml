@@ -54,7 +54,7 @@
         <Button Name="ButtonMul" Content="*" Margin="287,276,2,109" Click="Button_Multiplication_Click" 
                 FontSize="25" RenderTransformOrigin="0.012,0.512" Width="Auto"/>
         <TextBox Name="TextBox" HorizontalContentAlignment="Right" VerticalContentAlignment="Center" 
-                 Margin="2,10,2,310" TextWrapping="Wrap" Text="TextBox" FontSize="50" TextChanged="TextBox_TextChanged" Background="#FFDDDDDD"/>
+                 Margin="2,10,2,310" TextWrapping="Wrap" Text="TextBox" FontSize="50"  Background="#FFDDDDDD"/>
         <TextBlock Name="TextBlock" Margin="20,18,37,389" Text="TextBlock" FontSize="16"
                    TextWrapping="Wrap" TextAlignment="Right"/>
         <Button Name="ButtonSqr" Content="Sqr" Margin="97,175,194,210"
