@@ -7,18 +7,15 @@ namespace Calculator_Core_3._0
     {
         #region Поля и свойства.
 
-        private readonly Model model;
+        private readonly Calculation calculation;
         private readonly MainWindow mainWindow;
         private int equalCount;
-
         private int memory;
-
         private string BoxText
         {
-            get { return mainWindow.TextBox.Text; }
+            get { return (mainWindow.TextBox.Text); }
             set { mainWindow.TextBox.Text = value; }
         }
-
         private string BlockText
         {
             get { return mainWindow.TextBlock.Text; }
@@ -30,29 +27,29 @@ namespace Calculator_Core_3._0
         #region Конструктор.
         public Presenter(MainWindow mainWindow)
         {
-            model = new Model();
+            calculation = new Calculation();
             this.mainWindow = mainWindow;
-            BoxText = "";
+            BoxText = "0";
             BlockText = "";
             memory = 0;
 
             #region Subscribe to events.
 
-            this.mainWindow.But_0_Click += MainWindow_Numeric_Button_Click;
-            this.mainWindow.But_1_Click += MainWindow_Numeric_Button_Click;
-            this.mainWindow.But_2_Click += MainWindow_Numeric_Button_Click;
-            this.mainWindow.But_3_Click += MainWindow_Numeric_Button_Click;
-            this.mainWindow.But_4_Click += MainWindow_Numeric_Button_Click;
-            this.mainWindow.But_5_Click += MainWindow_Numeric_Button_Click;
-            this.mainWindow.But_6_Click += MainWindow_Numeric_Button_Click;
-            this.mainWindow.But_7_Click += MainWindow_Numeric_Button_Click;
-            this.mainWindow.But_8_Click += MainWindow_Numeric_Button_Click;
-            this.mainWindow.But_9_Click += MainWindow_Numeric_Button_Click;
+            this.mainWindow.But_0_Click += MainWindow_Numeric_Buttons_Click;
+            this.mainWindow.But_1_Click += MainWindow_Numeric_Buttons_Click;
+            this.mainWindow.But_2_Click += MainWindow_Numeric_Buttons_Click;
+            this.mainWindow.But_3_Click += MainWindow_Numeric_Buttons_Click;
+            this.mainWindow.But_4_Click += MainWindow_Numeric_Buttons_Click;
+            this.mainWindow.But_5_Click += MainWindow_Numeric_Buttons_Click;
+            this.mainWindow.But_6_Click += MainWindow_Numeric_Buttons_Click;
+            this.mainWindow.But_7_Click += MainWindow_Numeric_Buttons_Click;
+            this.mainWindow.But_8_Click += MainWindow_Numeric_Buttons_Click;
+            this.mainWindow.But_9_Click += MainWindow_Numeric_Buttons_Click;
 
-            this.mainWindow.But_Add_Click += MainWindow_Operation_Button_Click;
-            this.mainWindow.But_Sub_Click += MainWindow_Operation_Button_Click;
-            this.mainWindow.But_Mul_Click += MainWindow_Operation_Button_Click;
-            this.mainWindow.But_Dev_Click += MainWindow_Operation_Button_Click;
+            this.mainWindow.But_Add_Click += MainWindow_Operation_Buttons_Click;
+            this.mainWindow.But_Sub_Click += MainWindow_Operation_Buttons_Click;
+            this.mainWindow.But_Mul_Click += MainWindow_Operation_Buttons_Click;
+            this.mainWindow.But_Dev_Click += MainWindow_Operation_Buttons_Click;
             this.mainWindow.But_Sqr_Click += MainWindow_But_Sqr_Click;
 
             this.mainWindow.But_ChangeSign_Click += MainWindow_But_InvertSign_Click;
@@ -61,9 +58,9 @@ namespace Calculator_Core_3._0
             this.mainWindow.But_Res_Click += MainWindow_But_Reset_Click;
             this.mainWindow.But_Correct_Click += MainWindow_But_Correct_Click;
 
-            this.mainWindow.But_Memory_Add += MainWindow_But_Memory_Add_Click;
-            this.mainWindow.But_Memory_Sub += MainWindow_But_Memory_Sub_Click;
-            this.mainWindow.But_Memory_Read += MainWindow_But_Memory_Read_Click;
+            this.mainWindow.But_Memory_Add += MainWindow_Memory_Buttons_Click;
+            this.mainWindow.But_Memory_Sub += MainWindow_Memory_Buttons_Click;
+            this.mainWindow.But_Memory_Read += MainWindow_Memory_Buttons_Click;
 
             #endregion
         }
@@ -100,16 +97,16 @@ namespace Calculator_Core_3._0
 
         #endregion
 
-        private void InitArgument_1_AndSign(char sign)
+        private void FirstArgument_ArithmeticSign_Init(char sign)
         {
             if (!BoxTextIsEmpty())
             {
-                model.SetArithmeticSign(sign);
-                model.SetArgument_1(BoxText);
-                model.SetArgument_2(BoxText);
+                calculation.ArithmeticSign = sign;
+                calculation.FirstArgument = double.Parse(BoxText);
+                calculation.SecondArgument = double.Parse(BoxText);
                 BlockText = BoxText;
                 BoxText = "";
-                BlockText += " " + model.SignToString();
+                BlockText += " " + calculation.ArithmeticSign;
             }
             else
                 BoxText = "";
@@ -117,25 +114,30 @@ namespace Calculator_Core_3._0
 
         private void AddTextToBoxAndBlock(string str)
         {
-            if (str == "," && BoxTextIsEmpty())
+            if (str == "," && BoxText == "0")
             {
-                BoxText += "0" + str;
+                BoxText += str;
                 BlockText += "0";
             }
             else
+            {
+                BoxText = BoxText == "0" ? "" : BoxText;
                 BoxText += str;
+            }
 
-            if (!BlockTextContains(model.SignToString()))
+            if (!BlockTextContains(calculation.ArithmeticSign.ToString()))
                 BlockText += str;
         }
 
-        #region Функциональные клавиши.
+        #region Обработка нажатия клавиш.
+
+        #region Обработка функциональных клавиш.
         private void MainWindow_But_Reset_Click(object sender, EventArgs e)
         {
-            BoxText = "";
+            BoxText = "0";
             BlockText = "";
             equalCount = 0;
-            model.Reset();
+            calculation.Reset();
         }
 
         private void MainWindow_But_Point_Click(object sender, EventArgs e) =>
@@ -143,9 +145,9 @@ namespace Calculator_Core_3._0
 
         private void MainWindow_But_Sqr_Click(object sender, EventArgs e)
         {
-            InitArgument_1_AndSign('\0');
-            model.GetSqr();
-            BoxText = model.ResultToString();
+            FirstArgument_ArithmeticSign_Init('\0');
+            calculation.SqrCalculation();
+            BoxText = calculation.Result.ToString();
             BlockText = "";
         }
 
@@ -155,26 +157,26 @@ namespace Calculator_Core_3._0
             if (equalCount == 1)
                 return; //TODO повторное нажатие "=".
 
-            if (!model.SignInitCheck())
+            if (!calculation.SignInitCheck())
                 return;
 
             if (!BlockTextIsEmpty())
-                model.SetArgument_2(BlockTextRemove(BlockTextLength() - 1, 1));
+                calculation.SecondArgument = double.Parse(BlockTextRemove(BlockTextLength() - 1, 1));
 
             if (!BoxTextIsEmpty() && equalCount == 0)
-                model.SetArgument_2(BoxText);
+                calculation.SecondArgument = double.Parse(BoxText);
 
-            if (Math.Abs(model.GetArgument_2()) == 0 && model.GetArithmeticSign() == '/')
+            if (Math.Abs(calculation.SecondArgument) == 0 && calculation.ArithmeticSign == '/')
             {
                 ErrorMesage("Деление на 0");
-                model.Reset();
+                calculation.Reset();
                 return;
             }
 
-            model.GetResult();
-            BoxText = model.ResultToString();
-            model.SetArgument_1(BoxText);
-            BlockText += " " + model.GetArgument_2() + " =";
+            calculation.ArithmeticOpCalculation();
+            BoxText = calculation.Result.ToString();
+            calculation.FirstArgument = double.Parse(BoxText);
+            BlockText += " " + calculation.SecondArgument + " =";
             equalCount = 1;
         }
 
@@ -190,78 +192,62 @@ namespace Calculator_Core_3._0
             if (BoxTextIsEmpty())
                 return;
 
-            if (!BlockTextIsEmpty() && !BlockTextContains(model.SignToString()))
+            if (!BlockTextIsEmpty() && !BlockTextContains(calculation.ArithmeticSign.ToString()))
                 BlockText = BlockTextRemove(BlockTextLength() - 1, 1);
 
             BoxText = BoxTextRemove(BoxTextLength() - 1, 1);
         }
         #endregion
 
-        #region Клавиши памяти.
-        private void MainWindow_But_Memory_Read_Click(object sender, EventArgs e)
-        {
-            BoxText = Convert.ToString(memory);
-        }
-
-        private void MainWindow_But_Memory_Sub_Click(object sender, EventArgs e)
-        {
-            memory -= Convert.ToInt32(BoxText);
-        }
-
-        private void MainWindow_But_Memory_Add_Click(object sender, EventArgs e)
-        {
-            memory += Convert.ToInt32(BoxText);
-        }
-        #endregion
-
-        #region Обработка нажатия клавиш.
-
-        /// <summary>
-        /// Определяем нажатую клавишу по ее имени.
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="startindex"></param>
-        /// <param name="count"></param>
-        /// <returns></returns>
-        private string GetPressedButton(object sender, int startindex, int count)
+        private string PressedButton(object sender, int startindex, int count)
         {
             Button button = (Button)sender;
             return button.Name.Substring(startindex, count);
         }
 
-        /// <summary>
-        /// Обработчик нажатия операционных клавиш.
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void MainWindow_Operation_Button_Click(object sender, EventArgs e)
+        private void MainWindow_Operation_Buttons_Click(object sender, EventArgs e)
         {
-            switch (GetPressedButton(sender, 6, 3))
+            switch (PressedButton(sender, 6, 3))
             {
                 case "Div":
-                    InitArgument_1_AndSign('/');
+                    FirstArgument_ArithmeticSign_Init('/');
                     break;
                 case "Sub":
-                    InitArgument_1_AndSign('-');
+                    FirstArgument_ArithmeticSign_Init('-');
                     break;
                 case "Mul":
-                    InitArgument_1_AndSign('*');
+                    FirstArgument_ArithmeticSign_Init('*');
                     break;
                 case "Add":
-                    InitArgument_1_AndSign('+');
+                    FirstArgument_ArithmeticSign_Init('+');
                     break;
                 default:
-                    break;
+                    throw new InvalidOperationException();
             }
         }
 
-        /// <summary>
-        /// Обработчик нажатия числовых клавиш.
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void MainWindow_Numeric_Button_Click(object sender, EventArgs e) =>
-            AddTextToBoxAndBlock(GetPressedButton(sender, 6, 1));
+        private void MainWindow_Memory_Buttons_Click(object sender, EventArgs e)
+        {
+            switch (PressedButton(sender, 6, 1))
+            {
+                case "A":
+                    memory += Convert.ToInt32(BoxText);
+                    break;
+                case "S":
+                    memory -= Convert.ToInt32(BoxText);
+                    break;
+                case "R":
+                    BoxText = Convert.ToString(memory);
+                    break;
+                default:
+                    throw new InvalidOperationException();
+            }
+        }
+
+        private void MainWindow_Numeric_Buttons_Click(object sender, EventArgs e)
+        {
+            AddTextToBoxAndBlock(PressedButton(sender, 6, 1));
+        }
 
         #endregion
     }
