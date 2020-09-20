@@ -179,6 +179,7 @@ namespace Calculator_Core_3._0
 
         #endregion
 
+        #region Numeric buttons.
         private void Button_0_Click(object sender, RoutedEventArgs e) => but0Click.Invoke(sender, e);
         private void Button_1_Click(object sender, RoutedEventArgs e) => but1Click.Invoke(sender, e);
         private void Button_2_Click(object sender, RoutedEventArgs e) => but2Click.Invoke(sender, e);
@@ -189,25 +190,23 @@ namespace Calculator_Core_3._0
         private void Button_7_Click(object sender, RoutedEventArgs e) => but7Click.Invoke(sender, e);
         private void Button_8_Click(object sender, RoutedEventArgs e) => but8Click.Invoke(sender, e);
         private void Button_9_Click(object sender, RoutedEventArgs e) => but9Click.Invoke(sender, e);
-        private void Button_Point_Click(object sender, RoutedEventArgs e) => butPointClick.Invoke(sender, e);
-        private void Button_Equals_Click(object sender, RoutedEventArgs e) => butEqualsClick.Invoke(sender, e);
-        private void Button_Addition_Click(object sender, RoutedEventArgs e) => butAddClick.Invoke(sender, e);
-        private void Button_Subtraction_Click(object sender, RoutedEventArgs e) => butSubClick.Invoke(sender, e);
-        private void Button_Multiplication_Click(object sender, RoutedEventArgs e) => butMulClick.Invoke(sender, e);
-        private void Button_Division_Click(object sender, RoutedEventArgs e) => butDevClick.Invoke(sender, e);
-        private void Button_Reset_Click(object sender, RoutedEventArgs e) => butResClick.Invoke(sender, e);
-        private void ButtonSqr_Click(object sender, RoutedEventArgs e) => butSqrClick.Invoke(sender,e);
-        private void Button_ChangeSign_Click(object sender, RoutedEventArgs e) => butChangeSignClick.Invoke(sender, e);
-        private void ButtonCorrect_Click(object sender, RoutedEventArgs e) => butCorrectClick.Invoke(sender, e);
-        private void TextBox_TextChanged(object sender, System.Windows.Controls.TextChangedEventArgs e)
-        {
-
-        }
+        #endregion
 
         #region Memory Buttons.
         private void MemoryAdd_Click(object sender, RoutedEventArgs e) => butMemoryAdd.Invoke(sender, e);
         private void MemorySub_Click(object sender, RoutedEventArgs e) => butMemorySub.Invoke(sender,e);
         private void MemoryRead_Click(object sender, RoutedEventArgs e) => butMemoryRead.Invoke(sender,e);
         #endregion
+
+        private void Button_Point_Click(object sender, RoutedEventArgs e) => butPointClick?.Invoke(sender, e);
+        private void Button_Equals_Click(object sender, RoutedEventArgs e) => butEqualsClick?.Invoke(sender, e);
+        private void Button_Addition_Click(object sender, RoutedEventArgs e) => butAddClick?.Invoke(sender, e);
+        private void Button_Subtraction_Click(object sender, RoutedEventArgs e) => butSubClick?.Invoke(sender, e);
+        private void Button_Multiplication_Click(object sender, RoutedEventArgs e) => butMulClick?.Invoke(sender, e);
+        private void Button_Division_Click(object sender, RoutedEventArgs e) => butDevClick?.Invoke(sender, e);
+        private void Button_Reset_Click(object sender, RoutedEventArgs e) => butResClick?.Invoke(sender, e);
+        private void ButtonSqr_Click(object sender, RoutedEventArgs e) => butSqrClick?.Invoke(sender,e);
+        private void Button_ChangeSign_Click(object sender, RoutedEventArgs e) => butChangeSignClick?.Invoke(sender, e);
+        private void ButtonCorrect_Click(object sender, RoutedEventArgs e) => butCorrectClick?.Invoke(sender, e);
     }
 }
