@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Windows;
 
 namespace Calculator_Core_3._0
 {
@@ -20,9 +21,9 @@ namespace Calculator_Core_3._0
             mainWindow.GetStr += MainWindow_GetStr;
         }
 
-        private void MainWindow_GetStr()
+        private void MainWindow_GetStr(object sender, RoutedEventArgs e)
         {
-            throw new NotImplementedException();
+            //mainWindow.TextBox.Text = BtnName;
         }
 
         private void MainLoggic()
@@ -32,7 +33,7 @@ namespace Calculator_Core_3._0
                 firstOperand += BtnName;
             }
             else
-            if (BtnName=="=")
+            if (BtnName == "=")
             {
                 mainWindow.ShowResult(firstOperand.ToString());
             }
