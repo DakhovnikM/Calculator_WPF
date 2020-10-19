@@ -7,7 +7,7 @@ namespace Calculator_Core_3._0
     {
         #region Поля и свойства.
 
-        private readonly Calculation calculation;
+        private readonly Calc calculation;
         private readonly MainWindow mainWindow;
         private int equalCount;
         private int memory;
@@ -27,7 +27,7 @@ namespace Calculator_Core_3._0
         #region Конструктор.
         public Presenter(MainWindow mainWindow)
         {
-            calculation = new Calculation();
+            calculation = new Calc();
             this.mainWindow = mainWindow;
             BoxText = "0";
             BlockText = "";

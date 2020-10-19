@@ -2,7 +2,7 @@
 
 namespace Calculator_Core_3._0
 {
-    internal class Calculation
+    internal class Calc
     {
         public double FirstArgument { get; set; }
         public double SecondArgument { get; set; }
