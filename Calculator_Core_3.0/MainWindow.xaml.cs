@@ -27,7 +27,7 @@ namespace Calculator_Core_3._0
             }
         }
 
-        public delegate void BtnClic();
+        public EventHandler BtnClic;
         private event BtnClic getStr;
         public event BtnClic GetStr
         {
@@ -39,6 +39,7 @@ namespace Calculator_Core_3._0
         private void Btn_Click(object sender, RoutedEventArgs e)
         {
             BtnName = ((Button)sender).Content.ToString();
+            getStr?.Invoke();
         }
 
         public void ShowResult(string result)
