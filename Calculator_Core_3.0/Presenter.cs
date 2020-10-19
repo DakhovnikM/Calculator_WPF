@@ -13,7 +13,7 @@ namespace Calculator_Core_3._0
         private int memory;
         private string BoxText
         {
-            get { return (mainWindow.TextBox.Text); }
+            get { return mainWindow.TextBox.Text; }
             set { mainWindow.TextBox.Text = value; }
         }
         private string BlockText

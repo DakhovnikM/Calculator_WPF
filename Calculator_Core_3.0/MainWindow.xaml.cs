@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Security.Cryptography.X509Certificates;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -14,7 +15,8 @@ namespace Calculator_Core_3._0
         {
 
             InitializeComponent();
-            new Presenter(this);
+            new Controller(this);
+
 
             foreach (UIElement item in LayOut.Children)
             {
@@ -25,10 +27,24 @@ namespace Calculator_Core_3._0
             }
         }
 
+        public delegate void BtnClic();
+        private event BtnClic getStr;
+        public event BtnClic GetStr
+        {
+            add { getStr += value; }
+            remove { getStr -= value; }
+        }
+
+
         private void Btn_Click(object sender, RoutedEventArgs e)
         {
             BtnName = ((Button)sender).Content.ToString();
-            //TextBox.Text = btnName;
+        }
+
+        public void ShowResult(string result)
+        {
+            TextBox.Text = result;
+
         }
     }
 }
