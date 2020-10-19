@@ -35,33 +35,6 @@ namespace Calculator_Core_3._0
 
             #region Subscribe to events.
 
-            this.mainWindow.But_0_Click += MainWindow_Numeric_Buttons_Click;
-            this.mainWindow.But_1_Click += MainWindow_Numeric_Buttons_Click;
-            this.mainWindow.But_2_Click += MainWindow_Numeric_Buttons_Click;
-            this.mainWindow.But_3_Click += MainWindow_Numeric_Buttons_Click;
-            this.mainWindow.But_4_Click += MainWindow_Numeric_Buttons_Click;
-            this.mainWindow.But_5_Click += MainWindow_Numeric_Buttons_Click;
-            this.mainWindow.But_6_Click += MainWindow_Numeric_Buttons_Click;
-            this.mainWindow.But_7_Click += MainWindow_Numeric_Buttons_Click;
-            this.mainWindow.But_8_Click += MainWindow_Numeric_Buttons_Click;
-            this.mainWindow.But_9_Click += MainWindow_Numeric_Buttons_Click;
-
-            this.mainWindow.But_Add_Click += MainWindow_Operation_Buttons_Click;
-            this.mainWindow.But_Sub_Click += MainWindow_Operation_Buttons_Click;
-            this.mainWindow.But_Mul_Click += MainWindow_Operation_Buttons_Click;
-            this.mainWindow.But_Dev_Click += MainWindow_Operation_Buttons_Click;
-            this.mainWindow.But_Sqr_Click += MainWindow_But_Sqr_Click;
-
-            this.mainWindow.But_ChangeSign_Click += MainWindow_But_InvertSign_Click;
-            this.mainWindow.But_Equals_Click += MainWindow_But_Equals_Click;
-            this.mainWindow.But_Point_Click += MainWindow_But_Point_Click;
-            this.mainWindow.But_Res_Click += MainWindow_But_Reset_Click;
-            this.mainWindow.But_Correct_Click += MainWindow_But_Correct_Click;
-
-            this.mainWindow.But_Memory_Add += MainWindow_Memory_Buttons_Click;
-            this.mainWindow.But_Memory_Sub += MainWindow_Memory_Buttons_Click;
-            this.mainWindow.But_Memory_Read += MainWindow_Memory_Buttons_Click;
-
             #endregion
         }
         #endregion
