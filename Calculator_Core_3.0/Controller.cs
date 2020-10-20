@@ -23,7 +23,7 @@ namespace Calculator_Core_3._0
 
         private void MainWindow_GetStr(object sender, RoutedEventArgs e)
         {
-            //mainWindow.TextBox.Text = BtnName;
+            mainWindow.TextBox.Text = BtnName;
         }
 
         private void MainLoggic()

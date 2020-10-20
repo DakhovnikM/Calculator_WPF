@@ -40,7 +40,7 @@ namespace Calculator_Core_3._0
         private void Btn_Click(object sender, RoutedEventArgs e)
         {
             BtnName += ((Button)sender).Content.ToString();
-            TextBox.Text = BtnName;
+            //TextBox.Text = BtnName;
             getStr?.Invoke(sender,e);
         }
 

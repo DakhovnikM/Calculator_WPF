@@ -74,12 +74,12 @@ namespace Calculator_Core_3._0
         {
             if (!BoxTextIsEmpty())
             {
-                calculation.ArithmeticSign = sign;
-                calculation.FirstArgument = double.Parse(BoxText);
-                calculation.SecondArgument = double.Parse(BoxText);
+                calculation.OperationSign = sign;
+                calculation.FirstOperand = double.Parse(BoxText);
+                calculation.SecondOperand = double.Parse(BoxText);
                 BlockText = BoxText;
                 BoxText = "";
-                BlockText += " " + calculation.ArithmeticSign;
+                BlockText += " " + calculation.OperationSign;
             }
             else
                 BoxText = "";
@@ -98,7 +98,7 @@ namespace Calculator_Core_3._0
                 BoxText += str;
             }
 
-            if (!BlockTextContains(calculation.ArithmeticSign.ToString()))
+            if (!BlockTextContains(calculation.OperationSign.ToString()))
                 BlockText += str;
         }
 
@@ -134,12 +134,12 @@ namespace Calculator_Core_3._0
                 return;
 
             if (!BlockTextIsEmpty())
-                calculation.SecondArgument = double.Parse(BlockTextRemove(BlockTextLength() - 1, 1));
+                calculation.SecondOperand = double.Parse(BlockTextRemove(BlockTextLength() - 1, 1));
 
             if (!BoxTextIsEmpty() && equalCount == 0)
-                calculation.SecondArgument = double.Parse(BoxText);
+                calculation.SecondOperand = double.Parse(BoxText);
 
-            if (Math.Abs(calculation.SecondArgument) == 0 && calculation.ArithmeticSign == '/')
+            if (Math.Abs(calculation.SecondOperand) == 0 && calculation.OperationSign == '/')
             {
                 ErrorMesage("Деление на 0");
                 calculation.Reset();
@@ -148,8 +148,8 @@ namespace Calculator_Core_3._0
 
             calculation.ArithmeticOpCalculation();
             BoxText = calculation.Result.ToString();
-            calculation.FirstArgument = double.Parse(BoxText);
-            BlockText += " " + calculation.SecondArgument + " =";
+            calculation.FirstOperand = double.Parse(BoxText);
+            BlockText += " " + calculation.SecondOperand + " =";
             equalCount = 1;
         }
 
@@ -165,7 +165,7 @@ namespace Calculator_Core_3._0
             if (BoxTextIsEmpty())
                 return;
 
-            if (!BlockTextIsEmpty() && !BlockTextContains(calculation.ArithmeticSign.ToString()))
+            if (!BlockTextIsEmpty() && !BlockTextContains(calculation.OperationSign.ToString()))
                 BlockText = BlockTextRemove(BlockTextLength() - 1, 1);
 
             BoxText = BoxTextRemove(BoxTextLength() - 1, 1);
