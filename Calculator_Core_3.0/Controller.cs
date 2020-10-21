@@ -94,15 +94,18 @@ namespace Calculator_Core_3._0
             {
                 memory += Convert.ToDouble(TextBoxText);
             }
+
             if (content == "M-")
             {
                 memory -= Convert.ToDouble(TextBoxText);
             }
+
             if (content == "MR")
             {
                 ToLabelText("");
                 TextBoxText = memory.ToString();
             }
+
             if (content == "MC")
             {
                 memory = 0;
