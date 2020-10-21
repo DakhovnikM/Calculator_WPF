@@ -30,8 +30,7 @@ namespace Calculator_Core_3._0
         public double CalcResult(string key, double x, double y)
         {
             var value = dict[key];
-            Result = value(x, y);
-            return Result;
+            return Result = value(x, y);
         }
     }
 }

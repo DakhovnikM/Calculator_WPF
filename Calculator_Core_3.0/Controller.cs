@@ -11,32 +11,29 @@ namespace Calculator_Core_3._0
         #region Prop
         private readonly MainWindow mainWindow;
         private readonly Calc calc;
+        private double memory;
         private bool flag;
+        private double firstOperand;
+        private double secondOperand;
+        private string operationSign;
 
         private string TextBoxText
         {
             get { return mainWindow.TextBox.Text; }
             set { mainWindow.TextBox.Text = value; }
         }
-
-        public double FirstOperand { get; set; }
-        public double SecondOperand { get; set; }
-        private double Memory { get; set; }
-        public string OperationSign { get; set; }
         #endregion
 
         #region Ctor
         public Controller(MainWindow window)
         {
+            firstOperand = 0;
+            secondOperand = 0;
+            memory = 0;
+            operationSign = "";
+            flag = true;
             mainWindow = window;
             calc = new Calc();
-
-            FirstOperand = 0;
-            SecondOperand = 0;
-            Memory = 0;
-            OperationSign = "";
-            flag = true;
-
             mainWindow.GetStr += MainWindow_GetStr;
         }
         #endregion
@@ -53,8 +50,8 @@ namespace Calculator_Core_3._0
                 if (content == "+" || content == "-" || content == "*" || content == "/")
                 {
                     ToLabelText(TextBoxText);
-                    OperationSign = content; //TODO Повторное нажатие знака
-                    FirstOperand = GetOperand();
+                    operationSign = content; //TODO Повторное нажатие знака
+                    firstOperand = GetOperand();
                     ToLabelText(content);
                     TextBoxText = "";
                 }
@@ -66,48 +63,49 @@ namespace Calculator_Core_3._0
                         : "";
                 }
 
-                if (content == "=" && OperationSign != "")
+                if (content == "=" && operationSign != "")
                 {
-                    SecondOperand = GetOperand();
-                    var result = calc.CalcResult(OperationSign, FirstOperand, SecondOperand);
-                    TextBoxText = result.ToString();
-                    OperationSign = "";
-                    ToLabelText(SecondOperand + "=");
+                    secondOperand = GetOperand();
+                    var result = calc.CalcResult(operationSign, firstOperand, secondOperand).ToString();
+                    TextBoxText = result;
+                    operationSign = "";
+                    ToLabelText(secondOperand + "=");
                     flag = false;
                 }
             }
 
             if (content == "+/-")
             {
-                TextBoxText = TextBoxText.StartsWith("-") ? TextBoxText.Remove(0, 1) : "-" + TextBoxText;
+                TextBoxText = TextBoxText.StartsWith("-") 
+                    ? TextBoxText.Remove(0, 1) 
+                    : "-" + TextBoxText;
             }
 
             if (content == "Sqr")
             {
                 ToLabelText("");
-                FirstOperand = GetOperand();
-                ToLabelText("√" + FirstOperand);
-                var result = calc.CalcResult("Sqr", FirstOperand, 0).ToString();
+                firstOperand = GetOperand();
+                ToLabelText("√" + firstOperand);
+                var result = calc.CalcResult("Sqr", firstOperand, 0).ToString();
                 TextBoxText = result;
             }
 
             if (content == "M+")
             {
-                Memory += Convert.ToDouble(TextBoxText);
+                memory += Convert.ToDouble(TextBoxText);
             }
             if (content == "M-")
             {
-                Memory -= Convert.ToDouble(TextBoxText);
-
+                memory -= Convert.ToDouble(TextBoxText);
             }
             if (content == "MR")
             {
                 ToLabelText("");
-                TextBoxText = Memory.ToString();
+                TextBoxText = memory.ToString();
             }
             if (content == "MC")
             {
-                Memory = 0;
+                memory = 0;
             }
 
             if (content == "C")
@@ -120,10 +118,10 @@ namespace Calculator_Core_3._0
         private void Clear()
         {
             TextBoxText = "";
-            FirstOperand = 0;
-            SecondOperand = 0;
+            firstOperand = 0;
+            secondOperand = 0;
             ToLabelText("");
-            OperationSign = "";
+            operationSign = "";
         }
 
         private double GetOperand()
