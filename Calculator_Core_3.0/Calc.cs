@@ -18,7 +18,7 @@ namespace Calculator_Core_3._0
                 ["-"] = (x, y) => (x - y),
                 ["*"] = (x, y) => (x * y),
                 ["/"] = (x, y) => (x / y),
-                ["sqr"] = (x, y) => Math.Sqrt(x)
+                ["Sqr"] = (x, y) => Math.Sqrt(x + y)
             };
         }
 

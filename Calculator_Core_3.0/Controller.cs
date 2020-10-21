@@ -48,15 +48,15 @@ namespace Calculator_Core_3._0
                 if ((content == "," && !TextBoxText.Contains(",")) || int.TryParse(content, out int res))
                 {
                     TextBoxText += content;
-                    GetLabelText(content);
                 }
 
                 if (content == "+" || content == "-" || content == "*" || content == "/")
                 {
+                    ToLabelText(TextBoxText);
                     OperationSign = content; //TODO Повторное нажатие знака
                     FirstOperand = GetOperand();
+                    ToLabelText(content);
                     TextBoxText = "";
-                    GetLabelText(content);
                 }
 
                 if (content == "<<")
@@ -69,11 +69,21 @@ namespace Calculator_Core_3._0
                 if (content == "=" && OperationSign != "")
                 {
                     SecondOperand = GetOperand();
-                    TextBoxText = calc.CalcResult(OperationSign, FirstOperand, SecondOperand).ToString();
+                    var result = calc.CalcResult(OperationSign, FirstOperand, SecondOperand);
+                    TextBoxText = result.ToString();
                     OperationSign = "";
-                    GetLabelText("=");
+                    ToLabelText(SecondOperand + "=");
                     flag = false;
                 }
+            }
+
+            if (content == "Sqr")
+            {
+                ToLabelText("");
+                FirstOperand = GetOperand();
+                ToLabelText("√" + FirstOperand);
+                var result = calc.CalcResult("Sqr", FirstOperand, 0).ToString();
+                TextBoxText = result;
             }
 
             if (content == "M+")
@@ -87,7 +97,7 @@ namespace Calculator_Core_3._0
             }
             if (content == "MR")
             {
-                GetLabelText("");
+                ToLabelText("");
                 TextBoxText = Memory.ToString();
             }
             if (content == "MC")
@@ -107,25 +117,21 @@ namespace Calculator_Core_3._0
             TextBoxText = "";
             FirstOperand = 0;
             SecondOperand = 0;
-            GetLabelText("");
+            ToLabelText("");
             OperationSign = "";
         }
+
         private double GetOperand()
         {
             return TextBoxText != "" ? Convert.ToDouble(TextBoxText) : 0;
         }
 
-        private void GetLabelText(string content)
+        private void ToLabelText(string content)
         {
             if (content == "")
                 mainWindow.Label.Content = "";
             else
                 mainWindow.Label.Content += content;
-        }
-
-        private void MemoryInit()
-        {
-
         }
 
     }

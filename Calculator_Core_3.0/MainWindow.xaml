@@ -32,7 +32,7 @@
             <RowDefinition></RowDefinition>
         </Grid.RowDefinitions>
         
-        <TextBox Name="TextBox" Grid.ColumnSpan="4" Grid.Row="1" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"  TextWrapping="Wrap" Text="" FontSize="50"  Background="#FFDDDDDD" BorderThickness="0,0,0,1"/>
+        <TextBox Name="TextBox" Grid.ColumnSpan="4" Grid.Row="1" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"  TextWrapping="Wrap" Text="" FontSize="45"  Background="#FFDDDDDD" BorderThickness="0,0,0,1"/>
         <Label Name="Label" Grid.ColumnSpan="4" Grid.Row="0" FontSize="16" HorizontalAlignment="Right"/>
 
         <Button Name="Btn0" Content="0" Grid.Column="1" Grid.Row="7" Background="#FFC5C5C5"/>
