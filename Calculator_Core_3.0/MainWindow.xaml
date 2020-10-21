@@ -32,8 +32,8 @@
             <RowDefinition></RowDefinition>
         </Grid.RowDefinitions>
         
-        <TextBox Name="TextBox" Grid.ColumnSpan="4" Grid.Row="1" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"  TextWrapping="Wrap" Text="0" FontSize="50"  Background="#FFDDDDDD" BorderThickness="0,0,0,1"/>
-        <TextBlock Name="TextBlock" Grid.ColumnSpan="4" Grid.Row="0" Text="0" FontSize="16" TextWrapping="Wrap"  TextAlignment="Right"/>
+        <TextBox Name="TextBox" Grid.ColumnSpan="4" Grid.Row="1" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"  TextWrapping="Wrap" Text="" FontSize="50"  Background="#FFDDDDDD" BorderThickness="0,0,0,1"/>
+        <Label Name="Label" Grid.ColumnSpan="4" Grid.Row="0" FontSize="16" HorizontalAlignment="Right"/>
 
         <Button Name="Btn0" Content="0" Grid.Column="1" Grid.Row="7" Background="#FFC5C5C5"/>
         <Button Name="Btn8" Content="8" Grid.Column="1" Grid.Row="4" Background="#FFC5C5C5"/>
@@ -46,7 +46,7 @@
         <Button Name="Btn6" Content="6" Grid.Column="2" Grid.Row="5" Background="#FFC5C5C5"/>
         <Button Name="Btn9" Content="9" Grid.Column="2" Grid.Row="4" Background="#FFC5C5C5"/>
         
-        <Button Name="BtnRes" Content="С" Grid.Column="0" Grid.Row="3"  FontSize="35" Foreground="#FFEE1010" HorizontalContentAlignment="Center"/>
+        <Button Name="BtnRes" Content="C" Grid.Column="0" Grid.Row="3"  FontSize="35" Foreground="#FFEE1010" HorizontalContentAlignment="Center"/>
         <Button Name="BtnDot" Content="," Grid.Column="2" Grid.Row="7"/>
         <Button Name="BtnSign" Content="+/-" Grid.Column="0" Grid.Row="7"/>
         <Button Name="BtnCor" Content="&lt;&lt;" Grid.Column="2" Grid.Row="3"/>
@@ -60,5 +60,6 @@
         <Button Name="BtnMemAdd" Content="M+" Grid.Column="0" Grid.Row="2" FontSize="15"/>
         <Button Name="BtnMemSub" Content="M-" Grid.Column="1" Grid.Row="2" FontSize="15"/>
         <Button Name="BtnMemRead" Content="MR" Grid.Column="2" Grid.Row="2" FontSize="15"/>
+        <Button Name="BtnMemClear" Content="MC" Grid.Column="3" Grid.Row="2" FontSize="15"/>
     </Grid>
 </Window>
