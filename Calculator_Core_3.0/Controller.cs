@@ -77,6 +77,11 @@ namespace Calculator_Core_3._0
                 }
             }
 
+            if (content == "+/-")
+            {
+                TextBoxText = TextBoxText.StartsWith("-") ? TextBoxText.Remove(0, 1) : "-" + TextBoxText;
+            }
+
             if (content == "Sqr")
             {
                 ToLabelText("");
