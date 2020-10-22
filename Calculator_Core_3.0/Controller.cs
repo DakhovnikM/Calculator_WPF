@@ -12,35 +12,35 @@ namespace Calculator_Core_3._0
         private readonly MainWindow mainWindow;
         private readonly Calc calc;
         private double memory;
-        private bool flag;
+        private bool equalButtonPressed;
         private double firstOperand;
         private double secondOperand;
         private string operationSign;
-
         private string TextBoxText
         {
             get { return mainWindow.TextBox.Text; }
             set { mainWindow.TextBox.Text = value; }
         }
+        private double GetOperand { get => TextBoxText != "" ? Convert.ToDouble(TextBoxText) : 0; }
         #endregion
 
         #region Ctor
         public Controller(MainWindow window)
         {
+            mainWindow = window;
+            calc = new Calc();
             firstOperand = 0;
             secondOperand = 0;
             memory = 0;
             operationSign = "";
-            flag = true;
-            mainWindow = window;
-            calc = new Calc();
+            equalButtonPressed = true;
             mainWindow.GetStr += MainWindow_GetStr;
         }
         #endregion
 
         private void MainWindow_GetStr(string content)
         {
-            if (flag)
+            if (equalButtonPressed)
             {
                 if ((content == "," && !TextBoxText.Contains(",")) || int.TryParse(content, out int res))
                 {
@@ -51,7 +51,7 @@ namespace Calculator_Core_3._0
                 {
                     ToLabelText(TextBoxText);
                     operationSign = content; //TODO Повторное нажатие знака
-                    firstOperand = GetOperand();
+                    firstOperand = GetOperand;
                     ToLabelText(content);
                     TextBoxText = "";
                 }
@@ -65,26 +65,26 @@ namespace Calculator_Core_3._0
 
                 if (content == "=" && operationSign != "")
                 {
-                    secondOperand = GetOperand();
+                    secondOperand = GetOperand;
                     var result = calc.CalcResult(operationSign, firstOperand, secondOperand).ToString();
                     TextBoxText = result;
                     operationSign = "";
                     ToLabelText(secondOperand + "=");
-                    flag = false;
+                    equalButtonPressed = false;
                 }
             }
 
             if (content == "+/-")
             {
-                TextBoxText = TextBoxText.StartsWith("-") 
-                    ? TextBoxText.Remove(0, 1) 
+                TextBoxText = TextBoxText.StartsWith("-")
+                    ? TextBoxText.Remove(0, 1)
                     : "-" + TextBoxText;
             }
 
             if (content == "Sqr")
             {
                 ToLabelText("");
-                firstOperand = GetOperand();
+                firstOperand = GetOperand;
                 ToLabelText("√" + firstOperand);
                 var result = calc.CalcResult("Sqr", firstOperand, 0).ToString();
                 TextBoxText = result;
@@ -114,7 +114,6 @@ namespace Calculator_Core_3._0
             if (content == "C")
             {
                 Clear();
-                flag = true;
             };
         }
 
@@ -125,11 +124,7 @@ namespace Calculator_Core_3._0
             secondOperand = 0;
             ToLabelText("");
             operationSign = "";
-        }
-
-        private double GetOperand()
-        {
-            return TextBoxText != "" ? Convert.ToDouble(TextBoxText) : 0;
+            equalButtonPressed = true;
         }
 
         private void ToLabelText(string content)
