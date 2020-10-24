@@ -10,16 +10,19 @@ namespace Calculator_Core_3._0
     /// </summary>
     public partial class MainWindow : Window
     {
-        public delegate void BtnCont(string str);
         public string BtnContent { get; private set; }
-       
+
+        public Action<string> getButtonContent;
+
         /// <summary>
         /// Ctor
         /// </summary>
         public MainWindow()
         {
             InitializeComponent();
+
             new Controller(this);
+
             foreach (UIElement uielement in LayOut.Children)
             {
                 if (uielement is Button button)
@@ -27,13 +30,6 @@ namespace Calculator_Core_3._0
                     button.Click += Btn_Click;
                 }
             }
-        }
-
-        private BtnCont getButtonContent;
-        public event BtnCont GetStr
-        {
-            add { getButtonContent += value; }
-            remove { getButtonContent -= value; }
         }
 
         private void Btn_Click(object sender, RoutedEventArgs e)

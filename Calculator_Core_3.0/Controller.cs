@@ -16,11 +16,13 @@ namespace Calculator_Core_3._0
         private double firstOperand;
         private double secondOperand;
         private string operationSign;
+
         private string TextBoxText
         {
             get { return mainWindow.TextBox.Text; }
             set { mainWindow.TextBox.Text = value; }
         }
+
         private double GetOperand { get => TextBoxText != "" ? Convert.ToDouble(TextBoxText) : 0; }
         #endregion
 
@@ -34,7 +36,7 @@ namespace Calculator_Core_3._0
             memory = 0;
             operationSign = "";
             equalButtonPressed = true;
-            mainWindow.GetStr += MainWindow_GetStr;
+            mainWindow.getButtonContent += MainWindow_GetStr;
         }
         #endregion
 
