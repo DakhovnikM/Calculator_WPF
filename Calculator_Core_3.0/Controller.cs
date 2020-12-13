@@ -11,11 +11,14 @@ namespace Calculator_Core_3._0
         private readonly Calc calc;
         private double memory;
         private bool CanPressEqualButton;
+        private bool CanSetSecondOperand;
 
         private string GetOperand
         {
-            get => tbString ?? "0";
+            get => TBString == "" ? "0" : TBString;
         }
+
+        private string result="";
 
         private string firstOperand = "";
         public string FirstOperand
@@ -61,16 +64,6 @@ namespace Calculator_Core_3._0
             }
         }
 
-        private string result;
-        public string Result
-        {
-            get => result;
-            set
-            {
-                result = value;
-            }
-        }
-
         private string tbString = "";
         public string TBString
         {
@@ -78,17 +71,6 @@ namespace Calculator_Core_3._0
             set
             {
                 tbString = value;
-                OnPropertyChanged();
-            }
-        }
-
-        private string lbString = "";
-        public string LBString
-        {
-            get => lbString;
-            set
-            {
-                lbString = value;
                 OnPropertyChanged();
             }
         }
@@ -118,10 +100,16 @@ namespace Calculator_Core_3._0
         {
             if (CanPressEqualButton)
             {
+                if (CanSetSecondOperand)
+                {
+                    TBString = "";
+                    CanSetSecondOperand = false;
+                }
+
                 if (int.TryParse(buttonContent, out _) && buttonContent != "0")
                     TBString += buttonContent;
 
-                if (buttonContent == "0" && !TBString.StartsWith("0") || TBString == "")
+                if (buttonContent == "0" && !TBString.StartsWith("0") && TBString == "") //TODO добавление нуля в десятичном числе
                     TBString += buttonContent;
 
                 if (buttonContent == "," && !TBString.Contains(","))
@@ -129,9 +117,9 @@ namespace Calculator_Core_3._0
 
                 if (buttonContent == "+" || buttonContent == "-" || buttonContent == "*" || buttonContent == "/")
                 {
-                    OperationSign = buttonContent; //TODO Повторное нажатие знака
+                    OperationSign = buttonContent;
                     FirstOperand = GetOperand;
-                    TBString = "";
+                    CanSetSecondOperand = true;
                 }
 
                 if (buttonContent == "<<")
@@ -143,11 +131,14 @@ namespace Calculator_Core_3._0
 
                 if (buttonContent == "=" && OperationSign != "")
                 {
-                    EqualSign = buttonContent == "=" ? buttonContent : "";
-                    SecondOperand = GetOperand;
-                    Result = calc.CalcResult(OperationSign, FirstOperand, SecondOperand).ToString();
-                    TBString = Result;
-                    CanPressEqualButton = false;
+                    EqualSign = "=";
+
+                    if (result != "") FirstOperand = result;
+                    else
+                        SecondOperand = GetOperand;
+
+                    result = calc.CalcResult(OperationSign, FirstOperand, SecondOperand).ToString();
+                    TBString = result;
                 }
             }
 
@@ -161,8 +152,8 @@ namespace Calculator_Core_3._0
             if (buttonContent == "Sqr")
             {
                 FirstOperand = GetOperand;
-                Result = calc.CalcResult("Sqr", FirstOperand, "0").ToString();
-                TBString = Result;
+                result = calc.CalcResult("Sqr", FirstOperand, "0").ToString();
+                TBString = result;
             }
 
             if (buttonContent == "M+")
