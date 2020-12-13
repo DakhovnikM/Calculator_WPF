@@ -7,10 +7,15 @@
         mc:Ignorable="d"
         Title="Калькулятор" Height="470" Width="360" ResizeMode="NoResize" WindowStyle="ToolWindow">
 
+    <Window.DataContext>
+        <local:Controller/>
+    </Window.DataContext>
+
     <Window.Resources>
-        <Style x:Key="{x:Type Button }">
+        <Style x:Key="ButtonStyle" TargetType="Button">
             <Setter Property="ItemsControl.FontSize" Value="25"/>
             <Setter Property="ItemsControl.BorderThickness" Value="0"/>
+            <Setter Property="Background" Value="#FFC5C5C5"/>
         </Style>
     </Window.Resources>
 
@@ -31,9 +36,26 @@
             <RowDefinition></RowDefinition>
             <RowDefinition></RowDefinition>
         </Grid.RowDefinitions>
-        
-        <TextBox Name="TextBox" Grid.ColumnSpan="4" Grid.Row="1" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"  TextWrapping="Wrap" Text="" FontSize="45"  Background="#FFDDDDDD" BorderThickness="0,0,0,1"/>
-        <Label Name="Label" Grid.ColumnSpan="4" Grid.Row="0" FontSize="16" HorizontalAlignment="Right"/>
+
+        <TextBlock Name="TextBox" Grid.ColumnSpan="4" Grid.Row="1"  
+                    TextWrapping="Wrap" 
+                    Text="{Binding TBString}" 
+                    FontSize="45"  
+                    Background="#FFDDDDDD" 
+                   TextAlignment="Right"/>
+
+        <TextBlock Name="Label" Grid.ColumnSpan="4" Grid.Row="0" 
+                   FontSize="20" 
+                   TextAlignment="Right">
+            <TextBlock.Text>
+                <MultiBinding StringFormat="{}{0} {1} {2} {3}">
+                    <Binding Path="FirstOperand"/>
+                    <Binding Path="OperationSign"/>
+                    <Binding Path="SecondOperand"/>
+                    <Binding Path="EqualSign"/>
+                </MultiBinding>
+            </TextBlock.Text>
+        </TextBlock>
 
         <Button Name="Btn0" Content="0" Grid.Column="1" Grid.Row="7" Background="#FFC5C5C5"/>
         <Button Name="Btn8" Content="8" Grid.Column="1" Grid.Row="4" Background="#FFC5C5C5"/>
@@ -45,7 +67,7 @@
         <Button Name="Btn3" Content="3" Grid.Column="2" Grid.Row="6" Background="#FFC5C5C5"/>
         <Button Name="Btn6" Content="6" Grid.Column="2" Grid.Row="5" Background="#FFC5C5C5"/>
         <Button Name="Btn9" Content="9" Grid.Column="2" Grid.Row="4" Background="#FFC5C5C5"/>
-        
+
         <Button Name="BtnRes" Content="C" Grid.Column="0" Grid.Row="3"  FontSize="35" Foreground="#FFEE1010" HorizontalContentAlignment="Center"/>
         <Button Name="BtnDot" Content="," Grid.Column="2" Grid.Row="7"/>
         <Button Name="BtnSign" Content="+/-" Grid.Column="0" Grid.Row="7"/>
@@ -56,7 +78,7 @@
         <Button Name="BtnSub" Content="-" Grid.Column="3" Grid.Row="4"/>
         <Button Name="BtnMul" Content="*" Grid.Column="3" Grid.Row="5"/>
         <Button Name="BtnSqr" Content="Sqr" Grid.Column="1" Grid.Row="3"/>
-        
+
         <Button Name="BtnMemAdd" Content="M+" Grid.Column="0" Grid.Row="2" FontSize="15"/>
         <Button Name="BtnMemSub" Content="M-" Grid.Column="1" Grid.Row="2" FontSize="15"/>
         <Button Name="BtnMemRead" Content="MR" Grid.Column="2" Grid.Row="2" FontSize="15"/>

@@ -1,139 +1,194 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Reflection.Emit;
-using System.Text;
-using System.Windows;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
 
 namespace Calculator_Core_3._0
 {
-    class Controller
+    class Controller : INotifyPropertyChanged
     {
         #region Prop
         private readonly MainWindow mainWindow;
         private readonly Calc calc;
         private double memory;
-        private bool equalButtonPressed;
-        private double firstOperand;
-        private double secondOperand;
-        private string operationSign;
-        private string TextBoxText
+        private bool CanPressEqualButton;
+
+        private string GetOperand
         {
-            get { return mainWindow.TextBox.Text; }
-            set { mainWindow.TextBox.Text = value; }
+            get => tbString ?? "0";
         }
-        private double GetOperand { get => TextBoxText != "" ? Convert.ToDouble(TextBoxText) : 0; }
+
+        private string firstOperand = "";
+        public string FirstOperand
+        {
+            get => firstOperand;
+            set
+            {
+                firstOperand = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private string secondOperand = "";
+        public string SecondOperand
+        {
+            get => secondOperand;
+            set
+            {
+                secondOperand = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private string equalSign = "";
+        public string EqualSign
+        {
+            get => equalSign;
+            set
+            {
+                equalSign = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private string operationSign = "";
+        public string OperationSign
+        {
+            get => operationSign;
+            set
+            {
+                operationSign = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private string result;
+        public string Result
+        {
+            get => result;
+            set
+            {
+                result = value;
+            }
+        }
+
+        private string tbString = "";
+        public string TBString
+        {
+            get => tbString;
+            set
+            {
+                tbString = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private string lbString = "";
+        public string LBString
+        {
+            get => lbString;
+            set
+            {
+                lbString = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+        private void OnPropertyChanged([CallerMemberName] string param = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(param));
+        }
         #endregion
 
         #region Ctor
-        public Controller(MainWindow window)
+        public Controller()
+        {
+
+        }
+        public Controller(MainWindow window) : this()
         {
             mainWindow = window;
             calc = new Calc();
-            firstOperand = 0;
-            secondOperand = 0;
-            memory = 0;
-            operationSign = "";
-            equalButtonPressed = true;
-            mainWindow.GetStr += MainWindow_GetStr;
+            CanPressEqualButton = true;
+            mainWindow.GetButtonContent += MainWindow_GetButtonContent;
         }
         #endregion
 
-        private void MainWindow_GetStr(string content)
+        private void MainWindow_GetButtonContent(string buttonContent)
         {
-            if (equalButtonPressed)
+            if (CanPressEqualButton)
             {
-                if ((content == "," && !TextBoxText.Contains(",")) || int.TryParse(content, out int res))
+                if (int.TryParse(buttonContent, out _) && buttonContent != "0")
+                    TBString += buttonContent;
+
+                if (buttonContent == "0" && !TBString.StartsWith("0") || TBString == "")
+                    TBString += buttonContent;
+
+                if (buttonContent == "," && !TBString.Contains(","))
+                    TBString += buttonContent;
+
+                if (buttonContent == "+" || buttonContent == "-" || buttonContent == "*" || buttonContent == "/")
                 {
-                    TextBoxText += content;
+                    OperationSign = buttonContent; //TODO Повторное нажатие знака
+                    FirstOperand = GetOperand;
+                    TBString = "";
                 }
 
-                if (content == "+" || content == "-" || content == "*" || content == "/")
+                if (buttonContent == "<<")
                 {
-                    ToLabelText(TextBoxText);
-                    operationSign = content; //TODO Повторное нажатие знака
-                    firstOperand = GetOperand;
-                    ToLabelText(content);
-                    TextBoxText = "";
-                }
-
-                if (content == "<<")
-                {
-                    TextBoxText = TextBoxText.Length >= 1
-                        ? TextBoxText.Remove(TextBoxText.Length - 1)
+                    TBString = TBString.Length >= 1
+                        ? TBString.Remove(TBString.Length - 1)
                         : "";
                 }
 
-                if (content == "=" && operationSign != "")
+                if (buttonContent == "=" && OperationSign != "")
                 {
-                    secondOperand = GetOperand;
-                    var result = calc.CalcResult(operationSign, firstOperand, secondOperand).ToString();
-                    TextBoxText = result;
-                    operationSign = "";
-                    ToLabelText(secondOperand + "=");
-                    equalButtonPressed = false;
+                    EqualSign = buttonContent == "=" ? buttonContent : "";
+                    SecondOperand = GetOperand;
+                    Result = calc.CalcResult(OperationSign, FirstOperand, SecondOperand).ToString();
+                    TBString = Result;
+                    CanPressEqualButton = false;
                 }
             }
 
-            if (content == "+/-")
+            if (buttonContent == "+/-" && TBString != "")
             {
-                TextBoxText = TextBoxText.StartsWith("-")
-                    ? TextBoxText.Remove(0, 1)
-                    : "-" + TextBoxText;
+                TBString = TBString.StartsWith("-")
+                    ? TBString.Remove(0, 1)
+                    : "-" + TBString;
             }
 
-            if (content == "Sqr")
+            if (buttonContent == "Sqr")
             {
-                ToLabelText("");
-                firstOperand = GetOperand;
-                ToLabelText("√" + firstOperand);
-                var result = calc.CalcResult("Sqr", firstOperand, 0).ToString();
-                TextBoxText = result;
+                FirstOperand = GetOperand;
+                Result = calc.CalcResult("Sqr", FirstOperand, "0").ToString();
+                TBString = Result;
             }
 
-            if (content == "M+")
-            {
-                memory += Convert.ToDouble(TextBoxText);
-            }
+            if (buttonContent == "M+")
+                memory += Convert.ToDouble(TBString);
 
-            if (content == "M-")
-            {
-                memory -= Convert.ToDouble(TextBoxText);
-            }
+            if (buttonContent == "M-")
+                memory -= Convert.ToDouble(TBString);
 
-            if (content == "MR")
-            {
-                ToLabelText("");
-                TextBoxText = memory.ToString();
-            }
+            if (buttonContent == "MR")
+                TBString = memory.ToString();
 
-            if (content == "MC")
-            {
+            if (buttonContent == "MC")
                 memory = 0;
-            }
 
-            if (content == "C")
-            {
+            if (buttonContent == "C")
                 Clear();
-            };
         }
 
         private void Clear()
         {
-            TextBoxText = "";
-            firstOperand = 0;
-            secondOperand = 0;
-            ToLabelText("");
-            operationSign = "";
-            equalButtonPressed = true;
+            TBString = "";
+            FirstOperand = "";
+            SecondOperand = "";
+            OperationSign = "";
+            EqualSign = "";
+            CanPressEqualButton = true;
         }
-
-        private void ToLabelText(string content)
-        {
-            if (content == "")
-                mainWindow.Label.Content = "";
-            else
-                mainWindow.Label.Content += content;
-        }
-
     }
 }

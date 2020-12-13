@@ -3,22 +3,23 @@ using System.Collections.Generic;
 
 namespace Calculator_Core_3._0
 {
-    internal class Calc
+    class Calc
     {
-        public double Result { get; private set; }
+        private double result;
 
-        public delegate double MathOperation(double x, double y);
+        public delegate double MathOperation(string x, string y);
+
         private readonly Dictionary<string, MathOperation> dict;
 
         public Calc()
         {
             dict = new Dictionary<string, MathOperation>()
             {
-                ["+"] = (x, y) => (x + y),
-                ["-"] = (x, y) => (x - y),
-                ["*"] = (x, y) => (x * y),
-                ["/"] = (x, y) => (x / y),
-                ["Sqr"] = (x, y) => Math.Sqrt(x + y)
+                ["+"] = (x, y) => double.Parse(x) + double.Parse(y),
+                ["-"] = (x, y) => double.Parse(x) - double.Parse(y),
+                ["*"] = (x, y) => double.Parse(x) * double.Parse(y),
+                ["/"] = (x, y) => double.Parse(x) / double.Parse(y),
+                ["Sqr"] = (x, y) => Math.Sqrt(double.Parse(x) + double.Parse(y))
             };
         }
 
@@ -27,10 +28,11 @@ namespace Calculator_Core_3._0
             dict.Add(str, mathOperation);
         }
 
-        public double CalcResult(string key, double x, double y)
+        public double CalcResult(string key, string x, string y)
         {
             var value = dict[key];
-            return Result = value(x, y);
+            result = value(x, y);
+            return result;
         }
     }
 }
