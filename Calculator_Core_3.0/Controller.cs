@@ -123,11 +123,9 @@ namespace Calculator_Core_3._0
                 }
 
                 if (buttonContent == "<<")
-                {
                     TBString = TBString.Length >= 1
                         ? TBString.Remove(TBString.Length - 1)
                         : "";
-                }
 
                 if (buttonContent == "=" && OperationSign != "")
                 {

@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Calculator_Core_3._0"
         mc:Ignorable="d"
-        Title="Калькулятор" Height="470" Width="360" ResizeMode="NoResize" WindowStyle="ToolWindow">
+        Title="Калькулятор" Height="500" Width="360" ResizeMode="NoResize" WindowStyle="ToolWindow">
 
     <Window.DataContext>
         <local:Controller/>
@@ -28,7 +28,7 @@
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height=".5*"></RowDefinition>
-            <RowDefinition Height="2*"></RowDefinition>
+            <RowDefinition Height="1.3*"></RowDefinition>
             <RowDefinition Height=".5*"></RowDefinition>
             <RowDefinition></RowDefinition>
             <RowDefinition></RowDefinition>
@@ -37,15 +37,16 @@
             <RowDefinition></RowDefinition>
         </Grid.RowDefinitions>
 
-        <TextBlock Name="TextBox" Grid.ColumnSpan="4" Grid.Row="1"  
-                    TextWrapping="Wrap" 
+        <Viewbox Grid.ColumnSpan="4" Grid.Row="1" HorizontalAlignment="Right" VerticalAlignment="Center">
+            <TextBlock Name="TextBox"   
+                    TextWrapping="NoWrap" 
                     Text="{Binding TBString}" 
-                    FontSize="45"  
                     Background="#FFDDDDDD" 
                    TextAlignment="Right"/>
+        </Viewbox>
 
         <TextBlock Name="Label" Grid.ColumnSpan="4" Grid.Row="0" 
-                   FontSize="20" 
+                   FontSize="22" 
                    TextAlignment="Right">
             <TextBlock.Text>
                 <MultiBinding StringFormat="{}{0} {1} {2} {3}">
