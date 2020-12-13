@@ -109,7 +109,7 @@ namespace Calculator_Core_3._0
                 if (int.TryParse(buttonContent, out _) && buttonContent != "0")
                     TBString += buttonContent;
 
-                if (buttonContent == "0" && !TBString.StartsWith("0") && TBString == "") //TODO добавление нуля в десятичном числе
+                if (buttonContent == "0" && TBString!="0")
                     TBString += buttonContent;
 
                 if (buttonContent == "," && !TBString.Contains(","))
@@ -134,8 +134,7 @@ namespace Calculator_Core_3._0
                     EqualSign = "=";
 
                     if (result != "") FirstOperand = result;
-                    else
-                        SecondOperand = GetOperand;
+                    else SecondOperand = GetOperand;
 
                     result = calc.CalcResult(OperationSign, FirstOperand, SecondOperand).ToString();
                     TBString = result;
