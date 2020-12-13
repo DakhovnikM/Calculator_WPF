@@ -5,17 +5,21 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Calculator_Core_3._0"
         mc:Ignorable="d"
-        Title="Калькулятор" Height="500" Width="360" ResizeMode="NoResize" WindowStyle="ToolWindow">
+        Title="Калькулятор" 
+        Height="500" Width="360" 
+        ResizeMode="NoResize" 
+        WindowStyle="ToolWindow">
 
     <Window.DataContext>
         <local:Controller/>
     </Window.DataContext>
 
     <Window.Resources>
-        <Style x:Key="ButtonStyle" TargetType="Button">
+        <Style TargetType="Button">
             <Setter Property="ItemsControl.FontSize" Value="25"/>
             <Setter Property="ItemsControl.BorderThickness" Value="0"/>
-            <Setter Property="Background" Value="#FFC5C5C5"/>
+            <Setter Property="Background" Value="LightGray"/>
+            <Setter Property="Margin" Value="1"/>
         </Style>
     </Window.Resources>
 
@@ -38,11 +42,11 @@
         </Grid.RowDefinitions>
 
         <Viewbox Grid.ColumnSpan="4" Grid.Row="1" HorizontalAlignment="Right" VerticalAlignment="Center">
-            <TextBlock Name="TextBox"   
-                    TextWrapping="NoWrap" 
-                    Text="{Binding TBString}" 
-                    Background="#FFDDDDDD" 
-                   TextAlignment="Right"/>
+            <TextBlock Name="TextBox" 
+                       TextWrapping="NoWrap" 
+                       Text="{Binding TBString}" 
+                       Background="#FFDDDDDD" 
+                       TextAlignment="Right"/>
         </Viewbox>
 
         <TextBlock Name="Label" Grid.ColumnSpan="4" Grid.Row="0" 
@@ -70,11 +74,11 @@
         <Button Name="Btn9" Content="9" Grid.Column="2" Grid.Row="4" Background="#FFC5C5C5"/>
 
         <Button Name="BtnRes" Content="C" Grid.Column="0" Grid.Row="3"  FontSize="35" Foreground="#FFEE1010" HorizontalContentAlignment="Center"/>
-        <Button Name="BtnDot" Content="," Grid.Column="2" Grid.Row="7"/>
-        <Button Name="BtnSign" Content="+/-" Grid.Column="0" Grid.Row="7"/>
+        <Button Name="BtnDot" Content="," Grid.Column="2" Grid.Row="7" Background="#FFC5C5C5"/>
+        <Button Name="BtnSign" Content="+/-" Grid.Column="0" Grid.Row="7" Background="#FFC5C5C5"/>
         <Button Name="BtnCor" Content="&lt;&lt;" Grid.Column="2" Grid.Row="3"/>
         <Button Name="BtnDiv" Content="/" Grid.Column="3" Grid.Row="3"/>
-        <Button Name="BtnEql" Content="=" Grid.Column="3" Grid.Row="7" Background="#FFAABFE4"/>
+        <Button Name="BtnEql" Content="=" Grid.Column="3" Grid.Row="7" Background="Wheat"/>
         <Button Name="BtnAdd" Content="+" Grid.Column="3" Grid.Row="6"/>
         <Button Name="BtnSub" Content="-" Grid.Column="3" Grid.Row="4"/>
         <Button Name="BtnMul" Content="*" Grid.Column="3" Grid.Row="5"/>

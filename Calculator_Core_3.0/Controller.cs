@@ -115,7 +115,7 @@ namespace Calculator_Core_3._0
                 if (buttonContent == "," && !TBString.Contains(","))
                     TBString += buttonContent;
 
-                if (buttonContent == "+" || buttonContent == "-" || buttonContent == "*" || buttonContent == "/")
+                if (buttonContent == "+" || buttonContent == "-" || buttonContent == "*" || buttonContent == "/") //TODO реализовать повторное нажатие знака операции
                 {
                     OperationSign = buttonContent;
                     FirstOperand = GetOperand;
