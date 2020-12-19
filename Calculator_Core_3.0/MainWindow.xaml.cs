@@ -10,34 +10,10 @@ namespace Calculator_Core_3._0
     /// </summary>
     public partial class MainWindow : Window
     {
-        public delegate void BtnCont(string str);
-        private BtnCont getButtonContent;
-        public event BtnCont GetButtonContent
-        {
-            add => getButtonContent += value;
-            remove => getButtonContent -= value;
-        }
-        public string BtnContent { get; private set; }
-
-        /// <summary>
-        /// Ctor
-        /// </summary>
         public MainWindow()
         {
             InitializeComponent();
-            var controller = new Controller(this);
-            DataContext = controller;
-
-            foreach (UIElement uielement in LayOut.Children)
-            {
-                if (uielement is Button button) button.Click += Btn_Click;
-            }
-        }
-
-        private void Btn_Click(object sender, RoutedEventArgs e)
-        {
-            BtnContent = ((Button)sender).Content.ToString();
-            getButtonContent?.Invoke(BtnContent);
+            DataContext = new Controller();
         }
     }
 }

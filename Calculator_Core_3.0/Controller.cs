@@ -1,24 +1,24 @@
 ﻿using System;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using System.Windows.Input;
 
 namespace Calculator_Core_3._0
 {
     class Controller : INotifyPropertyChanged
     {
-        #region Prop
-        private readonly MainWindow mainWindow;
         private readonly Calc calc;
         private double memory;
         private bool CanPressEqualButton;
         private bool CanSetSecondOperand;
 
+        #region Свойства
         private string GetOperand
         {
-            get => TBString == "" ? "0" : TBString;
+            get => CalcString == "" ? "0" : CalcString;
         }
 
-        private string result="";
+        private string result = "";
 
         private string firstOperand = "";
         public string FirstOperand
@@ -64,8 +64,8 @@ namespace Calculator_Core_3._0
             }
         }
 
-        private string tbString = "";
-        public string TBString
+        private string tbString = "0";
+        public string CalcString
         {
             get => tbString;
             set
@@ -74,60 +74,69 @@ namespace Calculator_Core_3._0
                 OnPropertyChanged();
             }
         }
+        #endregion
 
         public event PropertyChangedEventHandler PropertyChanged;
         private void OnPropertyChanged([CallerMemberName] string param = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(param));
         }
+
+        #region Команды
+        public ICommand ControllerCommand { get; }
+        private bool CanExecuteControllerCommand(object p) => true;
+        private void OnExecutedControllerCommand(object p)
+        {
+            MainWindow_GetButtonContent((string)p);
+        }
+
         #endregion
 
         #region Ctor
         public Controller()
         {
-
-        }
-        public Controller(MainWindow window) : this()
-        {
-            mainWindow = window;
             calc = new Calc();
             CanPressEqualButton = true;
-            mainWindow.GetButtonContent += MainWindow_GetButtonContent;
+            ControllerCommand = new Command(OnExecutedControllerCommand, CanExecuteControllerCommand);
         }
         #endregion
 
-        private void MainWindow_GetButtonContent(string buttonContent)
+        private void MainWindow_GetButtonContent(string btnContent)
         {
+            if (CalcString == "0" && btnContent == ",") CalcString = "0,";
+
+            if (CalcString == "0") CalcString = "";
+
             if (CanPressEqualButton)
             {
                 if (CanSetSecondOperand)
                 {
-                    TBString = "";
+                    CalcString = "";
                     CanSetSecondOperand = false;
                 }
 
-                if (int.TryParse(buttonContent, out _) && buttonContent != "0")
-                    TBString += buttonContent;
+                if (int.TryParse(btnContent, out _) && btnContent != "0")
+                    CalcString += btnContent;
 
-                if (buttonContent == "0" && TBString!="0")
-                    TBString += buttonContent;
+                if (btnContent == "0" && CalcString != "0")
+                    CalcString += btnContent;
 
-                if (buttonContent == "," && !TBString.Contains(","))
-                    TBString += buttonContent;
+                if (btnContent == "," && !CalcString.Contains(","))
+                    CalcString += btnContent;
 
-                if (buttonContent == "+" || buttonContent == "-" || buttonContent == "*" || buttonContent == "/") //TODO реализовать повторное нажатие знака операции
+                if (btnContent == "+" || btnContent == "-" || btnContent == "*" || btnContent == "/") //TODO реализовать повторное нажатие знака операции
                 {
-                    OperationSign = buttonContent;
+                    OperationSign = btnContent;
                     FirstOperand = GetOperand;
                     CanSetSecondOperand = true;
                 }
 
-                if (buttonContent == "<<")
-                    TBString = TBString.Length >= 1
-                        ? TBString.Remove(TBString.Length - 1)
+                if (btnContent == "<<")
+                    CalcString = CalcString.Length >= 1
+                        ? CalcString.Remove(CalcString.Length - 1)
                         : "";
 
-                if (buttonContent == "=" && OperationSign != "")
+                if (btnContent == "=" && OperationSign != "")
                 {
                     EqualSign = "=";
 
@@ -135,43 +144,43 @@ namespace Calculator_Core_3._0
                     else SecondOperand = GetOperand;
 
                     result = calc.CalcResult(OperationSign, FirstOperand, SecondOperand).ToString();
-                    TBString = result;
+                    CalcString = result;
                 }
             }
 
-            if (buttonContent == "+/-" && TBString != "")
+            if (btnContent == "+/-" && CalcString != "")
             {
-                TBString = TBString.StartsWith("-")
-                    ? TBString.Remove(0, 1)
-                    : "-" + TBString;
+                CalcString = CalcString.StartsWith("-")
+                    ? CalcString.Remove(0, 1)
+                    : CalcString.Insert(0, "-");
             }
 
-            if (buttonContent == "Sqr")
+            if (btnContent == "Sqr")
             {
                 FirstOperand = GetOperand;
                 result = calc.CalcResult("Sqr", FirstOperand, "0").ToString();
-                TBString = result;
+                CalcString = result;
             }
 
-            if (buttonContent == "M+")
-                memory += Convert.ToDouble(TBString);
+            if (btnContent == "M+")
+                memory += Convert.ToDouble(CalcString);
 
-            if (buttonContent == "M-")
-                memory -= Convert.ToDouble(TBString);
+            if (btnContent == "M-")
+                memory -= Convert.ToDouble(CalcString);
 
-            if (buttonContent == "MR")
-                TBString = memory.ToString();
+            if (btnContent == "MR")
+                CalcString = memory.ToString();
 
-            if (buttonContent == "MC")
+            if (btnContent == "MC")
                 memory = 0;
 
-            if (buttonContent == "C")
+            if (btnContent == "C")
                 Clear();
         }
 
         private void Clear()
         {
-            TBString = "";
+            CalcString = "0";
             FirstOperand = "";
             SecondOperand = "";
             OperationSign = "";

@@ -16,14 +16,16 @@
 
     <Window.Resources>
         <Style TargetType="Button">
-            <Setter Property="ItemsControl.FontSize" Value="25"/>
-            <Setter Property="ItemsControl.BorderThickness" Value="0"/>
+            <Setter Property="Command" Value="{Binding ControllerCommand}"/>
+            <Setter Property="CommandParameter" Value="{Binding RelativeSource={RelativeSource Mode=Self}, Path=Content}"/>
+            <Setter Property="FontSize" Value="25"/>
+            <Setter Property="BorderThickness" Value="0"/>
             <Setter Property="Background" Value="LightGray"/>
             <Setter Property="Margin" Value="1"/>
         </Style>
     </Window.Resources>
 
-    <Grid x:Name="LayOut" Background="#FFDDDDDD">
+    <Grid Background="#FFDDDDDD">
         <Grid.ColumnDefinitions>
             <ColumnDefinition></ColumnDefinition>
             <ColumnDefinition></ColumnDefinition>
@@ -44,7 +46,7 @@
         <Viewbox Grid.ColumnSpan="4" Grid.Row="1" HorizontalAlignment="Right" VerticalAlignment="Center">
             <TextBlock Name="TextBox" 
                        TextWrapping="NoWrap" 
-                       Text="{Binding TBString}" 
+                       Text="{Binding CalcString}" 
                        Background="#FFDDDDDD" 
                        TextAlignment="Right"/>
         </Viewbox>
@@ -62,31 +64,31 @@
             </TextBlock.Text>
         </TextBlock>
 
-        <Button Name="Btn0" Content="0" Grid.Column="1" Grid.Row="7" Background="#FFC5C5C5"/>
-        <Button Name="Btn8" Content="8" Grid.Column="1" Grid.Row="4" Background="#FFC5C5C5"/>
-        <Button Name="Btn5" Content="5" Grid.Column="1" Grid.Row="5" Background="#FFC5C5C5"/>
-        <Button Name="Btn2" Content="2" Grid.Column="1" Grid.Row="6" Background="#FFC5C5C5"/>
-        <Button Name="Btn7" Content="7" Grid.Column="0" Grid.Row="4" Background="#FFC5C5C5"/>
-        <Button Name="Btn4" Content="4" Grid.Column="0" Grid.Row="5" Background="#FFC5C5C5"/>
-        <Button Name="Btn1" Content="1" Grid.Column="0" Grid.Row="6" Background="#FFC5C5C5"/>
-        <Button Name="Btn3" Content="3" Grid.Column="2" Grid.Row="6" Background="#FFC5C5C5"/>
-        <Button Name="Btn6" Content="6" Grid.Column="2" Grid.Row="5" Background="#FFC5C5C5"/>
-        <Button Name="Btn9" Content="9" Grid.Column="2" Grid.Row="4" Background="#FFC5C5C5"/>
+        <Button Content="0" Grid.Column="1" Grid.Row="7" Background="#FFC5C5C5"/>
+        <Button Content="8" Grid.Column="1" Grid.Row="4" Background="#FFC5C5C5"/>
+        <Button Content="5" Grid.Column="1" Grid.Row="5" Background="#FFC5C5C5"/>
+        <Button Content="2" Grid.Column="1" Grid.Row="6" Background="#FFC5C5C5"/>
+        <Button Content="7" Grid.Column="0" Grid.Row="4" Background="#FFC5C5C5"/>
+        <Button Content="4" Grid.Column="0" Grid.Row="5" Background="#FFC5C5C5"/>
+        <Button Content="1" Grid.Column="0" Grid.Row="6" Background="#FFC5C5C5"/>
+        <Button Content="3" Grid.Column="2" Grid.Row="6" Background="#FFC5C5C5"/>
+        <Button Content="6" Grid.Column="2" Grid.Row="5" Background="#FFC5C5C5"/>
+        <Button Content="9" Grid.Column="2" Grid.Row="4" Background="#FFC5C5C5"/>
 
-        <Button Name="BtnRes" Content="C" Grid.Column="0" Grid.Row="3"  FontSize="35" Foreground="#FFEE1010" HorizontalContentAlignment="Center"/>
-        <Button Name="BtnDot" Content="," Grid.Column="2" Grid.Row="7" Background="#FFC5C5C5"/>
-        <Button Name="BtnSign" Content="+/-" Grid.Column="0" Grid.Row="7" Background="#FFC5C5C5"/>
-        <Button Name="BtnCor" Content="&lt;&lt;" Grid.Column="2" Grid.Row="3"/>
-        <Button Name="BtnDiv" Content="/" Grid.Column="3" Grid.Row="3"/>
-        <Button Name="BtnEql" Content="=" Grid.Column="3" Grid.Row="7" Background="Wheat"/>
-        <Button Name="BtnAdd" Content="+" Grid.Column="3" Grid.Row="6"/>
-        <Button Name="BtnSub" Content="-" Grid.Column="3" Grid.Row="4"/>
-        <Button Name="BtnMul" Content="*" Grid.Column="3" Grid.Row="5"/>
-        <Button Name="BtnSqr" Content="Sqr" Grid.Column="1" Grid.Row="3"/>
+        <Button Content="C" Grid.Column="0" Grid.Row="3"  FontSize="35" Foreground="#FFEE1010"/>
+        <Button Content=","   Grid.Column="2" Grid.Row="7" Background="#FFC5C5C5"/>
+        <Button Content="+/-" Grid.Column="0" Grid.Row="7" Background="#FFC5C5C5"/>
+        <Button Content="&lt;&lt;" Grid.Column="2" Grid.Row="3"/>
+        <Button Content="/" Grid.Column="3" Grid.Row="3"/>
+        <Button Content="=" Grid.Column="3" Grid.Row="7" Background="Wheat"/>
+        <Button Content="+" Grid.Column="3" Grid.Row="6"/>
+        <Button Content="-" Grid.Column="3" Grid.Row="4"/>
+        <Button Content="*" Grid.Column="3" Grid.Row="5"/>
+        <Button Content="Sqr" Grid.Column="1" Grid.Row="3"/>
 
-        <Button Name="BtnMemAdd" Content="M+" Grid.Column="0" Grid.Row="2" FontSize="15"/>
-        <Button Name="BtnMemSub" Content="M-" Grid.Column="1" Grid.Row="2" FontSize="15"/>
-        <Button Name="BtnMemRead" Content="MR" Grid.Column="2" Grid.Row="2" FontSize="15"/>
-        <Button Name="BtnMemClear" Content="MC" Grid.Column="3" Grid.Row="2" FontSize="15"/>
+        <Button  Content="M+" Grid.Column="0" Grid.Row="2" FontSize="15"/>
+        <Button Content="M-" Grid.Column="1" Grid.Row="2" FontSize="15"/>
+        <Button Content="MR" Grid.Column="2" Grid.Row="2" FontSize="15"/>
+        <Button Content="MC" Grid.Column="3" Grid.Row="2" FontSize="15"/>
     </Grid>
 </Window>
