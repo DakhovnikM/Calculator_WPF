@@ -3,14 +3,14 @@ using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows.Input;
 
-namespace Calculator_Core_3._0
+namespace CalculatorMVVM
 {
     class Controller : INotifyPropertyChanged
     {
         private readonly Calc calc;
-        private double memory;
-        private bool CanPressEqualButton;
-        private bool CanSetSecondOperand;
+        private double _memory;
+        private bool _canPressEqualButton;
+        private bool _canSetSecondOperand;
 
         #region Свойства
         private string GetOperand
@@ -96,7 +96,7 @@ namespace Calculator_Core_3._0
         public Controller()
         {
             calc = new Calc();
-            CanPressEqualButton = true;
+            _canPressEqualButton = true;
             ControllerCommand = new Command(OnExecutedControllerCommand, CanExecuteControllerCommand);
         }
         #endregion
@@ -107,12 +107,12 @@ namespace Calculator_Core_3._0
 
             if (CalcString == "0") CalcString = "";
 
-            if (CanPressEqualButton)
+            if (_canPressEqualButton)
             {
-                if (CanSetSecondOperand)
+                if (_canSetSecondOperand)
                 {
                     CalcString = "";
-                    CanSetSecondOperand = false;
+                    _canSetSecondOperand = false;
                 }
 
                 if (int.TryParse(btnContent, out _) && btnContent != "0")
@@ -128,7 +128,7 @@ namespace Calculator_Core_3._0
                 {
                     OperationSign = btnContent;
                     FirstOperand = GetOperand;
-                    CanSetSecondOperand = true;
+                    _canSetSecondOperand = true;
                 }
 
                 if (btnContent == "<<")
@@ -163,16 +163,16 @@ namespace Calculator_Core_3._0
             }
 
             if (btnContent == "M+")
-                memory += Convert.ToDouble(CalcString);
+                _memory += Convert.ToDouble(CalcString);
 
             if (btnContent == "M-")
-                memory -= Convert.ToDouble(CalcString);
+                _memory -= Convert.ToDouble(CalcString);
 
             if (btnContent == "MR")
-                CalcString = memory.ToString();
+                CalcString = _memory.ToString();
 
             if (btnContent == "MC")
-                memory = 0;
+                _memory = 0;
 
             if (btnContent == "C")
                 Clear();
@@ -185,7 +185,7 @@ namespace Calculator_Core_3._0
             SecondOperand = "";
             OperationSign = "";
             EqualSign = "";
-            CanPressEqualButton = true;
+            _canPressEqualButton = true;
         }
     }
 }

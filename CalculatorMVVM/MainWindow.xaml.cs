@@ -3,7 +3,7 @@ using System.Security.Cryptography.X509Certificates;
 using System.Windows;
 using System.Windows.Controls;
 
-namespace Calculator_Core_3._0
+namespace CalculatorMVVM
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml

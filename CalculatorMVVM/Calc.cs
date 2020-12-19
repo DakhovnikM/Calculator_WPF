@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Calculator_Core_3._0
+namespace CalculatorMVVM
 {
     class Calc
     {

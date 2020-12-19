@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Windows.Input;
 
-namespace Calculator_Core_3._0
+namespace CalculatorMVVM
 {
     class Command : ICommand
     {
@@ -14,7 +14,8 @@ namespace Calculator_Core_3._0
         }
 
         private Action<object> _execute;
-        public Func<object, bool> _canExecute;
+
+        private Func<object, bool> _canExecute;
 
         public Command(Action<object> execute, Func<object, bool> canExecute = null)
         {
