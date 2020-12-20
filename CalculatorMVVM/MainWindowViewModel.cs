@@ -97,87 +97,12 @@ namespace CalculatorMVVM
         }
         #endregion
 
-        //private void ButtonContentProcessing(string btnContent)
-        //{
-        //    if (CalcContent == "0" && btnContent == ",") CalcContent = "0,";
-
-        //    if (CalcContent == "0") CalcContent = "";
-
-        //    if (_canPressEqualButton)
-        //    {
-        //        if (_canSetSecondOperand)
-        //        {
-        //            CalcContent = "";
-        //            _canSetSecondOperand = false;
-        //        }
-
-        //        if (int.TryParse(btnContent, out _) && btnContent != "0")
-        //            CalcContent += btnContent;
-
-        //        if (btnContent == "0" && CalcContent != "0")
-        //            CalcContent += btnContent;
-
-        //        if (btnContent == "," && !CalcContent.Contains(","))
-        //            CalcContent += btnContent;
-
-        //        if (btnContent == "+" || btnContent == "-" || btnContent == "*" || btnContent == "/") //TODO реализовать повторное нажатие знака операции
-        //        {
-        //            OperationSign = btnContent;
-        //            FirstOperand = GetOperand;
-        //            _canSetSecondOperand = true;
-        //        }
-
-        //        if (btnContent == "=" && OperationSign != "")
-        //        {
-        //            EqualSign = "=";
-
-        //            if (_result != "") FirstOperand = _result;
-        //            else SecondOperand = GetOperand;
-
-        //            _result = _calc.CalcResult(OperationSign, FirstOperand, SecondOperand).ToString();
-        //            CalcContent = _result;
-        //        }
-
-        //        if (btnContent == "<<")
-        //            CalcContent = CalcContent.Length >= 1
-        //                ? CalcContent.Remove(CalcContent.Length - 1)
-        //                : "";
-        //    }
-
-        //    if (btnContent == "+/-" && CalcContent != "")
-        //    {
-        //        CalcContent = CalcContent.StartsWith("-")
-        //            ? CalcContent.Remove(0, 1)
-        //            : CalcContent.Insert(0, "-");
-        //    }
-
-        //    if (btnContent == "Sqr")
-        //    {
-        //        FirstOperand = GetOperand;
-        //        _result = _calc.CalcResult("Sqr", FirstOperand, "0").ToString();
-        //        CalcContent = _result;
-        //    }
-
-        //    if (btnContent == "M+")
-        //        _memory += Convert.ToDouble(CalcContent);
-
-        //    if (btnContent == "M-")
-        //        _memory -= Convert.ToDouble(CalcContent);
-
-        //    if (btnContent == "MR")
-        //        CalcContent = _memory.ToString();
-
-        //    if (btnContent == "MC")
-        //        _memory = 0;
-
-        //    if (btnContent == "C")
-        //        Clear();
-        //}
-
         private void VariableInit(string btnContent)
         {
             if (int.TryParse(btnContent, out _))
             {
+                if (EqualSign == "=") Clear();
+                
                 if (_canSetSecondOperand)
                 {
                     CalcContent = "";
