@@ -7,11 +7,11 @@ namespace CalculatorMVVM
     {
         public delegate double MathOperation(string x, string y);
 
-        private readonly Dictionary<string, MathOperation> dict;
+        private readonly Dictionary<string, MathOperation> _dict;
 
         public Calc()
         {
-            dict = new Dictionary<string, MathOperation>()
+            _dict = new Dictionary<string, MathOperation>()
             {
                 ["+"] = (x, y) => double.Parse(x) + double.Parse(y),
                 ["-"] = (x, y) => double.Parse(x) - double.Parse(y),
@@ -23,12 +23,12 @@ namespace CalculatorMVVM
 
         public void DefineOperation(string str, MathOperation mathOperation)
         {
-            dict.Add(str, mathOperation);
+            _dict.Add(str, mathOperation);
         }
 
         public double CalcResult(string key, string x, string y)
         {
-            var value = dict[key];
+            var value = _dict[key];
             return value(x, y);
         }
     }

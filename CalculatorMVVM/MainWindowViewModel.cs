@@ -5,12 +5,11 @@ using System.Windows.Input;
 
 namespace CalculatorMVVM
 {
-    class Controller : INotifyPropertyChanged
+    internal class MainWindowViewModel : INotifyPropertyChanged
     {
         #region Поля
         private readonly Calc _calc;
         private double _memory;
-        private bool _canPressEqualButton;
         private bool _canSetSecondOperand;
         private string _result = "";
         #endregion
@@ -18,57 +17,57 @@ namespace CalculatorMVVM
         #region Свойства
         private string GetOperand => CalcContent == "" ? "0" : CalcContent;
 
-        private string firstOperand = "";
+        private string _firstOperand = "";
         public string FirstOperand
         {
-            get => firstOperand;
+            get => _firstOperand;
             set
             {
-                firstOperand = value;
+                _firstOperand = value;
                 OnPropertyChanged();
             }
         }
 
-        private string secondOperand = "";
+        private string _secondOperand = "";
         public string SecondOperand
         {
-            get => secondOperand;
+            get => _secondOperand;
             set
             {
-                secondOperand = value;
+                _secondOperand = value;
                 OnPropertyChanged();
             }
         }
 
-        private string equalSign = "";
+        private string _equalSign = "";
         public string EqualSign
         {
-            get => equalSign;
+            get => _equalSign;
             set
             {
-                equalSign = value;
+                _equalSign = value;
                 OnPropertyChanged();
             }
         }
 
-        private string operationSign = "";
+        private string _operationSign = "";
         public string OperationSign
         {
-            get => operationSign;
+            get => _operationSign;
             set
             {
-                operationSign = value;
+                _operationSign = value;
                 OnPropertyChanged();
             }
         }
 
-        private string calcString = "0";
+        private string _calcString = "0";
         public string CalcContent
         {
-            get => calcString;
+            get => _calcString;
             set
             {
-                calcString = value;
+                _calcString = value;
                 OnPropertyChanged();
             }
         }
@@ -90,10 +89,9 @@ namespace CalculatorMVVM
         #endregion
 
         #region Конструктор
-        public Controller()
+        public MainWindowViewModel()
         {
             _calc = new Calc();
-            _canPressEqualButton = true;
             ControllerCommand = new Command(OnExecutedControllerCommand, CanExecuteControllerCommand);
         }
         #endregion
@@ -194,9 +192,12 @@ namespace CalculatorMVVM
             {
                 if (btnContent == "+" || btnContent == "-" || btnContent == "*" || btnContent == "/") //TODO реализовать повторное нажатие знака операции
                 {
-                    OperationSign = btnContent;
-                    FirstOperand = GetOperand;
-                    _canSetSecondOperand = true;
+                    if (OperationSign == "")
+                    {
+                        OperationSign = btnContent;
+                        FirstOperand = GetOperand;
+                        _canSetSecondOperand = true;
+                    }
                 }
 
                 if (btnContent == "=")
@@ -266,7 +267,6 @@ namespace CalculatorMVVM
             OperationSign = "";
             EqualSign = "";
             _result = "";
-            _canPressEqualButton = true;
         }
     }
 }

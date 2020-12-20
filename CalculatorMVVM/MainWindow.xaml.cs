@@ -13,7 +13,7 @@ namespace CalculatorMVVM
         public MainWindow()
         {
             InitializeComponent();
-            DataContext = new Controller();
+            DataContext = new MainWindowViewModel();
         }
     }
 }

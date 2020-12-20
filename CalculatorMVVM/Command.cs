@@ -5,17 +5,17 @@ using System.Windows.Input;
 
 namespace CalculatorMVVM
 {
-    class Command : ICommand
+    internal class Command : ICommand
     {
         public event EventHandler CanExecuteChanged
         {
-            add { CommandManager.RequerySuggested += value; }
-            remove { CommandManager.RequerySuggested -= value; }
+            add => CommandManager.RequerySuggested += value;
+            remove => CommandManager.RequerySuggested -= value;
         }
 
-        private Action<object> _execute;
+        private readonly Action<object> _execute;
 
-        private Func<object, bool> _canExecute;
+        private readonly Func<object, bool> _canExecute;
 
         public Command(Action<object> execute, Func<object, bool> canExecute = null)
         {
