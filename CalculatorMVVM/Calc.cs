@@ -5,8 +5,6 @@ namespace CalculatorMVVM
 {
     class Calc
     {
-        private double result;
-
         public delegate double MathOperation(string x, string y);
 
         private readonly Dictionary<string, MathOperation> dict;
@@ -31,8 +29,7 @@ namespace CalculatorMVVM
         public double CalcResult(string key, string x, string y)
         {
             var value = dict[key];
-            result = value(x, y);
-            return result;
+            return value(x, y);
         }
     }
 }

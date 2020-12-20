@@ -22,6 +22,7 @@ namespace CalculatorMVVM
             _canExecute = canExecute;
             _execute = execute;
         }
+
         public bool CanExecute(object parameter)
         {
             return _canExecute?.Invoke(parameter) ?? true;

@@ -6,9 +6,9 @@
         xmlns:local="clr-namespace:CalculatorMVVM"
         mc:Ignorable="d"
         Title="Калькулятор" 
-        Height="500" Width="360" 
+        Height="520" Width="360" 
         ResizeMode="NoResize" 
-        WindowStyle="ToolWindow">
+        WindowStyle="SingleBorderWindow">
 
     <Window.DataContext>
         <local:Controller/>
@@ -20,12 +20,12 @@
             <Setter Property="CommandParameter" Value="{Binding RelativeSource={RelativeSource Mode=Self}, Path=Content}"/>
             <Setter Property="FontSize" Value="25"/>
             <Setter Property="BorderThickness" Value="0"/>
-            <Setter Property="Background" Value="LightGray"/>
+            <Setter Property="Background" Value="#ffdede"/>
             <Setter Property="Margin" Value="1"/>
         </Style>
     </Window.Resources>
 
-    <Grid Background="#FFDDDDDD">
+    <Grid Background="#fff7f7">
         <Grid.ColumnDefinitions>
             <ColumnDefinition></ColumnDefinition>
             <ColumnDefinition></ColumnDefinition>
@@ -44,14 +44,12 @@
         </Grid.RowDefinitions>
 
         <Viewbox Grid.ColumnSpan="4" Grid.Row="1" HorizontalAlignment="Right" VerticalAlignment="Center">
-            <TextBlock Name="TextBox" 
-                       TextWrapping="NoWrap" 
-                       Text="{Binding CalcString}" 
-                       Background="#FFDDDDDD" 
+            <TextBlock TextWrapping="NoWrap" 
+                       Text="{Binding CalcContent}"
                        TextAlignment="Right"/>
         </Viewbox>
 
-        <TextBlock Name="Label" Grid.ColumnSpan="4" Grid.Row="0" 
+        <TextBlock Grid.ColumnSpan="4" Grid.Row="0" 
                    FontSize="22" 
                    TextAlignment="Right">
             <TextBlock.Text>
@@ -64,23 +62,23 @@
             </TextBlock.Text>
         </TextBlock>
 
-        <Button Content="0" Grid.Column="1" Grid.Row="7" Background="#FFC5C5C5"/>
-        <Button Content="8" Grid.Column="1" Grid.Row="4" Background="#FFC5C5C5"/>
-        <Button Content="5" Grid.Column="1" Grid.Row="5" Background="#FFC5C5C5"/>
-        <Button Content="2" Grid.Column="1" Grid.Row="6" Background="#FFC5C5C5"/>
-        <Button Content="7" Grid.Column="0" Grid.Row="4" Background="#FFC5C5C5"/>
-        <Button Content="4" Grid.Column="0" Grid.Row="5" Background="#FFC5C5C5"/>
-        <Button Content="1" Grid.Column="0" Grid.Row="6" Background="#FFC5C5C5"/>
-        <Button Content="3" Grid.Column="2" Grid.Row="6" Background="#FFC5C5C5"/>
-        <Button Content="6" Grid.Column="2" Grid.Row="5" Background="#FFC5C5C5"/>
-        <Button Content="9" Grid.Column="2" Grid.Row="4" Background="#FFC5C5C5"/>
+        <Button Content="0" Grid.Column="1" Grid.Row="7" Background="#ffc6c6"/>
+        <Button Content="8" Grid.Column="1" Grid.Row="4" Background="#ffc6c6"/>
+        <Button Content="5" Grid.Column="1" Grid.Row="5" Background="#ffc6c6"/>
+        <Button Content="2" Grid.Column="1" Grid.Row="6" Background="#ffc6c6"/>
+        <Button Content="7" Grid.Column="0" Grid.Row="4" Background="#ffc6c6"/>
+        <Button Content="4" Grid.Column="0" Grid.Row="5" Background="#ffc6c6"/>
+        <Button Content="1" Grid.Column="0" Grid.Row="6" Background="#ffc6c6"/>
+        <Button Content="3" Grid.Column="2" Grid.Row="6" Background="#ffc6c6"/>
+        <Button Content="6" Grid.Column="2" Grid.Row="5" Background="#ffc6c6"/>
+        <Button Content="9" Grid.Column="2" Grid.Row="4" Background="#ffc6c6"/>
 
         <Button Content="C" Grid.Column="0" Grid.Row="3"  FontSize="35" Foreground="#FFEE1010"/>
-        <Button Content="," Grid.Column="2" Grid.Row="7" Background="#FFC5C5C5"/>
-        <Button Content="+/-" Grid.Column="0" Grid.Row="7" Background="#FFC5C5C5"/>
+        <Button Content="," Grid.Column="2" Grid.Row="7" Background="#ffc6c6"/>
+        <Button Content="+/-" Grid.Column="0" Grid.Row="7" Background="#ffc6c6"/>
         <Button Content="&lt;&lt;" Grid.Column="2" Grid.Row="3"/>
         <Button Content="/" Grid.Column="3" Grid.Row="3"/>
-        <Button Content="=" Grid.Column="3" Grid.Row="7" Background="Wheat"/>
+        <Button Content="=" Grid.Column="3" Grid.Row="7" Background="#ff9292"/>
         <Button Content="+" Grid.Column="3" Grid.Row="6"/>
         <Button Content="-" Grid.Column="3" Grid.Row="4"/>
         <Button Content="*" Grid.Column="3" Grid.Row="5"/>
