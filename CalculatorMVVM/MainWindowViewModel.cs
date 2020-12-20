@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel;
+using System.Globalization;
 using System.Runtime.CompilerServices;
 using System.Windows.Input;
 
@@ -190,14 +191,15 @@ namespace CalculatorMVVM
             }
             else
             {
-                if (btnContent == "+" || btnContent == "-" || btnContent == "*" || btnContent == "/") //TODO реализовать повторное нажатие знака операции
+                if (btnContent == "+" || btnContent == "-" || btnContent == "*" || btnContent == "/")
                 {
-                    if (OperationSign == "")
+                    if (OperationSign == "" || SecondOperand!="")
                     {
                         OperationSign = btnContent;
                         FirstOperand = GetOperand;
                         _canSetSecondOperand = true;
                     }
+                    else if(SecondOperand=="") OperationSign = btnContent;
                 }
 
                 if (btnContent == "=")
@@ -209,7 +211,7 @@ namespace CalculatorMVVM
                         if (_result != "") FirstOperand = _result;
                         else SecondOperand = GetOperand;
 
-                        _result = _calc.CalcResult(OperationSign, FirstOperand, SecondOperand).ToString();
+                        _result = _calc.CalcResult(OperationSign, FirstOperand, SecondOperand).ToString(CultureInfo.CurrentCulture);
                         CalcContent = _result;
                     }
                 }
@@ -238,7 +240,7 @@ namespace CalculatorMVVM
                 if (btnContent == "Sqr")
                 {
                     FirstOperand = GetOperand;
-                    _result = _calc.CalcResult("Sqr", FirstOperand, "0").ToString();
+                    _result = _calc.CalcResult("Sqr", FirstOperand, "0").ToString(CultureInfo.CurrentCulture);
                     CalcContent = _result;
                 }
 
@@ -249,7 +251,7 @@ namespace CalculatorMVVM
                     _memory -= Convert.ToDouble(CalcContent);
 
                 if (btnContent == "MR")
-                    CalcContent = _memory.ToString();
+                    CalcContent = _memory.ToString(CultureInfo.CurrentCulture);
 
                 if (btnContent == "MC")
                     _memory = 0;
