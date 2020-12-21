@@ -4,11 +4,12 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CalculatorMVVM"
+        xmlns:fa5="http://schemas.fontawesome.com/icons/"
         mc:Ignorable="d"
         Title="Калькулятор" 
         Height="520" Width="360" 
-        ResizeMode="NoResize" 
-        WindowStyle="SingleBorderWindow" HorizontalContentAlignment="Left">
+        ResizeMode="NoResize"
+        WindowStyle="None" HorizontalContentAlignment="Left">
 
     <Window.DataContext>
         <local:MainWindowViewModel/>
@@ -20,12 +21,13 @@
             <Setter Property="CommandParameter" Value="{Binding RelativeSource={RelativeSource Mode=Self}, Path=Content}"/>
             <Setter Property="FontSize" Value="25"/>
             <Setter Property="BorderThickness" Value="0"/>
-            <Setter Property="Background" Value="LightGray"/>
+            <Setter Property="Background" Value="#F2F2F2"/>
             <Setter Property="Margin" Value="1"/>
         </Style>
+        
     </Window.Resources>
 
-    <Grid Background="#fff7f7">
+    <Grid Background="#BDBDBD">
         <Grid.ColumnDefinitions>
             <ColumnDefinition></ColumnDefinition>
             <ColumnDefinition></ColumnDefinition>
@@ -34,7 +36,8 @@
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"></RowDefinition>
-            <RowDefinition Height="1.7*"></RowDefinition>
+            <RowDefinition  Height="Auto"></RowDefinition>
+            <RowDefinition Height="1.5*"></RowDefinition>
             <RowDefinition Height="Auto"></RowDefinition>
             <RowDefinition></RowDefinition>
             <RowDefinition></RowDefinition>
@@ -43,16 +46,44 @@
             <RowDefinition></RowDefinition>
         </Grid.RowDefinitions>
 
-        <Viewbox Grid.ColumnSpan="4" Grid.Row="1" HorizontalAlignment="Right">
-            <TextBlock TextWrapping="NoWrap" 
-                       Text="{Binding CalcContent}"
-                       TextAlignment="Right"/>
-        </Viewbox>
+        <DockPanel  Grid.Column="0" Grid.ColumnSpan="4">
+            <Label Content="Калькулятор" DockPanel.Dock="Left"/>
+            <StackPanel HorizontalAlignment="Right" Orientation="Horizontal" DockPanel.Dock="Right">
+                <Button  Width="45" Height="30"  ToolTip="Свернуть" Background="Transparent" Command="{Binding MinimizeApplication}">
+                    <Button.Template>
+                        <ControlTemplate TargetType="Button">
+                            <Border  x:Name="BtnMin" Background="Transparent">
+                                <fa5:ImageAwesome x:Name="Pt" Icon="Regular_WindowMinimize" Width="20"/>
+                            </Border>
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter TargetName="BtnMin" Property="Background" Value="Gray"/>
+                                    <Setter TargetName="Pt" Property="Foreground" Value="White"/>
+                                </Trigger>
+                            </ControlTemplate.Triggers>
 
-        <TextBlock Grid.ColumnSpan="4" Grid.Row="0" 
-                   FontSize="18"
-                   Foreground="Gray"
-                   TextAlignment="Right">
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
+                <Button  Width="45" Height="30" ToolTip="Закрыть" Background="Transparent" Command="{Binding CloseApplication}">
+                    <Button.Template>
+                        <ControlTemplate TargetType="Button">
+                            <Border x:Name="Bd" Background="Transparent">
+                                <fa5:ImageAwesome x:Name="Pt" Icon="Regular_WindowClose" Height="20"/>
+                            </Border>
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter TargetName="Bd" Property="Background" Value="Red"/>
+                                    <Setter TargetName="Pt" Property="Foreground" Value="White"/>
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
+            </StackPanel>
+        </DockPanel>
+
+        <TextBlock Grid.ColumnSpan="4" Grid.Row="1" FontSize="18" Foreground="Gray" TextAlignment="Right">
             <TextBlock.Text>
                 <MultiBinding StringFormat="{}{0} {1} {2} {3}">
                     <Binding Path="FirstOperand"/>
@@ -63,28 +94,32 @@
             </TextBlock.Text>
         </TextBlock>
 
-        <Button Content="0" Grid.Column="1" Grid.Row="7" Background="#ffc6c6"/>
-        <Button Content="8" Grid.Column="1" Grid.Row="4" Background="#ffc6c6"/>
-        <Button Content="5" Grid.Column="1" Grid.Row="5" Background="#ffc6c6"/>
-        <Button Content="2" Grid.Column="1" Grid.Row="6" Background="#ffc6c6"/>
-        <Button Content="7" Grid.Column="0" Grid.Row="4" Background="#ffc6c6"/>
-        <Button Content="4" Grid.Column="0" Grid.Row="5" Background="#ffc6c6"/>
-        <Button Content="1" Grid.Column="0" Grid.Row="6" Background="#ffc6c6"/>
-        <Button Content="3" Grid.Column="2" Grid.Row="6" Background="#ffc6c6"/>
-        <Button Content="6" Grid.Column="2" Grid.Row="5" Background="#ffc6c6"/>
-        <Button Content="9" Grid.Column="2" Grid.Row="4" Background="#ffc6c6"/>
+        <Viewbox Grid.ColumnSpan="4" Grid.Row="2" HorizontalAlignment="Right">
+            <TextBlock TextWrapping="NoWrap" Text="{Binding CalcContent}" TextAlignment="Right"/>
+        </Viewbox>
 
-        <Button Content="C" Grid.Column="0" Grid.Row="3" FontSize="35" Foreground="#FFEE1010"/>
-        <Button Content="," Grid.Column="2" Grid.Row="7"/>
-        <Button Content="+/-" Grid.Column="0" Grid.Row="7"/>
-        <Button Content="&lt;&lt;" Grid.Column="2" Grid.Row="3"/>
-        <Button Content="/" Grid.Column="3" Grid.Row="3" FontSize="25"/>
-        <Button Content="=" Grid.Column="3" Grid.Row="7" FontSize="30" Background="#e0ffe0"/>
-        <Button Content="+" Grid.Column="3" Grid.Row="6" FontSize="30"/>
-        <Button Content="-" Grid.Column="3" Grid.Row="5" FontSize="35"/>
-        <Button Content="*" Grid.Column="3" Grid.Row="4" FontSize="30"/>
-        <Button Content="Sqr" Grid.Column="1" Grid.Row="3"/>
-        <Grid Grid.Row="2" Grid.ColumnSpan="4" Height="30">
+        <Button Content="0" Grid.Column="1" Grid.Row="8"/>
+        <Button Content="8" Grid.Column="1" Grid.Row="5"/>
+        <Button Content="5" Grid.Column="1" Grid.Row="6"/>
+        <Button Content="2" Grid.Column="1" Grid.Row="7"/>
+        <Button Content="7" Grid.Column="0" Grid.Row="5"/>
+        <Button Content="4" Grid.Column="0" Grid.Row="6"/>
+        <Button Content="1" Grid.Column="0" Grid.Row="7"/>
+        <Button Content="3" Grid.Column="2" Grid.Row="7"/>
+        <Button Content="6" Grid.Column="2" Grid.Row="6"/>
+        <Button Content="9" Grid.Column="2" Grid.Row="5"/>
+
+        <Button Content="C" Grid.Column="0" Grid.Row="4" FontSize="35" Foreground="#FFEE1010" Background="#D8D8D8"/>
+        <Button Content="," Grid.Column="2" Grid.Row="8" Background="#D8D8D8"/>
+        <Button Content="+/-" Grid.Column="0" Grid.Row="8" Background="#D8D8D8"/>
+        <Button Content="&lt;&lt;" Grid.Column="2" Grid.Row="4" Background="#D8D8D8"/>
+        <Button Content="/" Grid.Column="3" Grid.Row="4" FontSize="25" Background="#D8D8D8"/>
+        <Button Content="=" Grid.Column="3" Grid.Row="8" FontSize="30" Background="#F5D0A9"/>
+        <Button Content="+" Grid.Column="3" Grid.Row="7" FontSize="35" Background="#D8D8D8"/>
+        <Button Content="-" Grid.Column="3" Grid.Row="6" FontSize="35" Background="#D8D8D8"/>
+        <Button Content="*" Grid.Column="3" Grid.Row="5" FontSize="30" Background="#D8D8D8"/>
+        <Button Content="Sqr" Grid.Column="1" Grid.Row="4" Background="#D8D8D8"/>
+        <Grid Grid.Row="3" Grid.ColumnSpan="4" Height="30">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
                 <ColumnDefinition/>
@@ -92,11 +127,11 @@
                 <ColumnDefinition/>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
-            <Button Content="M+" Grid.Column="0" FontSize="15" ToolTip="Добавить в память" Background="#fff7f7"/>
-            <Button Content="M-" Grid.Column="1" FontSize="15" ToolTip="Вычесть из памяти" Background="#fff7f7"/>
-            <Button Content="MR" Grid.Column="2" FontSize="15" ToolTip="Извлечь из памяти" Background="#fff7f7"/>
-            <Button Content="MC" Grid.Column="3" FontSize="15" ToolTip="Сбросить память" Background="#fff7f7"/>
-            <Button Content="MS" Grid.Column="4" FontSize="15" ToolTip="Сохранить в память" Background="#fff7f7"/>
+            <Button Content="MC" Grid.Column="0" FontSize="15" ToolTip="Сбросить память" Background="Transparent"/>
+            <Button Content="MR" Grid.Column="1" FontSize="15" ToolTip="Извлечь из памяти" Background="Transparent"/>
+            <Button Content="M+" Grid.Column="2" FontSize="15" ToolTip="Добавить в память" Background="Transparent"/>
+            <Button Content="M-" Grid.Column="3" FontSize="15" ToolTip="Вычесть из памяти" Background="Transparent"/>
+            <Button Content="MS" Grid.Column="4" FontSize="15" ToolTip="Сохранить в память" Background="Transparent"/>
         </Grid>
     </Grid>
 </Window>

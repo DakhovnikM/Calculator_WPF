@@ -2,6 +2,7 @@
 using System.ComponentModel;
 using System.Globalization;
 using System.Runtime.CompilerServices;
+using System.Windows;
 using System.Windows.Input;
 
 namespace CalculatorMVVM
@@ -82,6 +83,8 @@ namespace CalculatorMVVM
         }
 
         #region Команды
+
+        #region Инициализация переменных
         public ICommand ControllerCommand { get; }
         private bool CanExecuteControllerCommand(object p) => true;
         private void OnExecutedControllerCommand(object p)
@@ -90,11 +93,33 @@ namespace CalculatorMVVM
         }
         #endregion
 
+        #region Закрыть приложение
+        public ICommand CloseApplication { get; }
+        private bool CanExecuteCloseApplication(object p) => true;
+        private void OnExecutedCloseApplication(object p)
+        {
+            Application.Current.Shutdown();
+        }
+        #endregion
+
+        #region Сворачивание окна
+        public ICommand MinimizeApplication { get; }
+        private bool CanExecuteMinimizeApplication(object p) => true;
+        private void OnExecutedMinimizeApplication(object p)
+        {
+            Application.Current.MainWindow.WindowState = WindowState.Minimized;
+        }
+        #endregion
+
+        #endregion
+
         #region Конструктор
         public MainWindowViewModel()
         {
             _calc = new Calc();
             ControllerCommand = new Command(OnExecutedControllerCommand, CanExecuteControllerCommand);
+            CloseApplication = new Command(OnExecutedCloseApplication, CanExecuteCloseApplication);
+            MinimizeApplication = new Command(OnExecutedMinimizeApplication, CanExecuteMinimizeApplication);
         }
         #endregion
 
