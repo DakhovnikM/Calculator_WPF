@@ -13,6 +13,7 @@ namespace CalculatorMVVM
         private double _memory;
         private bool _canSetSecondOperand;
         private string _result = "";
+        private bool _mButtonUsed;
         #endregion
 
         #region Свойства
@@ -101,8 +102,18 @@ namespace CalculatorMVVM
         {
             if (int.TryParse(btnContent, out _))
             {
-                if (EqualSign == "=") Clear();
-                
+                if (EqualSign == "=")
+                {
+                    Clear();
+                    _mButtonUsed = false;
+                }
+
+                if (_mButtonUsed == true)
+                {
+                    CalcContent = "";
+                    _mButtonUsed = false;
+                }
+
                 if (_canSetSecondOperand)
                 {
                     CalcContent = "";
@@ -118,13 +129,13 @@ namespace CalculatorMVVM
             {
                 if (btnContent == "+" || btnContent == "-" || btnContent == "*" || btnContent == "/")
                 {
-                    if (OperationSign == "" || SecondOperand!="")
+                    if (OperationSign == "" || SecondOperand != "")
                     {
                         OperationSign = btnContent;
                         FirstOperand = GetOperand;
                         _canSetSecondOperand = true;
                     }
-                    else if(SecondOperand=="") OperationSign = btnContent;
+                    else if (SecondOperand == "") OperationSign = btnContent;
                 }
 
                 if (btnContent == "=")
@@ -157,9 +168,11 @@ namespace CalculatorMVVM
                 if (btnContent == "+/-")
                 {
                     if (CalcContent != "")
+                    {
                         CalcContent = CalcContent.StartsWith("-")
                             ? CalcContent.Remove(0, 1)
                             : CalcContent.Insert(0, "-");
+                    }
                 }
 
                 if (btnContent == "Sqr")
@@ -169,20 +182,31 @@ namespace CalculatorMVVM
                     CalcContent = _result;
                 }
 
-                if (btnContent == "M+")
-                    _memory += Convert.ToDouble(CalcContent);
+                if (btnContent.StartsWith("M"))
+                {
+                    if (btnContent == "M+")
+                        _memory += Convert.ToDouble(CalcContent);
 
-                if (btnContent == "M-")
-                    _memory -= Convert.ToDouble(CalcContent);
+                    if (btnContent == "M-")
+                        _memory -= Convert.ToDouble(CalcContent);
 
-                if (btnContent == "MR")
-                    CalcContent = _memory.ToString(CultureInfo.CurrentCulture);
+                    if (btnContent == "MR")
+                        CalcContent = _memory.ToString(CultureInfo.CurrentCulture);
 
-                if (btnContent == "MC")
-                    _memory = 0;
+                    if (btnContent == "MC")
+                        _memory = 0;
 
-                if (btnContent == "C")
-                    Clear();
+                    if (btnContent == "MS")
+                        _memory = Convert.ToDouble(CalcContent);
+
+                    FirstOperand = "";
+                    SecondOperand = "";
+                    OperationSign = "";
+                    EqualSign = "";
+                    _mButtonUsed = true;
+                }
+
+                if (btnContent == "C") Clear();
             }
         }
 
@@ -194,6 +218,7 @@ namespace CalculatorMVVM
             OperationSign = "";
             EqualSign = "";
             _result = "";
+            _mButtonUsed = false;
         }
     }
 }
