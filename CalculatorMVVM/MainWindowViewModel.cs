@@ -94,7 +94,7 @@ namespace CalculatorMVVM
         #endregion
 
         #region Закрыть приложение
-        public ICommand CloseApplication { get; }
+        public ICommand CloseApplicationCommand { get; }
         private bool CanExecuteCloseApplication(object p) => true;
         private void OnExecutedCloseApplication(object p)
         {
@@ -103,7 +103,7 @@ namespace CalculatorMVVM
         #endregion
 
         #region Сворачивание окна
-        public ICommand MinimizeApplication { get; }
+        public ICommand MinimizeApplicationCommand { get; }
         private bool CanExecuteMinimizeApplication(object p) => true;
         private void OnExecutedMinimizeApplication(object p)
         {
@@ -118,8 +118,8 @@ namespace CalculatorMVVM
         {
             _calc = new Calc();
             ControllerCommand = new Command(OnExecutedControllerCommand, CanExecuteControllerCommand);
-            CloseApplication = new Command(OnExecutedCloseApplication, CanExecuteCloseApplication);
-            MinimizeApplication = new Command(OnExecutedMinimizeApplication, CanExecuteMinimizeApplication);
+            CloseApplicationCommand = new Command(OnExecutedCloseApplication, CanExecuteCloseApplication);
+            MinimizeApplicationCommand = new Command(OnExecutedMinimizeApplication, CanExecuteMinimizeApplication);
         }
         #endregion
 

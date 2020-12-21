@@ -7,7 +7,7 @@
         xmlns:fa5="http://schemas.fontawesome.com/icons/"
         mc:Ignorable="d"
         Title="Калькулятор" 
-        Height="520" Width="360" 
+        Height="540" Width="360" 
         ResizeMode="NoResize"
         WindowStyle="None" HorizontalContentAlignment="Left">
 
@@ -24,7 +24,7 @@
             <Setter Property="Background" Value="#F2F2F2"/>
             <Setter Property="Margin" Value="1"/>
         </Style>
-        
+
     </Window.Resources>
 
     <Grid Background="#BDBDBD">
@@ -36,45 +36,40 @@
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"></RowDefinition>
-            <RowDefinition  Height="Auto"></RowDefinition>
-            <RowDefinition Height="1.5*"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="5*"></RowDefinition>
             <RowDefinition Height="Auto"></RowDefinition>
-            <RowDefinition></RowDefinition>
-            <RowDefinition></RowDefinition>
-            <RowDefinition></RowDefinition>
-            <RowDefinition></RowDefinition>
-            <RowDefinition></RowDefinition>
+            <RowDefinition Height="15*"></RowDefinition>
         </Grid.RowDefinitions>
 
         <DockPanel  Grid.Column="0" Grid.ColumnSpan="4">
             <Label Content="Калькулятор" DockPanel.Dock="Left"/>
             <StackPanel HorizontalAlignment="Right" Orientation="Horizontal" DockPanel.Dock="Right">
-                <Button  Width="45" Height="30"  ToolTip="Свернуть" Background="Transparent" Command="{Binding MinimizeApplication}">
+                <Button  Width="45" Height="30"  ToolTip="Свернуть" Background="Transparent" Command="{Binding MinimizeApplicationCommand}">
                     <Button.Template>
                         <ControlTemplate TargetType="Button">
-                            <Border  x:Name="BtnMin" Background="Transparent">
-                                <fa5:ImageAwesome x:Name="Pt" Icon="Regular_WindowMinimize" Width="20"/>
+                            <Border  x:Name="border" Background="Transparent">
+                                <fa5:ImageAwesome x:Name="image" Icon="Regular_WindowMinimize" Width="20"/>
                             </Border>
                             <ControlTemplate.Triggers>
                                 <Trigger Property="IsMouseOver" Value="True">
-                                    <Setter TargetName="BtnMin" Property="Background" Value="Gray"/>
-                                    <Setter TargetName="Pt" Property="Foreground" Value="White"/>
+                                    <Setter TargetName="border" Property="Background" Value="Gray"/>
+                                    <Setter TargetName="image" Property="Foreground" Value="White"/>
                                 </Trigger>
                             </ControlTemplate.Triggers>
-
                         </ControlTemplate>
                     </Button.Template>
                 </Button>
-                <Button  Width="45" Height="30" ToolTip="Закрыть" Background="Transparent" Command="{Binding CloseApplication}">
+                <Button  Width="45" Height="30" ToolTip="Закрыть" Background="Transparent" Command="{Binding CloseApplicationCommand}">
                     <Button.Template>
                         <ControlTemplate TargetType="Button">
-                            <Border x:Name="Bd" Background="Transparent">
-                                <fa5:ImageAwesome x:Name="Pt" Icon="Regular_WindowClose" Height="20"/>
+                            <Border x:Name="border" Background="Transparent">
+                                <fa5:ImageAwesome x:Name="image" Icon="Regular_WindowClose" Height="20"/>
                             </Border>
                             <ControlTemplate.Triggers>
                                 <Trigger Property="IsMouseOver" Value="True">
-                                    <Setter TargetName="Bd" Property="Background" Value="Red"/>
-                                    <Setter TargetName="Pt" Property="Foreground" Value="White"/>
+                                    <Setter TargetName="border" Property="Background" Value="Red"/>
+                                    <Setter TargetName="image" Property="Foreground" Value="White"/>
                                 </Trigger>
                             </ControlTemplate.Triggers>
                         </ControlTemplate>
@@ -83,7 +78,7 @@
             </StackPanel>
         </DockPanel>
 
-        <TextBlock Grid.ColumnSpan="4" Grid.Row="1" FontSize="18" Foreground="Gray" TextAlignment="Right">
+        <TextBlock  Grid.Row="1" Grid.ColumnSpan="4" FontSize="18" Foreground="Gray" TextAlignment="Right">
             <TextBlock.Text>
                 <MultiBinding StringFormat="{}{0} {1} {2} {3}">
                     <Binding Path="FirstOperand"/>
@@ -98,27 +93,6 @@
             <TextBlock TextWrapping="NoWrap" Text="{Binding CalcContent}" TextAlignment="Right"/>
         </Viewbox>
 
-        <Button Content="0" Grid.Column="1" Grid.Row="8"/>
-        <Button Content="8" Grid.Column="1" Grid.Row="5"/>
-        <Button Content="5" Grid.Column="1" Grid.Row="6"/>
-        <Button Content="2" Grid.Column="1" Grid.Row="7"/>
-        <Button Content="7" Grid.Column="0" Grid.Row="5"/>
-        <Button Content="4" Grid.Column="0" Grid.Row="6"/>
-        <Button Content="1" Grid.Column="0" Grid.Row="7"/>
-        <Button Content="3" Grid.Column="2" Grid.Row="7"/>
-        <Button Content="6" Grid.Column="2" Grid.Row="6"/>
-        <Button Content="9" Grid.Column="2" Grid.Row="5"/>
-
-        <Button Content="C" Grid.Column="0" Grid.Row="4" FontSize="35" Foreground="#FFEE1010" Background="#D8D8D8"/>
-        <Button Content="," Grid.Column="2" Grid.Row="8" Background="#D8D8D8"/>
-        <Button Content="+/-" Grid.Column="0" Grid.Row="8" Background="#D8D8D8"/>
-        <Button Content="&lt;&lt;" Grid.Column="2" Grid.Row="4" Background="#D8D8D8"/>
-        <Button Content="/" Grid.Column="3" Grid.Row="4" FontSize="25" Background="#D8D8D8"/>
-        <Button Content="=" Grid.Column="3" Grid.Row="8" FontSize="30" Background="#F5D0A9"/>
-        <Button Content="+" Grid.Column="3" Grid.Row="7" FontSize="35" Background="#D8D8D8"/>
-        <Button Content="-" Grid.Column="3" Grid.Row="6" FontSize="35" Background="#D8D8D8"/>
-        <Button Content="*" Grid.Column="3" Grid.Row="5" FontSize="30" Background="#D8D8D8"/>
-        <Button Content="Sqr" Grid.Column="1" Grid.Row="4" Background="#D8D8D8"/>
         <Grid Grid.Row="3" Grid.ColumnSpan="4" Height="30">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
@@ -132,6 +106,43 @@
             <Button Content="M+" Grid.Column="2" FontSize="15" ToolTip="Добавить в память" Background="Transparent"/>
             <Button Content="M-" Grid.Column="3" FontSize="15" ToolTip="Вычесть из памяти" Background="Transparent"/>
             <Button Content="MS" Grid.Column="4" FontSize="15" ToolTip="Сохранить в память" Background="Transparent"/>
+        </Grid>
+        
+        <Grid Grid.Row="4" Grid.ColumnSpan="4">
+            <Grid.RowDefinitions>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Button Content="0" Grid.Column="1" Grid.Row="4"/>
+            <Button Content="8" Grid.Column="1" Grid.Row="1"/>
+            <Button Content="5" Grid.Column="1" Grid.Row="2"/>
+            <Button Content="2" Grid.Column="1" Grid.Row="3"/>
+            <Button Content="7" Grid.Column="0" Grid.Row="1"/>
+            <Button Content="4" Grid.Column="0" Grid.Row="2"/>
+            <Button Content="1" Grid.Column="0" Grid.Row="3"/>
+            <Button Content="3" Grid.Column="2" Grid.Row="3"/>
+            <Button Content="6" Grid.Column="2" Grid.Row="2"/>
+            <Button Content="9" Grid.Column="2" Grid.Row="1"/>
+
+            <Button Content="C" Grid.Column="0" Grid.Row="0" FontSize="35" Foreground="#FFEE1010" Background="#D8D8D8"/>
+            <Button Content="," Grid.Column="2" Grid.Row="4" Background="#D8D8D8"/>
+            <Button Content="+/-" Grid.Column="0" Grid.Row="4" Background="#D8D8D8"/>
+            <Button Content="&lt;&lt;" Grid.Column="2" Grid.Row="0" Background="#D8D8D8"/>
+            <Button Content="/" Grid.Column="3" Grid.Row="0" FontSize="25" Background="#D8D8D8"/>
+            <Button Content="=" Grid.Column="3" Grid.Row="4" FontSize="30" Background="#F5D0A9"/>
+            <Button Content="+" Grid.Column="3" Grid.Row="3" FontSize="35" Background="#D8D8D8"/>
+            <Button Content="-" Grid.Column="3" Grid.Row="2" FontSize="35" Background="#D8D8D8"/>
+            <Button Content="*" Grid.Column="3" Grid.Row="1" FontSize="30" Background="#D8D8D8"/>
+            <Button Content="Sqr" Grid.Column="1" Grid.Row="0" Background="#D8D8D8"/>
         </Grid>
     </Grid>
 </Window>
