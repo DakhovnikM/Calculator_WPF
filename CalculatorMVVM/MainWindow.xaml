@@ -8,7 +8,7 @@
         Title="Калькулятор" 
         Height="520" Width="360" 
         ResizeMode="NoResize" 
-        WindowStyle="SingleBorderWindow">
+        WindowStyle="SingleBorderWindow" HorizontalContentAlignment="Left">
 
     <Window.DataContext>
         <local:MainWindowViewModel/>
@@ -34,8 +34,8 @@
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"></RowDefinition>
-            <RowDefinition Height="1.5*"></RowDefinition>
-            <RowDefinition Height=".5*"></RowDefinition>
+            <RowDefinition Height="1.7*"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
             <RowDefinition></RowDefinition>
             <RowDefinition></RowDefinition>
             <RowDefinition></RowDefinition>
@@ -84,10 +84,19 @@
         <Button Content="-" Grid.Column="3" Grid.Row="5" FontSize="35"/>
         <Button Content="*" Grid.Column="3" Grid.Row="4" FontSize="30"/>
         <Button Content="Sqr" Grid.Column="1" Grid.Row="3"/>
-
-        <Button Content="M+" Grid.Column="0" Grid.Row="2" FontSize="15"/>
-        <Button Content="M-" Grid.Column="1" Grid.Row="2" FontSize="15"/>
-        <Button Content="MR" Grid.Column="2" Grid.Row="2" FontSize="15"/>
-        <Button Content="MC" Grid.Column="3" Grid.Row="2" FontSize="15"/>
+        <Grid Grid.Row="2" Grid.ColumnSpan="4" Height="30">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Button Content="M+" Grid.Column="0" FontSize="15" ToolTip="Добавить в память" Background="#fff7f7"/>
+            <Button Content="M-" Grid.Column="1" FontSize="15" ToolTip="Вычесть из памяти" Background="#fff7f7"/>
+            <Button Content="MR" Grid.Column="2" FontSize="15" ToolTip="Извлечь из памяти" Background="#fff7f7"/>
+            <Button Content="MC" Grid.Column="3" FontSize="15" ToolTip="Сбросить память" Background="#fff7f7"/>
+            <Button Content="MS" Grid.Column="4" FontSize="15" ToolTip="Сохранить в память" Background="#fff7f7"/>
+        </Grid>
     </Grid>
 </Window>

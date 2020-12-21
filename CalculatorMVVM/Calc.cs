@@ -6,7 +6,6 @@ namespace CalculatorMVVM
     class Calc
     {
         public delegate double MathOperation(string x, string y);
-
         private readonly Dictionary<string, MathOperation> _dict;
 
         public Calc()
