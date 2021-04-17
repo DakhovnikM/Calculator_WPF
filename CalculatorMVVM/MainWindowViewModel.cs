@@ -179,9 +179,7 @@ namespace CalculatorMVVM
 
                 if (btnContent == "<<")
                 {
-                    CalcContent = CalcContent.Length >= 1
-                        ? CalcContent.Remove(CalcContent.Length - 1)
-                        : "";
+                    CalcContent = CalcContent.Length >= 1 ? CalcContent.Remove(CalcContent.Length - 1) : "";
                 }
 
                 if (btnContent == ",")
@@ -193,11 +191,7 @@ namespace CalculatorMVVM
                 if (btnContent == "+/-")
                 {
                     if (CalcContent != "")
-                    {
-                        CalcContent = CalcContent.StartsWith("-")
-                            ? CalcContent.Remove(0, 1)
-                            : CalcContent.Insert(0, "-");
-                    }
+                        CalcContent = CalcContent.StartsWith("-") ? CalcContent.Remove(0, 1) : CalcContent.Insert(0, "-");
                 }
 
                 if (btnContent == "Sqr")
@@ -209,8 +203,7 @@ namespace CalculatorMVVM
 
                 if (btnContent.StartsWith("M"))
                 {
-                    if (btnContent == "M+")
-                        _memory += Convert.ToDouble(CalcContent);
+                    if (btnContent == "M+") _memory += Convert.ToDouble(CalcContent);
 
                     if (btnContent == "M-")
                         _memory -= Convert.ToDouble(CalcContent);
@@ -224,26 +217,26 @@ namespace CalculatorMVVM
                     if (btnContent == "MS")
                         _memory = Convert.ToDouble(CalcContent);
 
-                    FirstOperand = "";
-                    SecondOperand = "";
-                    OperationSign = "";
-                    EqualSign = "";
+                    Clear();
                     _mButtonUsed = true;
                 }
 
-                if (btnContent == "C") Clear();
+                if (btnContent == "C")
+                {
+                    CalcContent = "0";
+                    _result = "";
+                    _mButtonUsed = false;
+                    Clear();
+                }
             }
         }
 
         private void Clear()
         {
-            CalcContent = "0";
             FirstOperand = "";
             SecondOperand = "";
             OperationSign = "";
             EqualSign = "";
-            _result = "";
-            _mButtonUsed = false;
         }
     }
 }

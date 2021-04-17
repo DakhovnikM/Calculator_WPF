@@ -13,7 +13,7 @@ namespace CalculatorMVVM
         public MainWindow()
         {
             InitializeComponent();
-            DataContext = new MainWindowViewModel();
+            //DataContext = new MainWindowViewModel();
         }
     }
 }// TODO Реализовать перетаскивание окна
